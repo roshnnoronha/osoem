@@ -1,0 +1,47 @@
+Number,Owner,Title
+A-000,Sarah Chen,Architectural Cover Sheet and General Notes
+A-001,Sarah Chen,Site Plan and Location Map
+A-100,Sarah Chen,Ground Floor Plan
+A-101,Sarah Chen,First Floor Plan
+A-102,Sarah Chen,Second Floor Plan
+A-103,Sarah Chen,Roof Plan
+A-200,Sarah Chen,North Elevation
+A-201,Sarah Chen,South Elevation
+A-202,Sarah Chen,East Elevation
+A-203,Sarah Chen,West Elevation
+A-300,Sarah Chen,Building Section A-A
+A-301,Sarah Chen,Building Section B-B
+A-400,Sarah Chen,Wall Sections and Details
+A-401,Sarah Chen,Stair Details
+A-402,Sarah Chen,Door and Window Schedule
+A-403,Sarah Chen,Kitchen and Bathroom Details
+S-000,Anne Mills,Structural Cover Sheet and General Notes
+S-100,Anne Mills,Foundation Plan
+S-101,Anne Mills,Foundation Details
+S-200,Anne Mills,Ground Floor Framing Plan
+S-201,Anne Mills,First Floor Framing Plan
+S-202,Anne Mills,Second Floor Framing Plan
+S-203,Anne Mills,Roof Framing Plan
+S-300,Anne Mills,Structural Sections
+S-400,Anne Mills,Column and Beam Schedule
+S-401,Anne Mills,Connection Details
+S-402,Anne Mills,Reinforcement Details
+P-000,James Rodriguez,Plumbing Cover Sheet and General Notes
+P-100,James Rodriguez,Ground Floor Plumbing Layout
+P-101,James Rodriguez,First Floor Plumbing Layout
+P-102,James Rodriguez,Second Floor Plumbing Layout
+P-200,James Rodriguez,Plumbing Riser Diagram
+P-201,James Rodriguez,Drainage and Waste Water Layout
+P-300,James Rodriguez,Plumbing Details and Schedules
+P-301,James Rodriguez,Water Supply Details
+E-000,Maria Santos,Electrical Cover Sheet and General Notes
+E-100,Maria Santos,Ground Floor Power Plan
+E-101,Maria Santos,First Floor Power Plan
+E-102,Maria Santos,Second Floor Power Plan
+E-200,Maria Santos,Ground Floor Lighting Plan
+E-201,Maria Santos,First Floor Lighting Plan
+E-202,Maria Santos,Second Floor Lighting Plan
+E-300,Maria Santos,Single Line Diagram
+E-301,Maria Santos,Panel Schedule
+E-400,Maria Santos,Electrical Details and Specifications
+E-401,Maria Santos,Fire Alarm and Safety Systems Plan
