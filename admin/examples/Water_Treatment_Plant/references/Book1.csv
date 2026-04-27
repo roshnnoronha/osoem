@@ -1,0 +1,58 @@
+﻿1 Bioreactors
+1.1 Pressure Vessels
+2 Post-Treatment Filters
+2.1 Pressure Vessels
+3 Tanks
+3.1 Electron Donor Storage Tanks
+3.2 Phosphoric Acid Storage Tanks
+3.3 Electron Donor Day Tanks
+3.4 Residuals Holding Tanks/Basins
+3.5 Aeration Tanks
+3.6 Ferric Chloride Storage Tanks
+3.7 Polymer Storage Tanks
+3.8 Coagulant Mix Tank
+4 Piping
+4.1 Backwash Piping
+4.2 Electron Donor Piping
+4.3 Phosphoric Acid Piping
+4.4 Process Piping
+4.5 Influent and Treated Water Piping
+4.6 Residuals Piping
+4.7 Ferric Chloride Piping
+4.8 Polymer Addition Piping
+5 Valves and Fittings
+5.1 Motor/Air Operated (on/off)
+5.2 Manual
+5.3 Check Valves
+6 Pumps and Blowers
+6.1 Residuals Pump
+6.2 Electron Donor Metering
+6.3 Phosphoric Acid Metering
+6.4 Blowers
+6.5 Ferric Chloride Metering to Post-Treatment
+6.6 Polymer Metering
+7 Mixers
+7.1 Residuals Mixers
+7.2 Coagulant Mix Tank Mixers
+8 Solids Transfer
+8.1 Eductors for Holding Tanks
+9 Instrumentation
+9.1 Flow Meters - Influent and treated water
+9.2 Flow Meters - Backwash
+9.3 Flow Meters - Residuals
+9.4 High/Low Alarm (for holding tanks)
+9.5 Temperature meters
+9.6 Head loss sensors
+9.7 Sampling Ports
+9.8 ORP sensor
+9.9 Turbidity meters
+9.10 Perchlorate/Nitrate Analyzer
+9.11 Dissolved Oxygen Analyzer
+10 System Controls 
+10.1 PLC Unit(s)
+10.2 Operator Equipment
+10.3 Controls Software
+11 Building Structures and HVAC
+11.1 Building 1
+11.1.2 Heating System
+11.1.3 Cooling System

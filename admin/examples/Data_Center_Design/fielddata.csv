@@ -1,0 +1,10 @@
+ArtefactName, FieldTitle, ValueType, MaximumLength
+Drawing,Drawing Number,1,10
+Drawing,Drawing Title,1,50
+Drawing,Issued Date,1,10
+Calculation,Calculation Number,1,10
+Calculation,Calculation Title,1,50
+Calculation,Issued Date,1,10
+Datasheet,Datasheet Number,1,10
+Datasheet,Datasheet Title,1,50
+Datasheet,Issued Date,1,10

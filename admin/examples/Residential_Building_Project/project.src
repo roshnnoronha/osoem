@@ -1,0 +1,566 @@
+# =============================================================================
+# Complete Project Setup - Building Project
+# Part 2: Project
+# =============================================================================
+# This source file demonstrates all the steps required to set up a complete
+# project in the osoem database, covering every entity type.
+#
+# Prerequisites:
+#   - A clean database with the schema applied
+#
+# Auto-increment IDs assumed to start at 1 for all tables.
+# =============================================================================
+
+
+# =============================================================================
+# STEP 3: Create the project
+# =============================================================================
+# Path: ~ > Projects
+# Format: ad "projectname:<name>,projectno:<number>"
+
+cd ~
+cd Projects
+ad "projectname:Building Project,projectno:PRO-2026-001"
+
+
+# =============================================================================
+# STEP 4: Add team members to the project
+# =============================================================================
+# Path: ~ > Projects > <Project> > Team
+# Format: ad "employeename:<name>,role:<role>"
+# Roles: 1 = Team Member, 2 = Project Manager, 3 = Administrator
+
+cd "Building Project"
+cd Team
+ad "employeename:John Davis,role:2"
+ad "employeename:Sarah Thompson,role:1"
+ad "employeename:Michael Chen,role:1"
+ad "employeename:Emily Rodriguez,role:1"
+ad "employeename:David Wilson,role:1"
+ad "employeename:Jessica Brown,role:1"
+ad "employeename:Robert Martinez,role:1"
+ad "employeename:Amanda Johnson,role:1"
+ad "employeename:Christopher Lee,role:1"
+ad "employeename:Jennifer Garcia,role:1"
+
+
+# =============================================================================
+# STEP 5: Create activity categories
+# =============================================================================
+# Path: ~ > Projects > <Project> > Activity Categories
+# Format: ad "categoryname:<name>"
+
+cd ~
+cd Projects
+cd "Building Project"
+cd "Activity Categories"
+ad "categoryname:Architecture"
+ad "categoryname:Structural Engineering"
+ad "categoryname:Plumbing Engineering"
+ad "categoryname:Electrical Engineering"
+
+
+# =============================================================================
+# STEP 6: Create activity subcategories
+# =============================================================================
+# Path: ~ > Projects > <Project> > Activity Categories > <Category>
+# Format: ad "subcategoryname:<name>"
+
+# Architecture subcategories
+cd "Architecture"
+ad "subcategoryname:Architectural Design"
+ad "subcategoryname:Landscape Design"
+cd ..
+
+# Structural Engineering subcategories
+cd "Structural Engineering"
+ad "subcategoryname:Design Development"
+ad "subcategoryname:Detailed Design"
+cd ..
+
+# Plumbing Engineering subcategories
+cd "Plumbing Engineering"
+ad "subcategoryname:Plumbing Design"
+cd ..
+
+# Electrical Engineering subcategories
+cd "Electrical Engineering"
+ad "subcategoryname:Electrical Design"
+cd ..
+
+
+# =============================================================================
+# STEP 7: Create activities
+# =============================================================================
+# Path: ~ > Projects > <Project> > Activity Categories > <Category> > <Subcategory>
+# Format: ad "activityname:<name>,activitymanagername:<name>,plannedstart:<date>,plannedfinish:<date>,plannedhours:<hours>"
+
+# Architecture > Architectural Design
+cd "Architecture"
+cd "Architectural Design"
+ad "activityname:Prepare architectural drawings,activitymanagername:Emily Rodriguez,plannedstart:2026-02-01,plannedfinish:2026-04-15,plannedhours:320.50"
+ad "activityname:Prepare floor plans,activitymanagername:David Wilson,plannedstart:2026-02-15,plannedfinish:2026-03-30,plannedhours:160.00"
+cd ..
+cd "Landscape Design"
+ad "activityname:Landscape planning and design,activitymanagername:David Wilson,plannedstart:2026-06-01,plannedfinish:2026-07-15,plannedhours:120.00"
+cd ..
+cd ..
+
+# Structural Engineering > Design Development
+cd "Structural Engineering"
+cd "Design Development"
+ad "activityname:Prepare structural drawings,activitymanagername:Sarah Thompson,plannedstart:2026-02-01,plannedfinish:2026-04-15,plannedhours:450.75"
+ad "activityname:Foundation design and analysis,activitymanagername:Michael Chen,plannedstart:2026-01-20,plannedfinish:2026-02-28,plannedhours:180.50"
+cd ..
+cd "Detailed Design"
+ad "activityname:Structural steel detailing,activitymanagername:Sarah Thompson,plannedstart:2026-03-15,plannedfinish:2026-05-30,plannedhours:380.25"
+ad "activityname:Concrete reinforcement detailing,activitymanagername:Michael Chen,plannedstart:2026-03-20,plannedfinish:2026-06-05,plannedhours:420.50"
+cd ..
+cd ..
+
+# Plumbing Engineering > Plumbing Design
+cd "Plumbing Engineering"
+cd "Plumbing Design"
+ad "activityname:Prepare plumbing drawings,activitymanagername:Amanda Johnson,plannedstart:2026-03-01,plannedfinish:2026-05-15,plannedhours:280.25"
+cd ..
+cd ..
+
+# Electrical Engineering > Electrical Design
+cd "Electrical Engineering"
+cd "Electrical Design"
+ad "activityname:Prepare electrical wiring drawings,activitymanagername:Jessica Brown,plannedstart:2026-03-15,plannedfinish:2026-05-30,plannedhours:310.00"
+ad "activityname:HVAC system design,activitymanagername:Robert Martinez,plannedstart:2026-04-01,plannedfinish:2026-06-15,plannedhours:250.00"
+ad "activityname:Fire protection system design,activitymanagername:Jessica Brown,plannedstart:2026-04-15,plannedfinish:2026-06-30,plannedhours:150.75"
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 8: Create tasks for activities
+# =============================================================================
+# Path: ... > <Activity> > Tasks
+# Format: ad "taskname:<name>"
+
+# Tasks for "Prepare structural drawings"
+cd "Structural Engineering"
+cd "Design Development"
+cd "Prepare structural drawings"
+cd Tasks
+ad "taskname:Review architectural drawings"
+ad "taskname:Model preparation"
+ad "taskname:Analysis and design"
+ad "taskname:Drawing preparation"
+ad "taskname:Calculation report compilation"
+ad "taskname:Interdisciplinary checks"
+ad "taskname:Document Approval"
+cd ..
+
+
+# =============================================================================
+# STEP 9: Create subtasks (tasks within tasks)
+# =============================================================================
+# Path: ... > Tasks > <Task> > Tasks
+# Format: ad "taskname:<name>"
+
+# Subtasks under "Model preparation"
+cd Tasks
+cd "Model preparation"
+cd Tasks
+ad "taskname:Prepare a preliminary 3D model"
+ad "taskname:Prepare final 3D model"
+ad "taskname:Perform clash check"
+cd ..
+cd ..
+
+# Subtasks under "Analysis and design"
+cd "Analysis and design"
+cd Tasks
+ad "taskname:Define the structure geometry"
+ad "taskname:Apply the loads on the analysis model"
+ad "taskname:Define the design parameters for the model"
+ad "taskname:Run the analysis and optimize the design"
+cd ..
+cd ..
+
+# Subtasks under "Drawing preparation"
+cd "Drawing preparation"
+cd Tasks
+ad "taskname:Prepare input for drawing drafting"
+ad "taskname:Drawing drafting"
+ad "taskname:Drawing review"
+ad "taskname:Drawing comment incorporation"
+cd ..
+cd ..
+
+# Subtasks under "Calculation report compilation"
+cd "Calculation report compilation"
+cd Tasks
+ad "taskname:Calculation preparation"
+ad "taskname:Calculation review"
+ad "taskname:Calculation comment incorporation"
+cd ..
+cd ..
+
+# Subtasks under "Interdisciplinary checks"
+cd "Interdisciplinary checks"
+cd Tasks
+ad "taskname:Perform disciplinary checks"
+ad "taskname:Incorporate comments"
+cd ..
+cd ..
+
+# Tasks for "Prepare architectural drawings"
+cd ..
+cd ..
+cd ..
+cd ..
+cd "Architecture"
+cd "Architectural Design"
+cd "Prepare architectural drawings"
+cd Tasks
+ad "taskname:Develop concept design"
+ad "taskname:Prepare floor plan layouts"
+ad "taskname:Prepare elevation drawings"
+ad "taskname:Prepare section drawings"
+ad "taskname:Design review"
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 10: Create task assignments
+# =============================================================================
+# Path: ... > Tasks > <Task> > Assignments
+# Format: ad "username:<name>,assigneddate:<date>,closedate:<date>"
+# Omit closedate for open assignments
+
+# Assign "Michael Chen" to "Review architectural drawings"
+cd ..
+cd ..
+cd "Structural Engineering"
+cd "Design Development"
+cd "Prepare structural drawings"
+cd Tasks
+cd "Review architectural drawings"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-02-01"
+cd ..
+
+# Assign "Sarah Thompson" to "Model preparation"
+cd ..
+cd "Model preparation"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-02-10"
+cd ..
+
+# Assign "Jennifer Garcia" to subtask "Drawing drafting"
+cd ..
+cd "Drawing preparation"
+cd Tasks
+cd "Drawing drafting"
+cd Assignments
+ad "username:Jennifer Garcia,assigneddate:2026-03-01"
+cd ..
+
+
+# =============================================================================
+# STEP 11: Book hours against assignments
+# =============================================================================
+# Path: ... > Assignments > <Assignment>
+# Format: ad "bookeddate:<date>,hours:<hours>"
+
+# Hours for Michael Chen on "Review architectural drawings"
+# Navigate back to the assignment
+cd ..
+cd ..
+cd ..
+cd "Review architectural drawings"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-02-03,hours:8"
+ad "bookeddate:2026-02-04,hours:6"
+ad "bookeddate:2026-02-05,hours:4"
+cd ..
+cd ..
+
+# Hours for Sarah Thompson on "Model preparation"
+cd ..
+cd "Model preparation"
+cd Assignments
+cd "Sarah Thompson"
+ad "bookeddate:2026-02-10,hours:8"
+ad "bookeddate:2026-02-11,hours:8"
+ad "bookeddate:2026-02-12,hours:8"
+ad "bookeddate:2026-02-13,hours:6"
+cd ..
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 12: Add activity notes
+# =============================================================================
+# Path: ... > <Activity> > Notes
+# Format: ad "username:<name>,note:<text>,notedate:<date>"
+
+cd ..
+cd Notes
+ad "username:John Davis,note:Kick-off meeting completed. Design criteria and scope agreed upon.,notedate:2026-02-01"
+ad "username:Sarah Thompson,note:Architectural drawings received for review. Minor comments to be addressed.,notedate:2026-02-05"
+ad "username:Michael Chen,note:Geotechnical report reviewed. Foundation type confirmed as pad foundations.,notedate:2026-02-10"
+cd ..
+
+
+# =============================================================================
+# STEP 13: Create artefact types
+# =============================================================================
+# Path: ~ > Projects > <Project> > Artefact Types
+# Format: ad "artefactname:<name>,artefactdescription:<description>"
+
+cd ~
+cd Projects
+cd "Building Project"
+cd "Artefact Types"
+ad "artefactname:Drawing,artefactdescription:Engineering drawings including architectural structural electrical and plumbing plans"
+ad "artefactname:Calculation,artefactdescription:Engineering calculation reports and analysis documents"
+ad "artefactname:Specification,artefactdescription:Technical specifications for materials and construction methods"
+
+
+# =============================================================================
+# STEP 14: Define artefact data fields
+# =============================================================================
+# Path: ... > <ArtefactType> > Fields
+# Format: ad "fieldtitle:<title>,valuetype:<type>,maximumlength:<len>,maximumvalue:<max>,minimumvalue:<min>"
+# valuetype: 0 = text, 1 = number
+
+# Fields for Drawing type
+cd "Drawing"
+cd Fields
+ad "fieldtitle:Drawing Number,valuetype:0,maximumlength:50,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Drawing Title,valuetype:0,maximumlength:200,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Revision,valuetype:0,maximumlength:10,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Revision Purpose,valuetype:0,maximumlength:100,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Prepared By,valuetype:0,maximumlength:100,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Checked By,valuetype:0,maximumlength:100,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Approved By,valuetype:0,maximumlength:100,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Sheet Size,valuetype:0,maximumlength:10,maximumvalue:0,minimumvalue:0"
+cd ..
+
+# Fields for Calculation type
+cd ..
+cd "Calculation"
+cd Fields
+ad "fieldtitle:Calculation Number,valuetype:0,maximumlength:50,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Calculation Title,valuetype:0,maximumlength:200,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Revision,valuetype:0,maximumlength:10,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Prepared By,valuetype:0,maximumlength:100,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Checked By,valuetype:0,maximumlength:100,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Number of Pages,valuetype:1,maximumlength:0,maximumvalue:500,minimumvalue:1"
+cd ..
+
+# Fields for Specification type
+cd ..
+cd "Specification"
+cd Fields
+ad "fieldtitle:Specification Number,valuetype:0,maximumlength:50,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Specification Title,valuetype:0,maximumlength:200,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Revision,valuetype:0,maximumlength:10,maximumvalue:0,minimumvalue:0"
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 15: Create artefacts
+# =============================================================================
+# Path: ... > <ArtefactType> > Artefacts
+# Format: ad "artefacttitle:<title>,artefactownername:<name>"
+
+# Drawing artefacts
+cd "Drawing"
+cd Artefacts
+ad "artefacttitle:Foundation Plan - Sheet S-101,artefactownername:Michael Chen"
+ad "artefacttitle:Ground Floor Framing Plan - Sheet S-102,artefactownername:Michael Chen"
+ad "artefacttitle:Second Floor Framing Plan - Sheet S-103,artefactownername:Michael Chen"
+ad "artefacttitle:Roof Framing Plan - Sheet S-104,artefactownername:Sarah Thompson"
+ad "artefacttitle:Typical Column Details - Sheet S-201,artefactownername:Michael Chen"
+ad "artefacttitle:Foundation Details - Sheet S-301,artefactownername:Michael Chen"
+cd ..
+
+# Calculation artefacts
+cd ..
+cd "Calculation"
+cd Artefacts
+ad "artefacttitle:Structural Analysis Report - Foundation Design,artefactownername:Michael Chen"
+ad "artefacttitle:Structural Analysis Report - Lateral Load Analysis,artefactownername:Sarah Thompson"
+ad "artefacttitle:Load Calculation Summary Report,artefactownername:Michael Chen"
+cd ..
+
+# Specification artefacts
+cd ..
+cd "Specification"
+cd Artefacts
+ad "artefacttitle:General Structural Notes and Specifications,artefactownername:Sarah Thompson"
+ad "artefacttitle:Concrete Material Specifications,artefactownername:Michael Chen"
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 16: Populate artefact data
+# =============================================================================
+# Path: ... > Artefacts > <Artefact> > Data
+# Format: ad "fieldname:<name>,value:<value>"
+
+# Data for "Foundation Plan - Sheet S-101"
+cd "Drawing"
+cd Artefacts
+cd "Foundation Plan - Sheet S-101"
+cd Data
+ad "fieldname:Drawing Number,value:S-101"
+ad "fieldname:Drawing Title,value:Foundation Plan"
+ad "fieldname:Revision,value:A"
+ad "fieldname:Revision Purpose,value:Issued for Review"
+ad "fieldname:Prepared By,value:Michael Chen"
+ad "fieldname:Checked By,value:Sarah Thompson"
+ad "fieldname:Sheet Size,value:A1"
+cd ..
+
+# Data for "Ground Floor Framing Plan - Sheet S-102"
+cd ..
+cd "Ground Floor Framing Plan - Sheet S-102"
+cd Data
+ad "fieldname:Drawing Number,value:S-102"
+ad "fieldname:Drawing Title,value:Ground Floor Framing Plan"
+ad "fieldname:Revision,value:A"
+ad "fieldname:Revision Purpose,value:Issued for Review"
+ad "fieldname:Prepared By,value:Michael Chen"
+ad "fieldname:Sheet Size,value:A1"
+cd ..
+cd ..
+
+# Data for "Structural Analysis Report - Foundation Design"
+cd ..
+cd ..
+cd "Calculation"
+cd Artefacts
+cd "Structural Analysis Report - Foundation Design"
+cd Data
+ad "fieldname:Calculation Number,value:CALC-S-001"
+ad "fieldname:Calculation Title,value:Foundation Design Calculations"
+ad "fieldname:Revision,value:0"
+ad "fieldname:Prepared By,value:Michael Chen"
+ad "fieldname:Checked By,value:Sarah Thompson"
+ad "fieldname:Number of Pages,value:45"
+cd ..
+
+
+# =============================================================================
+# STEP 17: Link artefacts to activities
+# =============================================================================
+# Path: ... > Artefacts > <Artefact> > Associations
+# Format: ad "activityname:<name>,ratio:<ratio>"
+
+# Link "Foundation Plan - Sheet S-101" to "Prepare structural drawings"
+cd ..
+cd ..
+cd ..
+cd "Drawing"
+cd Artefacts
+cd "Foundation Plan - Sheet S-101"
+cd Associations
+ad "activityname:Prepare structural drawings,ratio:0.50"
+ad "activityname:Foundation design and analysis,ratio:0.50"
+cd ..
+
+# Link "Ground Floor Framing Plan - Sheet S-102" to "Prepare structural drawings"
+cd ..
+cd "Ground Floor Framing Plan - Sheet S-102"
+cd Associations
+ad "activityname:Prepare structural drawings,ratio:1.00"
+cd ..
+
+# Link calculation to activity
+cd ..
+cd ..
+cd ..
+cd "Calculation"
+cd Artefacts
+cd "Structural Analysis Report - Foundation Design"
+cd Associations
+ad "activityname:Foundation design and analysis,ratio:1.00"
+cd ..
+cd ..
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 18: Create milestones
+# =============================================================================
+# Path: ~ > Projects > <Project> > Milestones
+# Format: ad "milestonename:<name>"
+
+cd ~
+cd Projects
+cd "Building Project"
+cd Milestones
+ad "milestonename:Drawing Approval"
+ad "milestonename:Calculation Approval"
+ad "milestonename:Specification Approval"
+
+
+# =============================================================================
+# STEP 19: Create milestone steps
+# =============================================================================
+# Path: ... > Milestones > <Milestone>
+# Format: ad "milestonestepname:<name>,progressratio:<ratio>"
+
+cd "Drawing Approval"
+ad "milestonestepname:Discipline Check,progressratio:0.50"
+ad "milestonestepname:Interdisciplinary Check,progressratio:0.75"
+ad "milestonestepname:Issue for Construction,progressratio:1.00"
+cd ..
+
+cd "Calculation Approval"
+ad "milestonestepname:Calculation Review,progressratio:0.50"
+ad "milestonestepname:Calculation Approval,progressratio:1.00"
+cd ..
+
+cd "Specification Approval"
+ad "milestonestepname:Specification Review,progressratio:0.50"
+ad "milestonestepname:Specification Approval,progressratio:1.00"
+cd ..
+
+
+# =============================================================================
+# STEP 20: Link milestones to artefact-activity associations
+# =============================================================================
+# Path: ... > Artefacts > <Artefact> > Associations > <Link>
+# Format: ad "milestonestepname:<name>,completedbyname:<name>,completiondate:<date>"
+# Use empty date if not yet completed
+
+# Mark "Foundation Plan" discipline check as completed
+cd ~
+cd Projects
+cd "Building Project"
+cd "Artefact Types"
+cd "Drawing"
+cd Artefacts
+cd "Foundation Plan - Sheet S-101"
+cd Associations
+cd "Prepare structural drawings"
+ad "milestonestepname:Discipline Check,completedbyname:Michael Chen,completiondate:2026-03-15"
+ad "milestonestepname:Interdisciplinary Check,completedbyname:Sarah Thompson,completiondate:2026-03-22"
+cd ..
+
+# Mark calculation review as completed
+cd ..
+cd ..
+cd ..
+cd ..
+cd "Calculation"
+cd Artefacts
+cd "Structural Analysis Report - Foundation Design"
+cd Associations
+cd "Foundation design and analysis"
+ad "milestonestepname:Calculation Review,completedbyname:Michael Chen,completiondate:2026-03-10"

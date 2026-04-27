@@ -1,0 +1,100 @@
+
+# =============================================================================
+# Complete Project Setup - Building Project
+# Part 1: Departments
+# =============================================================================
+# This source file demonstrates all the steps required to set up a complete
+# project in the osoem database, covering every entity type.
+#
+# Prerequisites:
+#   - A clean database with the schema applied
+#
+# Auto-increment IDs assumed to start at 1 for all tables.
+# =============================================================================
+
+
+# =============================================================================
+# STEP 1: Create departments
+# =============================================================================
+# Path: ~ > Organization > Departments
+# Format: ad "departmentname:<name>"
+
+cd ~
+cd Organization
+cd Departments
+ad "departmentname:Project Management"
+ad "departmentname:Structural Engineering"
+ad "departmentname:Architecture"
+ad "departmentname:Electrical Engineering"
+ad "departmentname:Plumbing Engineering"
+ad "departmentname:Mechanical Engineering"
+ad "departmentname:Piping Engineering"
+ad "departmentname:Instrumentation Engineering"
+
+
+# =============================================================================
+# STEP 2: Create employees
+# =============================================================================
+# Path: ~ > Organization > Departments > <Department>
+# Format: ad "firstname:<first>,lastname:<last>,email:<email>,password:<pass>"
+# The department ID is derived from the current location in the hierarchy.
+#
+# Employees (by ID):
+#   1  - John Davis         (Project Management)
+#   2  - Sarah Thompson     (Structural Engineering)
+#   3  - Michael Chen       (Structural Engineering)
+#   4  - Emily Rodriguez    (Architecture)
+#   5  - David Wilson       (Architecture)
+#   6  - Jessica Brown      (Electrical Engineering)
+#   7  - Robert Martinez    (Electrical Engineering)
+#   8  - Amanda Johnson     (Plumbing Engineering)
+#   9  - Christopher Lee    (Plumbing Engineering)
+#   10 - Jennifer Garcia    (Architecture)
+#   11 - Marcus Brown       (Mechanical Engineering)
+#   12 - Patricia Taylor    (Piping Engineering)
+#   13 - Kevin Zhang        (Instrumentation Engineering)
+
+# Project Management department
+cd "Project Management"
+ad "firstname:John,lastname:Davis,email:john.davis@engineering.com,password:manager123"
+cd ..
+
+# Structural Engineering department
+cd "Structural Engineering"
+ad "firstname:Sarah,lastname:Thompson,email:sarah.thompson@engineering.com,password:struct456"
+ad "firstname:Michael,lastname:Chen,email:michael.chen@engineering.com,password:struct789"
+cd ..
+
+# Architecture department
+cd "Architecture"
+ad "firstname:Emily,lastname:Rodriguez,email:emily.rodriguez@engineering.com,password:arch101"
+ad "firstname:David,lastname:Wilson,email:david.wilson@engineering.com,password:arch202"
+ad "firstname:Jennifer,lastname:Garcia,email:jennifer.garcia@engineering.com,password:draft707"
+cd ..
+
+# Electrical Engineering department
+cd "Electrical Engineering"
+ad "firstname:Jessica,lastname:Brown,email:jessica.brown@engineering.com,password:elec303"
+ad "firstname:Robert,lastname:Martinez,email:robert.martinez@engineering.com,password:elec404"
+cd ..
+
+# Plumbing Engineering department
+cd "Plumbing Engineering"
+ad "firstname:Amanda,lastname:Johnson,email:amanda.johnson@engineering.com,password:plumb505"
+ad "firstname:Christopher,lastname:Lee,email:christopher.lee@engineering.com,password:plumb606"
+cd ..
+
+# Mechanical Engineering department
+cd "Mechanical Engineering"
+ad "firstname:Marcus,lastname:Brown,email:marcus.brown@engineering.com,password:mech001"
+cd ..
+
+# Piping Engineering department
+cd "Piping Engineering"
+ad "firstname:Patricia,lastname:Taylor,email:patricia.taylor@engineering.com,password:pipe002"
+cd ..
+
+# Instrumentation Engineering department
+cd "Instrumentation Engineering"
+ad "firstname:Kevin,lastname:Zhang,email:kevin.zhang@engineering.com,password:inst003"
+cd ..

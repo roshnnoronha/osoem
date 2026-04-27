@@ -1,0 +1,7 @@
+CategoryName,SubCategoryName,ActivityName, TaskName, ParentTaskName, TaskDescription, DepartmentName, UserName, AssignedDate, CloseDate, BookedDate, Hours
+Initiation and Planning,Project Charter,Project Charter, Draft preparation,,Prepare a draft of the project charter, Project Management, John Davis, 2026-04-20,2026-04-23, 2026-04-20, 8
+Initiation and Planning,Project Charter,Project Charter, Draft preparation,,Prepare a draft of the project charter, Project Management, John Davis, 2026-04-20,2026-04-23, 2026-04-21, 8
+Initiation and Planning,Project Charter,Project Charter, Draft preparation,,Prepare a draft of the project charter, Project Management, John Davis, 2026-04-20,2026-04-23, 2026-04-22, 8
+Initiation and Planning,Project Charter,Project Charter, Draft preparation,,Prepare a draft of the project charter, Project Management, John Davis, 2026-04-20,2026-04-23, 2026-04-23, 4
+Initiation and Planning,Project Charter,Project Charter, Prepare write-up ,Draft preparation,Prepare a draft of the project charter, Project Management, John Davis, 2026-04-24,,,
+Initiation and Planning,Project Charter,Project Charter, Review write-up ,Draft preparation,Prepare a draft of the project charter, Project Management,,,,,

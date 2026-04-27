@@ -1,0 +1,193 @@
+ArtefactTitle,Categoryname,Subcategoryname,Activityname,Ratio
+Bioreactors - General Arrangement Drawing,Bioreactors,Pressure Vessels,Mechanical design, 1.0
+Bioreactors - Section and Elevation Drawing,Bioreactors,Pressure Vessels,Mechanical design, 1.0, 1.0
+Post Treatment Filters - General Arrangement Drawing,Post-Treatment Filters,Pressure Vessels,Mechanical design, 1.0
+Post Treatment Filters - Section and Elevation Drawing,Post-Treatment Filters,Pressure Vessels,Mechanical design, 1.0
+Electron Donor Storage Tanks - General Arrangement Drawing,Tanks,Electron Donor Storage Tanks,Mechanical design, 1.0
+Electron Donor Storage Tanks - Section and Elevation Drawing,Tanks,Electron Donor Storage Tanks,Mechanical design, 1.0
+Phosphoric Acid Storage Tanks - General Arrangement Drawing,Tanks,Phosphoric Acid Storage Tanks,Mechanical design, 1.0
+Phosphoric Acid Storage Tanks - Section and Elevation Drawing,Tanks,Phosphoric Acid Storage Tanks,Mechanical design, 1.0
+Electron Donor Day Tanks - General Arrangement Drawing,Tanks,Electron Donor Day Tanks,Mechanical design, 1.0
+Electron Donor Day Tanks - Section and Elevation Drawing,Tanks,Electron Donor Day Tanks,Mechanical design, 1.0
+Residuals Holding Tanks/Basins - General Arrangement Drawing,Tanks,Residuals Holding Tanks/Basins,Mechanical design, 1.0
+Residuals Holding Tanks/Basins - Section and Elevation Drawing,Tanks,Residuals Holding Tanks/Basins,Mechanical design, 1.0
+Aeration Tanks - General Arrangement Drawing,Tanks,Aeration Tanks,Mechanical design, 1.0
+Aeration Tanks - Section and Elevation Drawing,Tanks,Aeration Tanks,Mechanical design, 1.0
+Ferric Chloride Storage Tanks - General Arrangement Drawing,Tanks,Ferric Chloride Storage Tanks,Mechanical design, 1.0
+Ferric Chloride Storage Tanks - Section and Elevation Drawing,Tanks,Ferric Chloride Storage Tanks,Mechanical design, 1.0
+Polymer Storage Tanks - General Arrangement Drawing,Tanks,Polymer Storage Tanks,Mechanical design, 1.0
+Polymer Storage Tanks - Section and Elevation Drawing,Tanks,Polymer Storage Tanks,Mechanical design, 1.0
+Coagulant Mix Tank - General Arrangement Drawing,Tanks,Coagulant Mix Tank,Mechanical design, 1.0
+Coagulant Mix Tank - Section and Elevation Drawing,Tanks,Coagulant Mix Tank,Mechanical design, 1.0
+Residuals Pump - General Arrangement Drawing,Pumps and Blowers,Residuals Pump,Mechanical design, 1.0
+Residuals Pump - Section and Elevation Drawing,Pumps and Blowers,Residuals Pump,Mechanical design, 1.0
+Residuals Pump - Datasheet,Pumps and Blowers,Residuals Pump,Mechanical design, 1.0
+Electron Donor Metering - General Arrangement Drawing,Pumps and Blowers,Electron Donor Metering,Mechanical design, 1.0
+Electron Donor Metering - Section and Elevation Drawing,Pumps and Blowers,Electron Donor Metering,Mechanical design, 1.0
+Electron Donor Metering - Datasheet,Pumps and Blowers,Electron Donor Metering,Mechanical design, 1.0
+Phosphoric Acid Metering - General Arrangement Drawing,Pumps and Blowers,Phosphoric Acid Metering,Mechanical design, 1.0
+Phosphoric Acid Metering - Section and Elevation Drawing,Pumps and Blowers,Phosphoric Acid Metering,Mechanical design, 1.0
+Phosphoric Acid Metering - Datasheet,Pumps and Blowers,Phosphoric Acid Metering,Mechanical design, 1.0
+Blowers - General Arrangement Drawing,Pumps and Blowers,Phosphoric Acid Metering,Mechanical design, 1.0
+Blowers - Section and Elevation Drawing,Pumps and Blowers,Phosphoric Acid Metering,Mechanical design, 1.0
+Blowers - Datasheet,Pumps and Blowers,Phosphoric Acid Metering,Mechanical design, 1.0
+Ferric Chloride Metering to Post- General Arrangement Drawing,Pumps and Blowers,Ferric Chloride Metering to Post-Treatment,Mechanical design, 1.0
+Ferric Chloride Metering to Post- Section and Elevation Drawing,Pumps and Blowers,Ferric Chloride Metering to Post-Treatment,Mechanical design, 1.0
+Ferric Chloride Metering to Post- Datasheet,Pumps and Blowers,Ferric Chloride Metering to Post-Treatment,Mechanical design, 1.0
+Polymer Metering - General Arrangement Drawing,Pumps and Blowers,Polymer Metering,Mechanical design, 1.0
+Polymer Metering - Section and Elevation Drawing,Pumps and Blowers,Polymer Metering,Mechanical design, 1.0
+Polymer Metering - Datasheet,Pumps and Blowers,Polymer Metering,Mechanical design, 1.0
+Residuals Mixers - General Arrangement Drawing,Mixers,Residuals Mixers,Mechanical design, 1.0
+Residuals Mixers - Section and Elevation Drawing,Mixers,Residuals Mixers,Mechanical design, 1.0
+Coagulant Mix Tank Mixers - General Arrangement Drawing,Mixers,Coagulant Mix Tank Mixers,Mechanical design, 1.0
+Coagulant Mix Tank Mixers - Section and Elevation Drawing,Mixers,Coagulant Mix Tank Mixers,Mechanical design, 1.0
+Eductors for Holding Tanks - General Arrangement Drawing,Solids Transfer,Eductors for Holding Tanks,Mechanical design, 1.0
+Eductors for Holding Tanks - Section and Elevation Drawing,Solids Transfer,Eductors for Holding Tanks,Mechanical design, 1.0
+Bioreactors - Calculation,Bioreactors,Pressure Vessels,Mechanical design, 1.0
+Post Treatment Filters - Calculation,Post-Treatment Filters,Pressure Vessels,Mechanical design, 1.0
+Electron Donor Storage Tanks - Calculation,Tanks,Electron Donor Storage Tanks,Mechanical design, 1.0
+Phosphoric Acid Storage Tanks - Calculation,Tanks,Phosphoric Acid Storage Tanks,Mechanical design, 1.0
+Electron Donor Day Tanks - Calculation,Tanks,Electron Donor Day Tanks,Mechanical design, 1.0
+Residuals Holding Tanks/Basins - Calculation,Tanks,Residuals Holding Tanks/Basins,Mechanical design, 1.0
+Aeration Tanks - Calculation,Tanks,Aeration Tanks,Mechanical design, 1.0
+Ferric Chloride Storage Tanks - Calculation,Tanks,Ferric Chloride Storage Tanks,Mechanical design, 1.0
+Polymer Storage Tanks - Calculation,Tanks,Polymer Storage Tanks,Mechanical design, 1.0
+Coagulant Mix Tank - Calculation,Tanks,Coagulant Mix Tank,Mechanical design, 1.0
+Residuals Pump - Calculation,Pumps and Blowers,Residuals Pump,Mechanical design, 1.0
+Electron Donor Metering - Calculation,Pumps and Blowers,Electron Donor Metering,Mechanical design, 1.0
+Phosphoric Acid Metering - Calculation,Pumps and Blowers,Phosphoric Acid Metering,Mechanical design, 1.0
+Blowers - Calculation,Pumps and Blowers,Phosphoric Acid Metering,Mechanical design, 1.0
+Ferric Chloride Metering to Post- Calculation,Pumps and Blowers,Ferric Chloride Metering to Post-Treatment,Mechanical design, 1.0
+Polymer Metering - Calculation,Pumps and Blowers,Polymer Metering,Mechanical design, 1.0
+Residuals Mixers - Calculation,Mixers,Residuals Mixers,Mechanical design, 1.0
+Coagulant Mix Tank Mixers - Calculation,Mixers,Coagulant Mix Tank Mixers,Mechanical design, 1.0
+Eductors for Holding Tanks - Calculation,Solids Transfer,Eductors for Holding Tanks,Mechanical design, 1.0
+Bioreactors - Foundation Drawing,Bioreactors,Pressure Vessels,Foundation design, 1.0
+Post Treatment Filters - Foundation Drawing,Post-Treatment Filters,Pressure Vessels,Foundation design, 1.0
+Electron Donor Storage Tanks - Foundation Drawing,Tanks,Electron Donor Storage Tanks,Foundation design, 1.0
+Phosphoric Acid Storage Tanks - Foundation Drawing,Tanks,Phosphoric Acid Storage Tanks,Foundation design, 1.0
+Electron Donor Day Tanks - Foundation Drawing,Tanks,Electron Donor Day Tanks,Foundation design, 1.0
+Residuals Holding Tanks/Basins - Foundation Drawing,Tanks,Residuals Holding Tanks/Basins,Foundation design, 1.0
+Aeration Tanks - Foundation Drawing,Tanks,Aeration Tanks,Foundation design, 1.0
+Ferric Chloride Storage Tanks - Foundation Drawing,Tanks,Ferric Chloride Storage Tanks,Foundation design, 1.0
+Polymer Storage Tanks - Foundation Drawing,Tanks,Polymer Storage Tanks,Foundation design, 1.0
+Coagulant Mix Tank - Foundation Drawing,Tanks,Coagulant Mix Tank,Foundation design, 1.0
+Residuals Pump - Foundation Drawing,Pumps and Blowers,Residuals Pump,Foundation design, 1.0
+Electron Donor Metering - Foundation Drawing,Pumps and Blowers,Electron Donor Metering,Foundation design, 1.0
+Phosphoric Acid Metering - Foundation Drawing,Pumps and Blowers,Phosphoric Acid Metering,Foundation design, 1.0
+Blowers - Foundation Drawing,Pumps and Blowers,Phosphoric Acid Metering,Foundation design, 1.0
+Ferric Chloride Metering to Post- Foundation Drawing,Pumps and Blowers,Ferric Chloride Metering to Post-Treatment,Foundation design, 1.0
+Polymer Metering - Foundation Drawing,Pumps and Blowers,Polymer Metering,Foundation design, 1.0
+Residuals Mixers - Foundation Drawing,Mixers,Residuals Mixers,Foundation design, 1.0
+Coagulant Mix Tank Mixers - Foundation Drawing,Mixers,Coagulant Mix Tank Mixers,Foundation design, 1.0
+Bioreactors - Foundation Calculation,Bioreactors,Pressure Vessels,Foundation design, 1.0
+Post Treatment Filters - Foundation Calculation,Post-Treatment Filters,Pressure Vessels,Foundation design, 1.0
+Electron Donor Storage Tanks - Foundation Calculation,Tanks,Electron Donor Storage Tanks,Foundation design, 1.0
+Phosphoric Acid Storage Tanks - Foundation Calculation,Tanks,Phosphoric Acid Storage Tanks,Foundation design, 1.0
+Electron Donor Day Tanks - Foundation Calculation,Tanks,Electron Donor Day Tanks,Foundation design, 1.0
+Residuals Holding Tanks/Basins - Foundation Calculation,Tanks,Residuals Holding Tanks/Basins,Foundation design, 1.0
+Aeration Tanks - Foundation Calculation,Tanks,Aeration Tanks,Foundation design, 1.0
+Ferric Chloride Storage Tanks - Foundation Calculation,Tanks,Ferric Chloride Storage Tanks,Foundation design, 1.0
+Polymer Storage Tanks - Foundation Calculation,Tanks,Polymer Storage Tanks,Foundation design, 1.0
+Coagulant Mix Tank - Foundation Calculation,Tanks,Coagulant Mix Tank,Foundation design, 1.0
+Residuals Pump - Foundation Calculation,Pumps and Blowers,Residuals Pump,Foundation design, 1.0
+Electron Donor Metering - Foundation Calculation,Pumps and Blowers,Electron Donor Metering,Foundation design, 1.0
+Phosphoric Acid Metering - Foundation Calculation,Pumps and Blowers,Phosphoric Acid Metering,Foundation design, 1.0
+Blowers - Foundation Calculation,Pumps and Blowers,Phosphoric Acid Metering,Foundation design, 1.0
+Ferric Chloride Metering to Post- Foundation Calculation,Pumps and Blowers,Ferric Chloride Metering to Post-Treatment,Foundation design, 1.0
+Polymer Metering - Foundation Calculation,Pumps and Blowers,Polymer Metering,Foundation design, 1.0
+Residuals Mixers - Foundation Calculation,Mixers,Residuals Mixers,Foundation design, 1.0
+Coagulant Mix Tank Mixers - Foundation Calculation,Mixers,Coagulant Mix Tank Mixers,Foundation design, 1.0
+Backwash Piping - Layout Drawings,Piping,Backwash Piping,Piping layout, 1.0
+Backwash Piping - Stress Calculation,Piping,Backwash Piping,Piping stress, 1.0
+Backwash Piping - Pipe Support Drawings,Piping,Backwash Piping,Piping supports, 1.0
+Electron Donor Piping - Isometric Drawings,Piping,Electron Donor Piping,Piping layout, 1.0
+Electron Donor Piping - Layout Drawings,Piping,Electron Donor Piping,Piping layout, 1.0
+Electron Donor Piping - Stress Calculation,Piping,Electron Donor Piping,Piping stress, 1.0
+Electron Donor Piping - Pipe Support Drawings,Piping,Electron Donor Piping,Piping supports, 1.0
+Phosphoric Acid Piping - Isometric Drawings,Piping,Phosphoric Acid Piping,Piping layout, 1.0
+Phosphoric Acid Piping - Layout Drawings,Piping,Phosphoric Acid Piping,Piping layout, 1.0
+Phosphoric Acid Piping - Stress Calculation,Piping,Phosphoric Acid Piping,Piping stress, 1.0
+Phosphoric Acid Piping - Pipe Support Drawings,Piping,Phosphoric Acid Piping,Piping supports, 1.0
+Process Piping - Isometric Drawings,Piping,Process Piping,Piping layout, 1.0
+Process Piping - Layout Drawings,Piping,Process Piping,Piping layout, 1.0
+Process Piping - Stress Calculation,Piping,Process Piping,Piping stress, 1.0
+Process Piping - Pipe Support Drawings,Piping,Process Piping,Piping supports, 1.0
+Influent and Treated Water Piping - Isometric Drawings,Piping,Influent and Treated Water Piping,Piping layout, 1.0
+Influent and Treated Water Piping - Layout Drawings,Piping,Influent and Treated Water Piping,Piping layout, 1.0
+Influent and Treated Water Piping - Stress Calculation,Piping,Influent and Treated Water Piping,Piping stress, 1.0
+Influent and Treated Water Piping - Pipe Support Drawings,Piping,Influent and Treated Water Piping,Piping supports, 1.0
+Residuals Piping - Isometric Drawings,Piping,Residuals Piping,Piping layout, 1.0
+Residuals Piping - Layout Drawings,Piping,Residuals Piping,Piping layout, 1.0
+Residuals Piping - Stress Calculation,Piping,Residuals Piping,Piping stress, 1.0
+Residuals Piping - Pipe Support Drawings,Piping,Residuals Piping,Piping supports, 1.0
+Ferric Chloride Piping - Isometric Drawings,Piping,Ferric Chloride Piping,Piping layout, 1.0
+Ferric Chloride Piping - Layout Drawings,Piping,Ferric Chloride Piping,Piping layout, 1.0
+Ferric Chloride Piping - Stress Calculation,Piping,Ferric Chloride Piping,Piping stress, 1.0
+Ferric Chloride Piping - Pipe Support Drawings,Piping,Ferric Chloride Piping,Piping supports, 1.0
+Polymer Addition Piping - Isometric Drawings,Piping,Polymer Addition Piping,Piping layout, 1.0
+Polymer Addition Piping - Layout Drawings,Piping,Polymer Addition Piping,Piping layout, 1.0
+Polymer Addition Piping - Stress Calculation,Piping,Polymer Addition Piping,Piping stress, 1.0
+Polymer Addition Piping - Pipe Support Drawings,Piping,Polymer Addition Piping,Piping supports, 1.0
+Flow Meters Influent and treated water - Datasheet,Instrumentation,Flow Meters - Influent and treated water,Instrumentation design, 1.0
+Flow Meters Influent and treated water - Instrument Location Plan,Instrumentation,Flow Meters - Influent and treated water,Instrumentation design, 1.0
+Flow Meters Backwash - Datasheet,Instrumentation,Flow Meters - Backwash,Instrumentation design, 1.0
+Flow Meters Backwash - Instrument Location Plan,Instrumentation,Flow Meters - Backwash,Instrumentation design, 1.0
+Flow Meters Residuals - Datasheet,Instrumentation,Flow Meters - Residuals,Instrumentation design, 1.0
+Flow Meters Residuals - Instrument Location Plan,Instrumentation,Flow Meters - Residuals,Instrumentation design, 1.0
+High/Low Alarm - Datasheet,Instrumentation,High/Low Alarm (for holding tanks),Instrumentation design, 1.0
+High/Low Alarm - Instrument Location Plan,Instrumentation,High/Low Alarm (for holding tanks),Instrumentation design, 1.0
+Temperature meters - Datasheet,Instrumentation,Temperature meters,Instrumentation design, 1.0
+Temperature meters - Instrument Location Plan,Instrumentation,Temperature meters,Instrumentation design, 1.0
+Head loss sensors - Datasheet,Instrumentation,Head loss sensors,Instrumentation design, 1.0
+Head loss sensors - Instrument Location Plan,Instrumentation,Head loss sensors,Instrumentation design, 1.0
+Sampling Ports - Datasheet,Instrumentation,Sampling Ports,Instrumentation design, 1.0
+Sampling Ports - Instrument Location Plan,Instrumentation,Sampling Ports,Instrumentation design, 1.0
+ORP sensor - Datasheet,Instrumentation,ORP sensor,Instrumentation design, 1.0
+ORP sensor - Instrument Location Plan,Instrumentation,ORP sensor,Instrumentation design, 1.0
+Turbidity meters - Datasheet,Instrumentation,Turbidity meters,Instrumentation design, 1.0
+Turbidity meters - Instrument Location Plan,Instrumentation,Turbidity meters,Instrumentation design, 1.0
+Perchlorate/Nitrate Analyzer - Datasheet,Instrumentation,Perchlorate/Nitrate Analyzer,Instrumentation design, 1.0
+Perchlorate/Nitrate Analyzer - Instrument Location Plan,Instrumentation,Perchlorate/Nitrate Analyzer,Instrumentation design, 1.0
+Dissolved Oxygen Analyzer - Datasheet,Instrumentation,Dissolved Oxygen Analyzer,Instrumentation design, 1.0
+Dissolved Oxygen Analyzer - Instrument Location Plan,Instrumentation,Dissolved Oxygen Analyzer,Instrumentation design, 1.0
+PLC Unit - Datasheet,System Controls,PLC Unit,Instrumentation design, 1.0
+PLC Unit - Instrument Location Plan,System Controls,PLC Unit,Instrumentation design, 1.0
+Operator Equipment - Datasheet,System Controls,Operator Equipment,Instrumentation design, 1.0
+Operator Equipment - Instrument Location Plan,System Controls,Operator Equipment,Instrumentation design, 1.0
+Controls Software - Datasheet,System Controls,Controls Software,Instrumentation design, 1.0
+Controls Software - Instrument Location Plan,System Controls,Controls Software,Instrumentation design, 1.0
+Residuals Pump - Single Line Diagram,Pumps and Blowers,Residuals Pump,Electrical design, 1.0
+Residuals Pump - Cable Layout,Pumps and Blowers,Residuals Pump,Electrical design, 1.0
+Electron Donor Metering - Single Line Diagram,Pumps and Blowers,Electron Donor Metering,Electrical design, 1.0
+Electron Donor Metering - Cable Layout,Pumps and Blowers,Electron Donor Metering,Electrical design, 1.0
+Phosphoric Acid Metering - Single Line Diagram,Pumps and Blowers,Phosphoric Acid Metering,Electrical design, 1.0
+Phosphoric Acid Metering - Cable Layout,Pumps and Blowers,Phosphoric Acid Metering,Electrical design, 1.0
+Blowers - Single Line Diagram,Pumps and Blowers,Phosphoric Acid Metering,Electrical design, 1.0
+Blowers - Cable Layout,Pumps and Blowers,Phosphoric Acid Metering,Electrical design, 1.0
+Ferric Chloride Metering to Post- Single Line Diagram,Pumps and Blowers,Ferric Chloride Metering to Post-Treatment,Electrical design, 1.0
+Ferric Chloride Metering to Post- Cable Layout,Pumps and Blowers,Ferric Chloride Metering to Post-Treatment,Electrical design, 1.0
+Polymer Metering - Single Line Diagram,Pumps and Blowers,Polymer Metering,Electrical design, 1.0
+Polymer Metering - Cable Layout,Pumps and Blowers,Polymer Metering,Electrical design, 1.0
+PLC Unit - Single Line Diagram,System Controls,PLC Unit,Electrical design, 1.0
+PLC Unit - Cable Layout,System Controls,PLC Unit,Electrical design, 1.0
+Operator Equipment - Single Line Diagram,System Controls,Operator Equipment,Electrical design, 1.0
+Operator Equipment - Cable Layout,System Controls,Operator Equipment,Electrical design, 1.0
+Building - Ground Floor Plan,Building Structures and HVAC,Building,Architectual Design, 1.0
+Building - Roof Plan,Building Structures and HVAC,Building,Architectual Design, 1.0
+Building - Elevations 1,Building Structures and HVAC,Building,Architectual Design, 1.0
+Building - Elevations 2,Building Structures and HVAC,Building,Architectual Design, 1.0
+Building - Finish Schedule,Building Structures and HVAC,Building,Architectual Design, 1.0
+Building - General Notes,Building Structures and HVAC,Building,Structural Design, 1.0
+Building - Foundation Drawing,Building Structures and HVAC,Building,Structural Design, 1.0
+Building - Grade Slab and Beam Plan,Building Structures and HVAC,Building,Structural Design, 1.0
+Building - Roof Slab and Beam Plan,Building Structures and HVAC,Building,Structural Design, 1.0
+Building - Elevations 1,Building Structures and HVAC,Building,Structural Design, 1.0
+Building - Elevations 2,Building Structures and HVAC,Building,Structural Design, 1.0
+Building - Structural Calculation,Building Structures and HVAC,Building,Structural Design, 1.0
+Building - HVAC Layout and Details,Building Structures and HVAC,Building,Electrical wiring Design, 1.0
+Building - Sanitary Sewer,Building Structures and HVAC,Building,Plumbing Design, 1.0
+Building - Potable Water,Building Structures and HVAC,Building,Plumbing Design, 1.0
+Building - Plumbing Calculations,Building Structures and HVAC,Building,Plumbing Design, 1.0
+Building - Fire Protection Layout,Building Structures and HVAC,Building,Fire Protection Design, 1.0
+Building - Lighting Calculation,Building Structures and HVAC,Building,Electrical wiring Design, 1.0

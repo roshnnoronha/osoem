@@ -1,0 +1,5 @@
+fieldtitle,valuetype,maximumlength 
+Number,0,100
+Title,0,100
+Issued date,0,10
+

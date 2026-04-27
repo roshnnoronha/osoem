@@ -1,0 +1,597 @@
+# =============================================================================
+# Complete Project Setup - Industrial Building Project
+# Part 2: Project
+# =============================================================================
+# This source file sets up a complete industrial building project in the osoem
+# database, covering every entity type.
+#
+# Prerequisites:
+#   - A clean database with the schema applied
+#   - Organisation departments and employees loaded from:
+#     examples/source/org/departments.src
+#
+# Employees (by ID, from org/departments.src):
+#   1  - John Davis         (Project Management)
+#   2  - Sarah Thompson     (Structural Engineering)
+#   3  - Michael Chen       (Structural Engineering)
+#   4  - Emily Rodriguez    (Architecture)
+#   5  - David Wilson       (Architecture)
+#   6  - Jessica Brown      (Electrical Engineering)
+#   7  - Robert Martinez    (Electrical Engineering)
+#   8  - Amanda Johnson     (Plumbing Engineering)
+#   9  - Christopher Lee    (Plumbing Engineering)
+#   10 - Jennifer Garcia    (Architecture)
+# =============================================================================
+
+
+# =============================================================================
+# STEP 3: Create the project
+# =============================================================================
+# Path: ~ > Projects
+# Format: ad "projectname:<name>,projectno:<number>"
+
+cd ~
+cd Projects
+ad "projectname:Industrial Building Project,projectno:PRO-2026-004"
+
+
+# =============================================================================
+# STEP 4: Add team members to the project
+# =============================================================================
+# Path: ~ > Projects > <Project> > Team
+# Format: ad "employeename:<name>,role:<role>"
+# Roles: 1 = Team Member, 2 = Project Manager, 3 = Administrator
+
+cd "Industrial Building Project"
+cd Team
+ad "employeename:John Davis,role:2"
+ad "employeename:Sarah Thompson,role:1"
+ad "employeename:Michael Chen,role:1"
+ad "employeename:Emily Rodriguez,role:1"
+ad "employeename:David Wilson,role:1"
+ad "employeename:Jessica Brown,role:1"
+ad "employeename:Robert Martinez,role:1"
+ad "employeename:Amanda Johnson,role:1"
+ad "employeename:Christopher Lee,role:1"
+ad "employeename:Jennifer Garcia,role:1"
+
+
+# =============================================================================
+# STEP 5: Create activity categories
+# =============================================================================
+# Path: ~ > Projects > <Project> > Activity Categories
+# Format: ad "categoryname:<name>"
+
+cd ~
+cd Projects
+cd "Industrial Building Project"
+cd "Activity Categories"
+ad "categoryname:Architecture"
+ad "categoryname:Structural Engineering"
+ad "categoryname:Plumbing Engineering"
+ad "categoryname:Electrical Engineering"
+
+
+# =============================================================================
+# STEP 6: Create activity subcategories
+# =============================================================================
+# Path: ~ > Projects > <Project> > Activity Categories > <Category>
+# Format: ad "subcategoryname:<name>"
+
+# Architecture subcategories
+cd "Architecture"
+ad "subcategoryname:Facility Layout Design"
+ad "subcategoryname:Industrial Facade Design"
+cd ..
+
+# Structural Engineering subcategories
+cd "Structural Engineering"
+ad "subcategoryname:Structural Analysis"
+ad "subcategoryname:Detailed Structural Design"
+cd ..
+
+# Plumbing Engineering subcategories
+cd "Plumbing Engineering"
+ad "subcategoryname:Process Piping Design"
+ad "subcategoryname:Drainage and Sanitation Design"
+cd ..
+
+# Electrical Engineering subcategories
+cd "Electrical Engineering"
+ad "subcategoryname:Power Distribution Design"
+ad "subcategoryname:Instrumentation and Controls"
+cd ..
+
+
+# =============================================================================
+# STEP 7: Create activities
+# =============================================================================
+# Path: ~ > Projects > <Project> > Activity Categories > <Category> > <Subcategory>
+# Format: ad "activityname:<name>,activitymanagername:<name>,plannedstart:<date>,plannedfinish:<date>,plannedhours:<hours>"
+
+# Architecture > Facility Layout Design
+cd "Architecture"
+cd "Facility Layout Design"
+ad "activityname:Industrial facility layout and zoning,activitymanagername:Emily Rodriguez,plannedstart:2026-03-01,plannedfinish:2026-05-15,plannedhours:280.00"
+ad "activityname:Loading dock and logistics design,activitymanagername:David Wilson,plannedstart:2026-03-15,plannedfinish:2026-04-30,plannedhours:160.00"
+cd ..
+cd "Industrial Facade Design"
+ad "activityname:Industrial facade and cladding design,activitymanagername:Jennifer Garcia,plannedstart:2026-05-01,plannedfinish:2026-06-30,plannedhours:120.00"
+cd ..
+cd ..
+
+# Structural Engineering > Structural Analysis
+cd "Structural Engineering"
+cd "Structural Analysis"
+ad "activityname:Heavy structural frame analysis,activitymanagername:Sarah Thompson,plannedstart:2026-03-01,plannedfinish:2026-06-30,plannedhours:480.00"
+ad "activityname:Equipment foundation design and analysis,activitymanagername:Michael Chen,plannedstart:2026-02-15,plannedfinish:2026-04-30,plannedhours:220.00"
+cd ..
+cd "Detailed Structural Design"
+ad "activityname:Structural steelwork detailing,activitymanagername:Sarah Thompson,plannedstart:2026-05-01,plannedfinish:2026-08-31,plannedhours:400.00"
+ad "activityname:Industrial floor slab design,activitymanagername:Michael Chen,plannedstart:2026-04-01,plannedfinish:2026-06-30,plannedhours:200.00"
+cd ..
+cd ..
+
+# Plumbing Engineering > Process Piping Design
+cd "Plumbing Engineering"
+cd "Process Piping Design"
+ad "activityname:Process water supply system design,activitymanagername:Amanda Johnson,plannedstart:2026-04-01,plannedfinish:2026-06-30,plannedhours:240.00"
+ad "activityname:Compressed air distribution design,activitymanagername:Christopher Lee,plannedstart:2026-04-15,plannedfinish:2026-06-30,plannedhours:180.00"
+cd ..
+cd "Drainage and Sanitation Design"
+ad "activityname:Industrial drainage and oil interceptor design,activitymanagername:Amanda Johnson,plannedstart:2026-05-01,plannedfinish:2026-07-15,plannedhours:160.00"
+cd ..
+cd ..
+
+# Electrical Engineering > Power Distribution Design
+cd "Electrical Engineering"
+cd "Power Distribution Design"
+ad "activityname:High voltage switchgear and distribution design,activitymanagername:Jessica Brown,plannedstart:2026-03-15,plannedfinish:2026-06-30,plannedhours:360.00"
+ad "activityname:Industrial lighting design,activitymanagername:Robert Martinez,plannedstart:2026-04-15,plannedfinish:2026-06-30,plannedhours:200.00"
+cd ..
+cd "Instrumentation and Controls"
+ad "activityname:Motor control centre design,activitymanagername:Robert Martinez,plannedstart:2026-05-01,plannedfinish:2026-07-31,plannedhours:240.00"
+ad "activityname:Fire and gas detection system design,activitymanagername:Jessica Brown,plannedstart:2026-05-15,plannedfinish:2026-07-31,plannedhours:180.00"
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 8: Create tasks for activities
+# =============================================================================
+# Path: ... > <Activity> > Tasks
+# Format: ad "taskname:<name>"
+
+# Tasks for "Heavy structural frame analysis"
+cd "Structural Engineering"
+cd "Structural Analysis"
+cd "Heavy structural frame analysis"
+cd Tasks
+ad "taskname:Review geotechnical and site survey data"
+ad "taskname:Structural system selection"
+ad "taskname:Load calculations"
+ad "taskname:Frame analysis and design"
+ad "taskname:Drawing preparation"
+ad "taskname:Calculation report compilation"
+ad "taskname:Interdisciplinary review"
+ad "taskname:Document approval"
+cd ..
+
+
+# =============================================================================
+# STEP 9: Create subtasks (tasks within tasks)
+# =============================================================================
+# Path: ... > Tasks > <Task> > Tasks
+# Format: ad "taskname:<name>"
+
+# Subtasks under "Structural system selection"
+cd Tasks
+cd "Structural system selection"
+cd Tasks
+ad "taskname:Evaluate structural system options"
+ad "taskname:Prepare system selection report"
+cd ..
+cd ..
+
+# Subtasks under "Load calculations"
+cd "Load calculations"
+cd Tasks
+ad "taskname:Define gravity loads"
+ad "taskname:Calculate wind loads"
+ad "taskname:Calculate seismic loads"
+ad "taskname:Prepare load summary"
+cd ..
+cd ..
+
+# Subtasks under "Frame analysis and design"
+cd "Frame analysis and design"
+cd Tasks
+ad "taskname:Define frame geometry and member sizes"
+ad "taskname:Apply gravity and wind loads"
+ad "taskname:Run analysis and optimize member sizes"
+ad "taskname:Check deflection and serviceability"
+cd ..
+cd ..
+
+# Subtasks under "Drawing preparation"
+cd "Drawing preparation"
+cd Tasks
+ad "taskname:Prepare structural arrangement drawings"
+ad "taskname:Prepare connection detail drawings"
+ad "taskname:Drawing review"
+ad "taskname:Drawing comment incorporation"
+cd ..
+cd ..
+
+# Tasks for "Equipment foundation design and analysis"
+cd ..
+cd ..
+cd "Equipment foundation design and analysis"
+cd Tasks
+ad "taskname:Review equipment loading data"
+ad "taskname:Foundation type selection"
+ad "taskname:Foundation design calculations"
+ad "taskname:Reinforcement detailing"
+ad "taskname:Document approval"
+cd ..
+
+
+# =============================================================================
+# STEP 10: Create task assignments
+# =============================================================================
+# Path: ... > Tasks > <Task> > Assignments
+# Format: ad "username:<name>,assigneddate:<date>,closedate:<date>"
+# Omit closedate for open assignments
+
+# Assign Michael Chen to "Review geotechnical and site survey data"
+cd ..
+cd "Heavy structural frame analysis"
+cd Tasks
+cd "Review geotechnical and site survey data"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-03-01"
+cd ..
+
+# Assign Sarah Thompson to "Structural system selection"
+cd ..
+cd "Structural system selection"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-03-10"
+cd ..
+
+# Assign Michael Chen to subtask "Define gravity loads"
+cd ..
+cd "Load calculations"
+cd Tasks
+cd "Define gravity loads"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-03-20"
+cd ..
+
+
+# =============================================================================
+# STEP 11: Book hours against assignments
+# =============================================================================
+# Path: ... > Assignments > <Assignment>
+# Format: ad "bookeddate:<date>,hours:<hours>"
+
+# Hours for Michael Chen on "Review geotechnical and site survey data"
+cd ..
+cd ..
+cd ..
+cd "Review geotechnical and site survey data"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-03-03,hours:8"
+ad "bookeddate:2026-03-04,hours:8"
+ad "bookeddate:2026-03-05,hours:6"
+cd ..
+cd ..
+
+# Hours for Sarah Thompson on "Structural system selection"
+cd ..
+cd "Structural system selection"
+cd Assignments
+cd "Sarah Thompson"
+ad "bookeddate:2026-03-10,hours:8"
+ad "bookeddate:2026-03-11,hours:8"
+ad "bookeddate:2026-03-12,hours:7"
+ad "bookeddate:2026-03-13,hours:5"
+cd ..
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 12: Add activity notes
+# =============================================================================
+# Path: ... > <Activity> > Notes
+# Format: ad "username:<name>,note:<text>,notedate:<date>"
+
+cd ..
+cd Notes
+ad "username:John Davis,note:Project kick-off meeting held. Scope and timeline agreed. Geotechnical investigation underway.,notedate:2026-03-01"
+ad "username:Sarah Thompson,note:Geotechnical report received. Pile foundations confirmed based on site soil conditions.,notedate:2026-03-08"
+ad "username:Michael Chen,note:Equipment loading data received from client. Foundation design can now proceed.,notedate:2026-03-15"
+cd ..
+
+
+# =============================================================================
+# STEP 13: Create artefact types
+# =============================================================================
+# Path: ~ > Projects > <Project> > Artefact Types
+# Format: ad "artefactname:<name>,artefactdescription:<description>"
+
+cd ~
+cd Projects
+cd "Industrial Building Project"
+cd "Artefact Types"
+ad "artefactname:Drawing,artefactdescription:Engineering drawings for the industrial facility"
+ad "artefactname:Calculation,artefactdescription:Engineering calculation reports and analysis documents"
+ad "artefactname:Equipment Schedule,artefactdescription:Schedules listing mechanical and electrical equipment items"
+
+
+# =============================================================================
+# STEP 14: Define artefact data fields
+# =============================================================================
+# Path: ... > <ArtefactType> > Fields
+# Format: ad "fieldtitle:<title>,valuetype:<type>,maximumlength:<len>,maximumvalue:<max>,minimumvalue:<min>"
+# valuetype: 0 = text, 1 = number
+
+# Fields for Drawing type
+cd "Drawing"
+cd Fields
+ad "fieldtitle:Drawing Number,valuetype:0,maximumlength:50,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Drawing Title,valuetype:0,maximumlength:200,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Revision,valuetype:0,maximumlength:10,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Revision Purpose,valuetype:0,maximumlength:100,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Prepared By,valuetype:0,maximumlength:100,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Checked By,valuetype:0,maximumlength:100,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Approved By,valuetype:0,maximumlength:100,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Sheet Size,valuetype:0,maximumlength:10,maximumvalue:0,minimumvalue:0"
+cd ..
+
+# Fields for Calculation type
+cd ..
+cd "Calculation"
+cd Fields
+ad "fieldtitle:Calculation Number,valuetype:0,maximumlength:50,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Calculation Title,valuetype:0,maximumlength:200,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Revision,valuetype:0,maximumlength:10,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Prepared By,valuetype:0,maximumlength:100,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Checked By,valuetype:0,maximumlength:100,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Number of Pages,valuetype:1,maximumlength:0,maximumvalue:500,minimumvalue:1"
+cd ..
+
+# Fields for Equipment Schedule type
+cd ..
+cd "Equipment Schedule"
+cd Fields
+ad "fieldtitle:Schedule Number,valuetype:0,maximumlength:50,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Schedule Title,valuetype:0,maximumlength:200,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Revision,valuetype:0,maximumlength:10,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Discipline,valuetype:0,maximumlength:50,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Prepared By,valuetype:0,maximumlength:100,maximumvalue:0,minimumvalue:0"
+ad "fieldtitle:Number of Items,valuetype:1,maximumlength:0,maximumvalue:1000,minimumvalue:1"
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 15: Create artefacts
+# =============================================================================
+# Path: ... > <ArtefactType> > Artefacts
+# Format: ad "artefacttitle:<title>,artefactownername:<name>"
+
+# Drawing artefacts
+cd "Drawing"
+cd Artefacts
+ad "artefacttitle:Structural General Arrangement - Sheet S-001,artefactownername:Sarah Thompson"
+ad "artefacttitle:Main Steel Frame Details - Sheet S-101,artefactownername:Michael Chen"
+ad "artefacttitle:Pile Foundation Layout - Sheet S-201,artefactownername:Michael Chen"
+ad "artefacttitle:High Voltage Single Line Diagram - Sheet E-001,artefactownername:Jessica Brown"
+ad "artefacttitle:Industrial Lighting Layout - Sheet E-101,artefactownername:Robert Martinez"
+ad "artefacttitle:Process Water Supply Layout - Sheet P-001,artefactownername:Amanda Johnson"
+cd ..
+
+# Calculation artefacts
+cd ..
+cd "Calculation"
+cd Artefacts
+ad "artefacttitle:Structural Frame Analysis Report,artefactownername:Sarah Thompson"
+ad "artefacttitle:Pile Foundation Design Calculations,artefactownername:Michael Chen"
+ad "artefacttitle:Electrical Load Analysis and Distribution Report,artefactownername:Jessica Brown"
+cd ..
+
+# Equipment Schedule artefacts
+cd ..
+cd "Equipment Schedule"
+cd Artefacts
+ad "artefacttitle:Mechanical Equipment Schedule,artefactownername:Amanda Johnson"
+ad "artefacttitle:Electrical Equipment Schedule,artefactownername:Jessica Brown"
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 16: Populate artefact data
+# =============================================================================
+# Path: ... > Artefacts > <Artefact> > Data
+# Format: ad "fieldname:<name>,value:<value>"
+
+# Data for "Structural General Arrangement - Sheet S-001"
+cd "Drawing"
+cd Artefacts
+cd "Structural General Arrangement - Sheet S-001"
+cd Data
+ad "fieldname:Drawing Number,value:S-001"
+ad "fieldname:Drawing Title,value:Structural General Arrangement"
+ad "fieldname:Revision,value:A"
+ad "fieldname:Revision Purpose,value:Issued for Review"
+ad "fieldname:Prepared By,value:Sarah Thompson"
+ad "fieldname:Checked By,value:Michael Chen"
+ad "fieldname:Sheet Size,value:A0"
+cd ..
+
+# Data for "Pile Foundation Layout - Sheet S-201"
+cd ..
+cd "Pile Foundation Layout - Sheet S-201"
+cd Data
+ad "fieldname:Drawing Number,value:S-201"
+ad "fieldname:Drawing Title,value:Pile Foundation Layout"
+ad "fieldname:Revision,value:0"
+ad "fieldname:Revision Purpose,value:Issued for Internal Review"
+ad "fieldname:Prepared By,value:Michael Chen"
+ad "fieldname:Checked By,value:Sarah Thompson"
+ad "fieldname:Sheet Size,value:A1"
+cd ..
+cd ..
+cd ..
+cd ..
+
+# Data for "Structural Frame Analysis Report"
+cd "Calculation"
+cd Artefacts
+cd "Structural Frame Analysis Report"
+cd Data
+ad "fieldname:Calculation Number,value:CALC-S-001"
+ad "fieldname:Calculation Title,value:Structural Frame Analysis"
+ad "fieldname:Revision,value:0"
+ad "fieldname:Prepared By,value:Sarah Thompson"
+ad "fieldname:Checked By,value:Michael Chen"
+ad "fieldname:Number of Pages,value:62"
+cd ..
+cd ..
+cd ..
+cd ..
+
+# Data for "Mechanical Equipment Schedule"
+cd "Equipment Schedule"
+cd Artefacts
+cd "Mechanical Equipment Schedule"
+cd Data
+ad "fieldname:Schedule Number,value:SCH-M-001"
+ad "fieldname:Schedule Title,value:Mechanical Equipment Schedule"
+ad "fieldname:Revision,value:0"
+ad "fieldname:Discipline,value:Mechanical"
+ad "fieldname:Prepared By,value:Amanda Johnson"
+ad "fieldname:Number of Items,value:24"
+cd ..
+cd ..
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 17: Link artefacts to activities
+# =============================================================================
+# Path: ... > Artefacts > <Artefact> > Associations
+# Format: ad "activityname:<name>,ratio:<ratio>"
+
+# Link "Structural General Arrangement" to "Heavy structural frame analysis"
+cd "Drawing"
+cd Artefacts
+cd "Structural General Arrangement - Sheet S-001"
+cd Associations
+ad "activityname:Heavy structural frame analysis,ratio:1.00"
+cd ..
+
+# Link "Pile Foundation Layout" split across two activities
+cd ..
+cd "Pile Foundation Layout - Sheet S-201"
+cd Associations
+ad "activityname:Equipment foundation design and analysis,ratio:0.60"
+ad "activityname:Heavy structural frame analysis,ratio:0.40"
+cd ..
+cd ..
+cd ..
+cd ..
+
+# Link calculations to activities
+cd "Calculation"
+cd Artefacts
+cd "Structural Frame Analysis Report"
+cd Associations
+ad "activityname:Heavy structural frame analysis,ratio:1.00"
+cd ..
+
+cd ..
+cd "Pile Foundation Design Calculations"
+cd Associations
+ad "activityname:Equipment foundation design and analysis,ratio:1.00"
+cd ..
+cd ..
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 18: Create milestones
+# =============================================================================
+# Path: ~ > Projects > <Project> > Milestones
+# Format: ad "milestonename:<name>"
+
+cd ~
+cd Projects
+cd "Industrial Building Project"
+cd Milestones
+ad "milestonename:Drawing Approval"
+ad "milestonename:Calculation Approval"
+ad "milestonename:Equipment Schedule Approval"
+
+
+# =============================================================================
+# STEP 19: Create milestone steps
+# =============================================================================
+# Path: ... > Milestones > <Milestone>
+# Format: ad "milestonestepname:<name>,progressratio:<ratio>"
+
+cd "Drawing Approval"
+ad "milestonestepname:Discipline Check,progressratio:0.50"
+ad "milestonestepname:Interdisciplinary Check,progressratio:0.75"
+ad "milestonestepname:Issue for Construction,progressratio:1.00"
+cd ..
+
+cd "Calculation Approval"
+ad "milestonestepname:Calculation Review,progressratio:0.50"
+ad "milestonestepname:Calculation Approval,progressratio:1.00"
+cd ..
+
+cd "Equipment Schedule Approval"
+ad "milestonestepname:Internal Review,progressratio:0.50"
+ad "milestonestepname:Client Approval,progressratio:1.00"
+cd ..
+
+
+# =============================================================================
+# STEP 20: Link milestones to artefact-activity associations
+# =============================================================================
+# Path: ... > Artefacts > <Artefact> > Associations > <Link>
+# Format: ad "milestonestepname:<name>,completedbyname:<name>,completiondate:<date>"
+# Use empty date if not yet completed
+
+# Mark "Structural General Arrangement" discipline and IDC checks as completed
+cd ~
+cd Projects
+cd "Industrial Building Project"
+cd "Artefact Types"
+cd "Drawing"
+cd Artefacts
+cd "Structural General Arrangement - Sheet S-001"
+cd Associations
+cd "Heavy structural frame analysis"
+ad "milestonestepname:Discipline Check,completedbyname:Sarah Thompson,completiondate:2026-04-20"
+ad "milestonestepname:Interdisciplinary Check,completedbyname:Michael Chen,completiondate:2026-04-28"
+cd ..
+
+# Mark "Structural Frame Analysis Report" calculation review as completed
+cd ..
+cd ..
+cd ..
+cd ..
+cd "Calculation"
+cd Artefacts
+cd "Structural Frame Analysis Report"
+cd Associations
+cd "Heavy structural frame analysis"
+ad "milestonestepname:Calculation Review,completedbyname:Michael Chen,completiondate:2026-04-15"

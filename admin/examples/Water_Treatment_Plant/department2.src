@@ -1,0 +1,22 @@
+
+cd ~
+cd Organization
+cd Departments
+ad "departmentname:Mechanical Engineering"
+ad "departmentname:Piping Engineering"
+ad "departmentname:Instrumentation Engineering"
+
+# Mechanical Engineering department
+cd "Mechanical Engineering"
+ad "firstname:Marcus,lastname:Brown,email:marcus.brown@engineering.com,password:mech001"
+cd ..
+
+# Piping Engineering department
+cd "Piping Engineering"
+ad "firstname:Patricia,lastname:Taylor,email:patricia.taylor@engineering.com,password:pipe002"
+cd ..
+
+# Instrumentation Engineering department
+cd "Instrumentation Engineering"
+ad "firstname:Kevin,lastname:Zhang,email:kevin.zhang@engineering.com,password:inst003"
+cd ..

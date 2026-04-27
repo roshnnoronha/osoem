@@ -1,27 +1,96 @@
 #ifndef ADD_H
 #define ADD_H
 
-#include "../database.h"
+#include "../data/database.h"
+#include "../data/path.h"
+#include "../utils/auth.h"
+#include "../data/projectdata.h"
+#include "../data/activitydata.h"
+#include "../data/categorydata.h"
+#include "../data/subcategorydata.h"
+#include "../data/taskdata.h"
+#include "../data/employeedata.h"
+#include "../data/artefacttypedata.h"
+#include "../data/artefactdata.h"
+#include "../data/notedata.h"
+#include "../data/fielddata.h"
+#include "../data/milestonedata.h"
+#include "../data/milestonestepdata.h"
+#include "../data/departmentdata.h"
+#include "../data/projectteammemberdata.h"
+#include "../data/assignmentdata.h"
+#include "../data/hoursdata.h"
+#include "../data/artefactdataitemdata.h"
+#include "../data/artefacttoactivitylinkdata.h"
+#include "../data/milestonetoartefactlinkdata.h"
+
 #include <string>
 
+using namespace data;
+
 namespace commands {
-namespace add {    
-    // Function to add a project
-    void addProject(Database& db, const std::string& projectName, const std::string& projectNumber, int projectManagerId);
+// Add an item interactively (prompts user for input)
+void add(Database& db, Path& pth);
 
-    // Function to add an activity category
-    void addCategory(Database& db, int projectId, const std::string& categoryName);
+// Add an item using comma-separated values
+void add(Database& db, Path& pth, const std::string& csvValues);
 
-    // Function to add an activity sub-category
-    void addSubcategory(Database& db, int categoryId, const std::string& subCategoryName);
+// Function to add a project
+int addProject(Database& db, ProjectData& proj);
 
-    // Function to add an activity
-    void addActivity(Database& db, const std::string& name, int subcategoryId,int managerId, const std::string& startDate,const std::string& endDate, double plannedHours) ;
+// Function to add an activity category
+int addCategory(Database& db, CategoryData& cat, int projectId);
 
-    // Function to add a task
-    void addTask(Database& db, int activityId, const std::string& taskName, int parentTaskId) ;
+// Function to add an activity sub-category
+int addSubcategory(Database& db, SubCategoryData& subCat, int categoryId);
 
-} // namespace add
+// Function to add an activity
+int addActivity(Database& db, ActivityData& act, int subcategoryId, int projectId = 0);
+
+// Function to add a task
+int addTask(Database& db, TaskData& tas, int activityId, int parentTaskId);
+
+// Function to add a new employee
+int addEmployee(Database& db, EmployeeData& emp);
+
+// Function to add a new artefact type
+int addArtefactType(Database& db, ArtefactTypeData& artTyp);
+
+// Function to add a new artefact
+int addArtefact(Database& db, ArtefactData& art, int projectId = 0);
+
+// Function to add a new note
+int addNote(Database& db, NoteData& noe, int projectId = 0);
+
+// Function to add a new field
+int addField(Database& db, FieldData& fie);
+
+// Function to add a new milestone
+int addMilestone(Database& db, MilestoneData& mil);
+
+// Function to add a new milestone step
+int addMilestoneStep(Database& db, MilestoneStepData& milStp);
+
+// Function to add a new department
+int addDepartment(Database& db, DepartmentData& dept);
+
+// Function to add a new team member
+int addTeamMember(Database& db, ProjectTeamMemberData& member);
+
+// Function to add a new assignment
+int addAssignment(Database& db, AssignmentData& assignment, int projectId = 0);
+
+// Function to add hours
+int addHours(Database& db, HoursData& hours);
+
+// Function to add artefact data item
+int addArtefactDataItem(Database& db, ArtefactDataItemData& data);
+
+// Function to add artefact to activity link
+int addArtefactToActivityLink(Database& db, ArtefactToActivityLinkData& link);
+
+// Function to add milestone to artefact link
+int addMilestoneToArtefactLink(Database& db, MilestoneToArtefactLinkData& link, int projectId = 0);
 } // namespace commands
 
 #endif //ADD_H

@@ -6,9 +6,9 @@
 namespace config {
     // Database connection parameters
     const std::string DB_HOST = "localhost";
-    const std::string DB_USER = "roshn";
-    const std::string DB_PASS = "P@ssword";
-    const std::string DB_NAME = "trial";
+    const std::string DB_USER = "<username>";
+    const std::string DB_PASS = "<password>";
+    const std::string DB_NAME = "osoem_database";
     const int DB_PORT = 3306;
 }
 

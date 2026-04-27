@@ -1,19 +1,6 @@
 # OSOEM Admin Tool
 
-A command-line administrative tool for managing the OSOEM engineering project management database.
-
-## Features
-
-The osoem_admin tool provides the following functionality:
-
-1. **Import and manage activities** from CSV files
-2. **Navigate, add, and remove activities** with hierarchical task management
-3. **Add tasks to activities** with parent-child relationships
-4. **Create artefact types** and import artefacts in bulk
-5. **Add and remove employees**
-6. **Add and remove milestones** with progress tracking steps
-7. **Link artefacts to activities** with ratio allocation
-8. **Link milestone steps to artefacts** for progress measurement
+A command-line administrative tool for managing the OSOEM engineering project management database. The tool provides an interactive shell with a hierarchical folder-like interface for navigating and manipulating project data.
 
 ## Prerequisites
 
@@ -22,45 +9,32 @@ The osoem_admin tool provides the following functionality:
 - CMake 3.10 or higher
 - C++17 compatible compiler (g++ or clang++)
 - MySQL/MariaDB server
-- MySQL Connector/C++ library
 
 ### Installing Dependencies
 
 #### Ubuntu/Debian
 ```bash
 sudo apt update
-sudo apt install cmake g++ libmysqlcppconn-dev
+sudo apt install cmake g++ libmysqlcppconn-dev libreadline-dev libssl-dev
 ```
 
 #### Fedora/RHEL
 ```bash
-sudo dnf install cmake gcc-c++ mysql-connector-c++-devel
+sudo dnf install cmake gcc-c++ mysql-connector-c++-devel readline-devel openssl-devel
 ```
 
 ## Building the Project
 
-1. Navigate to the admin directory:
 ```bash
 cd admin
-```
-
-2. Create a build directory:
-```bash
 mkdir build
 cd build
-```
-
-3. Run CMake:
-```bash
 cmake ..
+cd ..
+cmake --build build/ --target=osoem_admin
 ```
 
-4. Build the project:
-```bash
-make
-```
-
-5. The executable `osoem_admin` will be created in the build directory.
+The executable `osoem_admin` will be created in the `build/` directory.
 
 ### Optional: Install System-Wide
 ```bash
@@ -69,310 +43,315 @@ sudo make install
 
 ## Configuration
 
-The tool connects to the database using the following default settings (configured in `config/database.h`):
-
-- **Host:** localhost
-- **Port:** 3306
-- **User:** roshn
-- **Password:** P@ssword
-- **Database:** trial
-
-To change these settings, edit `config/database.h` and rebuild the project.
+Database connection settings are configured in `config/db_config.h`. Edit this file and rebuild to change the connection parameters. Provide the <username>, <password> to the database.
 
 ## Usage
 
-### General Command Format
+### Interactive Mode
 ```bash
-./osoem_admin <command> [options]
+./osoem_admin                          # Start as admin (default)
+./osoem_admin -u user@example.com      # Start with user authentication
 ```
 
-### Activity Management
+When using the `-u` flag, the tool prompts for a password and authenticates against the database. Authenticated users are assigned a role (Admin or User). Non-admin users have read-only access and cannot use data modification commands (`add`, `remove`, `set`, `import`).
 
-**Import activities from CSV:**
+### Batch Mode
 ```bash
-./osoem_admin import-activities <csv_file> <project_id>
-```
-Example:
-```bash
-./osoem_admin import-activities ../data/sample/Residential_building_project/activities.csv 1
+./osoem_admin script.src               # Execute commands from a file
 ```
 
-**List all activities:**
-```bash
-./osoem_admin list-activities [project_id]
+In batch mode, commands are read from a text file and executed sequentially. Lines starting with `#` are treated as comments. The tool displays the file name and line number during execution. Batch mode runs with admin privileges.
+
+## Navigating the Hierarchy
+
+The tool organizes data in a folder-like hierarchy. The prompt displays the current location:
+
+```
+[osoem] ~/Projects/Building Project/Activity Categories>
 ```
 
-**Add a single activity:**
-```bash
-./osoem_admin add-activity <name> <subcategory_id> <manager_id> <start_date> <end_date> <hours>
-```
-Example:
-```bash
-./osoem_admin add-activity "Structural Analysis" 5 3 2026-03-01 2026-05-15 320.0
-```
+The root is represented by `~`. The full hierarchy is:
 
-**Remove an activity:**
-```bash
-./osoem_admin remove-activity <activity_id>
 ```
-
-### Task Management
-
-**Add a task to an activity:**
-```bash
-./osoem_admin add-task <activity_id> <task_name> [parent_task_id]
-```
-Examples:
-```bash
-# Add a top-level task
-./osoem_admin add-task 5 "Review architectural drawings"
-
-# Add a subtask
-./osoem_admin add-task 5 "Check dimensions" 12
-```
-
-**List tasks for an activity:**
-```bash
-./osoem_admin list-tasks <activity_id>
-```
-
-### Artefact Management
-
-**Create a new artefact type:**
-```bash
-./osoem_admin create-artefact-type <project_id> <name> <description>
-```
-Example:
-```bash
-./osoem_admin create-artefact-type 1 "Engineering Drawings" "Technical drawings for construction"
+~ (root)
+ ├── Organization
+ │   └── Departments
+ │       └── [Department]
+ │           └── Employees
+ └── Projects
+     └── [Project]
+         ├── Activity Categories
+         │   └── [Category]
+         │       └── [Subcategory]
+         │           └── [Activity]
+         │               ├── Tasks
+         │               │   └── [Task]
+         │               │       ├── Tasks (sub-tasks, recursive)
+         │               │       └── Assignments
+         │               │           └── [Assignment]
+         │               │               └── Hours
+         │               └── Notes
+         ├── Artefact Types
+         │   └── [Artefact Type]
+         │       ├── Artefacts
+         │       │   └── [Artefact]
+         │       │       ├── Data
+         │       │       └── Associations
+         │       │           └── [Artefact-Activity Link]
+         │       │               └── Milestone-Artefact Links
+         │       └── Fields
+         ├── Milestones
+         │   └── [Milestone]
+         │       └── Milestone Steps
+         └── Team
 ```
 
-**Import artefacts from CSV:**
-```bash
-./osoem_admin import-artefacts <csv_file> <artefact_type_id>
-```
-Example:
-```bash
-./osoem_admin import-artefacts ../data/sample/Residential_building_project/drawings.csv 1
-```
+## Commands
 
-**List artefact types:**
-```bash
-./osoem_admin list-artefact-types [project_id]
+### list (ls)
+
+Lists items at the current location.
+
+```
+ls          # Show ID and name
+ls -a       # Show all fields in tabular format
 ```
 
-**List artefacts of a specific type:**
-```bash
-./osoem_admin list-artefacts <artefact_type_id>
+### select (cd, sl)
+
+Navigates to an item or folder. Supports selection by ID or by name (case-insensitive).
+
+```
+cd Projects                     # Navigate to a folder
+cd "Building Project"           # Navigate to an item by name
+cd 1                            # Navigate to an item by ID
+cd ..                           # Go up one level
+cd ~                            # Return to root
 ```
 
-### Employee Management
+For employees, selection works with full name, first name, or last name.
 
-**Add a new employee:**
-```bash
-./osoem_admin add-employee <firstname> <lastname> <email> <password>
-```
-Example:
-```bash
-./osoem_admin add-employee John Doe john.doe@example.com SecurePass123
-```
+### add (ad)
 
-**Remove an employee:**
-```bash
-./osoem_admin remove-employee <employee_id>
+Adds a new item at the current location. Requires admin privileges.
+
+```
+ad                                          # Interactive mode (prompts for fields)
+ad "Project Alpha,PA-001"                   # CSV values (positional)
+ad "taskname:Review,assigneeid:3"           # Key-value pairs
 ```
 
-**List all employees:**
-```bash
-./osoem_admin list-employees
+The expected fields depend on the current location in the hierarchy:
+
+| Location | Fields |
+|---|---|
+| Departments | `departmentname` |
+| Employees | `firstname, lastname, email, password` |
+| Projects | `projectname, projectno` |
+| Team | `employeename, role` (role: 1=Member, 2=Manager, 3=Admin) |
+| Activity Categories | `categoryname` |
+| Subcategories | `subcategoryname` |
+| Activities | `activityname, managerid, plannedstart, plannedfinish, plannedhours` |
+| Tasks / Sub-tasks | `taskname` |
+| Assignments | `employeename, assigneddate, closedate` |
+| Hours | `hours, bookeddate` |
+| Notes | `note, notedate` |
+| Artefact Types | `artefactname, artefactdescription` |
+| Artefacts | `title, artefactownername` |
+| Fields | `fieldtitle, valuetype, maximumlength, maximumvalue, minimumvalue` |
+| Artefact Data | `fieldname, value` |
+| Associations (Artefact-Activity Links) | `activityname, ratio` |
+| Milestone-Artefact Links | `milestonestepname, completedbyname, completiondate` |
+| Milestones | `milestonename` |
+| Milestone Steps | `milestonestepname, progressratio` |
+
+Name-based lookups are supported for foreign key fields (e.g., using an employee name instead of an ID for `managerid`).
+
+### remove (rm)
+
+Removes an item by ID or name. Requires admin privileges.
+
+```
+rm 5                    # Remove by ID
+rm "Project Alpha"      # Remove by name
 ```
 
-### Milestone Management
+### set (st)
 
-**Add a milestone:**
-```bash
-./osoem_admin add-milestone <project_id> <name>
-```
-Example:
-```bash
-./osoem_admin add-milestone 1 "Drawing Review Process"
-```
+Updates one or more fields on an item at the current location. Requires admin privileges. The first argument identifies the item (by ID or name); the second argument is a key-value CSV string using the same field names as `add`.
 
-**Add a milestone step:**
-```bash
-./osoem_admin add-milestone-step <milestone_id> <step_name> <progress_ratio>
 ```
-Example:
-```bash
-./osoem_admin add-milestone-step 1 "Discipline Check" 0.50
-./osoem_admin add-milestone-step 1 "Interdisciplinary Review" 0.75
-./osoem_admin add-milestone-step 1 "Issue for Construction" 1.00
+st 1 "projectname:New Project Name"
+st "Project Alpha" "projectname:Refinery Project,projectno:RP-002"
+st 3 "email:newemail@example.com"
 ```
 
-**Remove a milestone:**
-```bash
-./osoem_admin remove-milestone <milestone_id>
+The `set` command supports all entity types in the hierarchy, using the same field names as the `add` command.
+
+### import (im)
+
+Imports data from a CSV file into the current location. Requires admin privileges.
+
+```
+im employees.csv            # Normal import — error on duplicate entries
+im -i employees.csv         # Ignore duplicates (skip silently)
+im -r activities.csv        # Recursive import — resolves parent references and ignores duplicates
 ```
 
-**List milestones:**
-```bash
-./osoem_admin list-milestones [project_id]
+The CSV file must have a header row with column names matching the expected fields for the current location. The `-r` (recursive) flag is used in batch scripts for bulk population where items may already exist across multiple import passes.
+
+### export (ex)
+
+Exports data at the current location to a CSV file.
+
+```
+ex output.csv
 ```
 
-**List milestone steps:**
-```bash
-./osoem_admin list-milestone-steps <milestone_id>
-```
+### exit / quit
 
-### Linking Functionality
+Exits the interactive shell. Ctrl+D also exits.
 
-**Link an artefact to an activity:**
-```bash
-./osoem_admin link-artefact <artefact_id> <activity_id> <ratio>
-```
-Example:
-```bash
-# Link artefact 10 to activity 5 with 100% allocation
-./osoem_admin link-artefact 10 5 1.00
+## Features
 
-# Split artefact 11 between two activities (50% each)
-./osoem_admin link-artefact 11 5 0.50
-./osoem_admin link-artefact 11 6 0.50
-```
+### Tab Completion
 
-**Link a milestone step to an artefact:**
-```bash
-./osoem_admin link-milestone <milestone_step_id> <artefact_link_id>
-```
+The interactive shell provides context-aware tab completion for commands, folder names, and item names. Names containing spaces are automatically quoted.
 
-**List artefact-activity links:**
-```bash
-./osoem_admin list-artefact-links [activity_id]
-```
+### Name-Based Lookups
 
-**List milestone links:**
-```bash
-./osoem_admin list-milestone-links [milestone_id]
-```
+Most commands accept names in addition to numeric IDs. Name matching is case-insensitive. If multiple matches are found, the first match is used with a warning.
 
-### Help
+### Input Validation
 
-**Display help:**
-```bash
-./osoem_admin help
-./osoem_admin --help
-./osoem_admin -h
-```
+- Names cannot start with a number
+- The `:` character is reserved for key-value syntax
+- Foreign key references are validated against the database
+- Artefact data fields are validated by type (text length, numeric range)
 
-## CSV File Formats
+### Authentication and Authorization
 
-### Activities CSV (activities.csv)
-```csv
-Activity,Start_Date,End_Date,Manager
-Project Initiation,2026-01-05,2026-01-19,Anne Mills
-Site Survey,2026-01-20,2026-02-10,John Smith
-```
+When started with `-u <email>`, the tool authenticates against the database using SHA-256 hashed passwords with salt. Non-admin users are restricted to read-only commands (`list`, `select`, `export`). Without the `-u` flag, the tool runs with admin privileges.
 
-**Fields:**
-- `Activity`: Activity name (required)
-- `Start_Date`: Planned start date in YYYY-MM-DD format (required)
-- `End_Date`: Planned end date in YYYY-MM-DD format (required)
-- `Manager`: Full name of the activity manager (required, will be created if doesn't exist)
+### Batch Scripting
 
-### Artefacts CSV (drawings.csv)
-```csv
-Number,Owner,Title
-A-001,Sarah Chen,Site Plan and Location Map
-A-100,Sarah Chen,Ground Floor Plan
-```
-
-**Fields:**
-- `Number`: Artefact identifier (mapped to custom fields if defined)
-- `Owner`: Full name of the artefact owner (optional, will be created if doesn't exist)
-- `Title`: Artefact title (used as artefacttitle in database)
-
-**Note:** The CSV columns should match the data fields defined for the artefact type.
-
-## Example Workflow
-
-Here's a typical workflow for setting up a new project:
+Command scripts can be executed by passing a filename as an argument. Example script:
 
 ```bash
-# 1. List existing employees
-./osoem_admin list-employees
+# setup_project.src
+cd Projects
+ad "Refinery Project,RP-001"
+cd "Refinery Project"
+cd "Activity Categories"
+ad "Engineering"
+cd Engineering
+ad "Structural"
+cd Structural
+ad "Foundation Design,1,2026-01-01,2026-06-01,500"
+```
 
-# 2. Add project manager if needed
-./osoem_admin add-employee Anne Mills anne.mills@example.com password123
+Run with:
+```bash
+./osoem_admin setup_project.src
+```
 
-# 3. Import activities from CSV (assuming project ID is 1)
-./osoem_admin import-activities ../data/sample/Residential_building_project/activities.csv 1
+## Examples
 
-# 4. List imported activities
-./osoem_admin list-activities 1
+The `examples/` directory contains ready-to-run scripts and CSV data files for several engineering projects.
 
-# 5. Add tasks to an activity (e.g., activity ID 5)
-./osoem_admin add-task 5 "Review architectural drawings"
-./osoem_admin add-task 5 "3D model preparation"
-./osoem_admin add-task 5 "Prepare preliminary 3D model" 2
+### Organization Examples (`examples/Organization_Examples/`)
 
-# 6. Create an artefact type
-./osoem_admin create-artefact-type 1 "Drawings" "Engineering drawings"
+Sets up departments and employees for a typical engineering organization.
 
-# 7. Import artefacts
-./osoem_admin import-artefacts ../data/sample/Residential_building_project/drawings.csv 1
+```bash
+./osoem_admin examples/Organization_Examples/departments.src
+```
 
-# 8. Create a milestone
-./osoem_admin add-milestone 1 "Drawing Review"
-./osoem_admin add-milestone-step 1 "Discipline Check" 0.50
-./osoem_admin add-milestone-step 1 "Issue for Construction" 1.00
+### Residential Building Project (`examples/Residential_Building_Project/`)
 
-# 9. Link artefacts to activities
-./osoem_admin link-artefact 1 5 1.00
+A complete residential building project demonstrating the activity and task hierarchy.
 
-# 10. Link milestone steps to artefacts
-./osoem_admin link-milestone 1 1
+```bash
+./osoem_admin examples/Residential_Building_Project/project.src
+```
+
+### Industrial Building Project (`examples/Industrial_Building_Project/`)
+
+An industrial building project example.
+
+```bash
+./osoem_admin examples/Industrial_Building_Project/project.src
+```
+
+### Data Center Design (`examples/Data_Center_Design/`)
+
+A data center design project with artefact types, fields, milestones, and CSV data files for activities and artefacts.
+
+```bash
+./osoem_admin examples/Data_Center_Design/Data_Center_Design.src
+```
+
+### Water Treatment Plant (`examples/Water_Treatment_Plant/`)
+
+A large-scale example with multiple engineering disciplines, artefact types (drawings, calculations, datasheets), milestones, and a comprehensive activity breakdown. Data is organised into per-discipline CSV files.
+
+```bash
+./osoem_admin examples/Water_Treatment_Plant/Water_Treatment_Plant.src
+```
+
+### CSV Examples (`examples/CSV_Examples/`)
+
+Standalone CSV files for each entity type, useful as templates when importing data.
+
+## Project Structure
+
+```
+admin/
+├── CMakeLists.txt              # Build configuration
+├── config/
+│   └── db_config.h             # Database connection settings
+├── src/
+│   ├── main.cpp                # Entry point, interactive loop, argument parsing
+│   ├── commands/               # Command implementations
+│   │   ├── execute.cpp/.h      # Command dispatcher and batch execution
+│   │   ├── list.cpp/.h         # list command
+│   │   ├── select.cpp/.h       # select command
+│   │   ├── add.cpp/.h          # add command
+│   │   ├── remove.cpp/.h       # remove command
+│   │   ├── set.cpp/.h          # set command
+│   │   ├── importcsv.cpp/.h    # import command
+│   │   └── exportcsv.cpp/.h    # export command
+│   ├── data/                   # Database access layer
+│   │   ├── database.cpp/.h     # Database connection management
+│   │   ├── path.cpp/.h         # Hierarchy path state
+│   │   ├── datarecord.h        # Base class for data records
+│   │   └── *data.cpp/.h        # Data access for each entity type
+│   ├── utils/                  # Utilities
+│   │   ├── auth.cpp/.h         # Authentication (SHA-256 + salt)
+│   │   ├── csv_parser.cpp/.h   # CSV parsing
+│   │   ├── lookup.cpp/.h       # Name-to-ID lookups
+│   │   ├── utils.cpp/.h        # General helpers
+│   │   ├── completion_provider.cpp/.h  # Tab completion
+│   │   └── readline_wrapper.cpp/.h     # Readline integration
+│   └── exceptions/             # Custom exception types
+├── examples/                   # Example scripts and CSV files
+└── README.md                   # This file
 ```
 
 ## Troubleshooting
 
 ### MySQL Connection Errors
 - Verify MySQL service is running: `sudo systemctl status mysql`
-- Check database credentials in `config/database.h`
-- Ensure the database 'trial' exists
-- Verify user 'roshn' has appropriate permissions
+- Check database credentials in `config/db_config.h`
+- Ensure the configured database exists
+- Verify the database user has appropriate permissions
 
 ### Build Errors
-- Ensure MySQL Connector/C++ is installed: `dpkg -l | grep libmysqlcppconn`
-- Check CMake can find the library: Review CMake output messages
-- Try specifying library path manually in CMakeLists.txt
+- Ensure all dependencies are installed: `libmysqlcppconn-dev`, `libreadline-dev`, `libssl-dev`
+- Check CMake output for missing library messages
+- Verify C++17 support in your compiler
 
 ### Import Errors
-- Verify CSV file format matches expected structure
+- Verify CSV file headers match expected field names
 - Check for encoding issues (should be UTF-8)
-- Ensure project_id exists in Projects table before importing
-
-## Project Structure
-
-```
-admin/
-├── CMakeLists.txt          # Build configuration
-├── config/
-│   └── database.h          # Database connection settings
-├── src/
-│   ├── main.cpp           # Entry point and command routing
-│   ├── database.cpp/.h    # Database connection management
-│   ├── csv_parser.cpp/.h  # CSV parsing utilities
-│   ├── utils.cpp/.h       # Helper functions
-│   └── commands/          # Command implementations
-│       ├── activities.cpp/.h
-│       ├── tasks.cpp/.h
-│       ├── artefacts.cpp/.h
-│       ├── employees.cpp/.h
-│       ├── milestones.cpp/.h
-│       └── links.cpp/.h
-└── README.md              # This file
-```
-
-## License
-
-This project is part of the OSOEM engineering project management system.
+- Ensure you are at the correct location in the hierarchy before importing

@@ -1,0 +1,1615 @@
+# =============================================================================
+# Complete Project Setup - Water Treatment Plant
+# =============================================================================
+# This source file sets up the Water Treatment Plant project (WTP-2024-005)
+# in the osoem database.
+#
+# Prerequisites:
+#   - A clean database with the schema applied
+#   - The organization source file loaded (examples/Organization/departments.src)
+#     or the following employees already present in the database:
+#       John Davis, Sarah Thompson, Michael Chen, Emily Rodriguez,
+#       Robert Martinez, Jessica Brown, Amanda Johnson
+#
+#
+# All data is imported directly from CSV files:
+#   projectdata/projectdata.csv
+#   categorydata/categorydata.csv
+#   subcategorydata/<category>.subcategorydata.csv
+#   activitydata/<category>.<subcategory>.activitydata.csv
+#   artefacttypedata/artefacttypedata.csv
+#   artefactfielddata/<type>.fielddata.csv
+#   artefactdata/drawing.artefactdata.csv
+#   artefactdata/calculation.artefactdata.csv
+#   artefactdata/datasheet.artefactdata.csv
+#   milestonedata/milestonedata.csv
+#   milestonestepdata/milestonestepdata.csv
+# =============================================================================
+
+
+
+# =============================================================================
+# STEP 1: Create the project
+# =============================================================================
+# Path: ~ > Projects
+# Importing from: ./projectdata/projectdata.csv
+
+cd ~
+cd Projects
+im "./projectdata/projectdata.csv"
+
+
+# =============================================================================
+# STEP 2: Add team members to the project
+# =============================================================================
+# Path: ~ > Projects > <Project> > Team
+# Format: ad "employeename:<name>,role:<role>"
+# Roles: 1 = Team Member, 2 = Project Manager, 3 = Administrator
+
+cd "Water Treatment Plant"
+cd Team
+ad "employeename:John Davis,role:2"
+ad "employeename:Sarah Thompson,role:1"
+ad "employeename:Michael Chen,role:1"
+ad "employeename:Emily Rodriguez,role:1"
+ad "employeename:Robert Martinez,role:1"
+ad "employeename:Jessica Brown,role:1"
+ad "employeename:Amanda Johnson,role:1"
+ad "employeename:Marcus Brown,role:1"
+ad "employeename:Patricia Taylor,role:1"
+ad "employeename:Kevin Zhang,role:1"
+
+
+# =============================================================================
+# STEP 3: Import activity categories
+# =============================================================================
+# Path: ~ > Projects > <Project> > Activity Categories
+# Importing from: ./categorydata/categorydata.csv
+
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd "Activity Categories"
+im "./categorydata/categorydata.csv"
+
+
+# =============================================================================
+# STEP 4: Import activity subcategories
+# =============================================================================
+# Path: ~ > Projects > <Project> > Activity Categories > <Category>
+# Importing per-category CSV files from subcategorydata/
+
+cd "Bioreactors"
+im "./subcategorydata/bioreactors.subcategorydata.csv"
+cd ..
+
+cd "Building Structures and HVAC"
+im "./subcategorydata/building_structures_and_hvac.subcategorydata.csv"
+cd ..
+
+cd "Instrumentation"
+im "./subcategorydata/instrumentation.subcategorydata.csv"
+cd ..
+
+cd "Mixers"
+im "./subcategorydata/mixers.subcategorydata.csv"
+cd ..
+
+cd "Piping"
+im "./subcategorydata/piping.subcategorydata.csv"
+cd ..
+
+cd "Post-Treatment Filters"
+im "./subcategorydata/post_treatment_filters.subcategorydata.csv"
+cd ..
+
+cd "Pumps and Blowers"
+im "./subcategorydata/pumps_and_blowers.subcategorydata.csv"
+cd ..
+
+cd "Solids Transfer"
+im "./subcategorydata/solid_transfer.subcategorydata.csv"
+cd ..
+
+cd "System Controls"
+im "./subcategorydata/system_controls.subcategorydata.csv"
+cd ..
+
+cd "Tanks"
+im "./subcategorydata/tanks.subcategorydata.csv"
+cd ..
+
+cd "Valves and Fittings"
+im "./subcategorydata/valves_and_fittings.subcategorydata.csv"
+cd ..
+
+
+# =============================================================================
+# STEP 5: Import activities
+# =============================================================================
+# Path: ~ > Projects > <Project> > Activity Categories > <Category> > <Subcategory>
+# Importing per-subcategory CSV files from activitydata/
+
+# --- Bioreactors > Pressure Vessels ---
+cd "Bioreactors"
+cd "Pressure Vessels"
+im "./activitydata/Bioreactors.Pressure_Vessels.activitydata.csv"
+cd ..
+cd ..
+
+# --- Building Structures and HVAC > Building ---
+cd "Building Structures and HVAC"
+cd "Building"
+im "./activitydata/BuildingStructures_and_HVAC.Building.activitydata.csv"
+cd ..
+cd ..
+
+# --- Instrumentation ---
+cd "Instrumentation"
+cd "Dissolved Oxygen Analyzer"
+im "./activitydata/Instrumentation.Dissolved_Oxygen_Analyzer.activitydata.csv"
+cd ..
+cd "Flow Meters - Backwash"
+im "./activitydata/Instrumentation.Flow_Meters_-_Backwash.activitydata.csv"
+cd ..
+cd "Flow Meters - Influent and treated water"
+im "./activitydata/Instrumentation.Flow_Meters_-_Influent_and_treated_water.activitydata.csv"
+cd ..
+cd "Flow Meters - Residuals"
+im "./activitydata/Instrumentation.Flow_Meters_-_Residuals.activitydata.csv"
+cd ..
+cd "Head loss sensors"
+im "./activitydata/Instrumentation.Head_loss_sensors.activitydata.csv"
+cd ..
+cd "High/Low Alarm (for holding tanks)"
+im "./activitydata/Instrumentation.High_Low_Alarm_(for_holding_tanks).activitydata.csv"
+cd ..
+cd "ORP sensor"
+im "./activitydata/Instrumentation.ORP_sensor.activitydata.csv"
+cd ..
+cd "Perchlorate/Nitrate Analyzer"
+im "./activitydata/Instrumentation.Perchlorate_Nitrate_Analyzer.activitydata.csv"
+cd ..
+cd "Sampling Ports"
+im "./activitydata/Instrumentation.Sampling_Ports.activitydata.csv"
+cd ..
+cd "Temperature meters"
+im "./activitydata/Instrumentation.Temperature_meters.activitydata.csv"
+cd ..
+cd "Turbidity meters"
+im "./activitydata/Instrumentation.Turbidity_meters.activitydata.csv"
+cd ..
+cd ..
+
+# --- Mixers ---
+cd "Mixers"
+cd "Coagulant Mix Tank Mixers"
+im "./activitydata/Mixers.Coagulant_Mix_Tank_Mixers.activitydata.csv"
+cd ..
+cd "Residuals Mixers"
+im "./activitydata/Mixers.Residuals_Mixers.activitydata.csv"
+cd ..
+cd ..
+
+# --- Piping ---
+cd "Piping"
+cd "Backwash Piping"
+im "./activitydata/Piping.Backwash_Piping.activitydata.csv"
+cd ..
+cd "Electron Donor Piping"
+im "./activitydata/Piping.Electron_Donor_Piping.activitydata.csv"
+cd ..
+cd "Ferric Chloride Piping"
+im "./activitydata/Piping.Ferric_Chloride_Piping.activitydata.csv"
+cd ..
+cd "Influent and Treated Water Piping"
+im "./activitydata/Piping.Influent_and_Treated_Water_Piping.activitydata.csv"
+cd ..
+cd "Phosphoric Acid Piping"
+im "./activitydata/Piping.Phosphoric_Acid_Piping.activitydata.csv"
+cd ..
+cd "Polymer Addition Piping"
+im "./activitydata/Piping.Polymer_Addition_Piping.activitydata.csv"
+cd ..
+cd "Process Piping"
+im "./activitydata/Piping.Process_Piping.activitydata.csv"
+cd ..
+cd "Residuals Piping"
+im "./activitydata/Piping.Residuals_Piping.activitydata.csv"
+cd ..
+cd ..
+
+# --- Post-Treatment Filters > Pressure Vessels ---
+cd "Post-Treatment Filters"
+cd "Pressure Vessels"
+im "./activitydata/Post-TreatmentFilters.Pressure_Vessels.activitydata.csv"
+cd ..
+cd ..
+
+# --- Pumps and Blowers ---
+cd "Pumps and Blowers"
+cd "Blowers"
+im "./activitydata/Pumpsand_Blowers.Blowers.activitydata.csv"
+cd ..
+cd "Electron Donor Metering"
+im "./activitydata/Pumpsand_Blowers.Electron_Donor_Metering.activitydata.csv"
+cd ..
+cd "Ferric Chloride Metering to Post-Treatment"
+im "./activitydata/Pumpsand_Blowers.Ferric_Chloride_Metering_to_Post-Treatment.activitydata.csv"
+cd ..
+cd "Phosphoric Acid Metering"
+im "./activitydata/Pumpsand_Blowers.Phosphoric_Acid_Metering.activitydata.csv"
+cd ..
+cd "Polymer Metering"
+im "./activitydata/Pumpsand_Blowers.Polymer_Metering.activitydata.csv"
+cd ..
+cd "Residuals Pump"
+im "./activitydata/Pumpsand_Blowers.Residuals_Pump.activitydata.csv"
+cd ..
+cd ..
+
+# --- Solids Transfer > Eductors for Holding Tanks ---
+cd "Solids Transfer"
+cd "Eductors for Holding Tanks"
+im "./activitydata/SolidsTransfer.Eductors_for_Holding_Tanks.activitydata.csv"
+cd ..
+cd ..
+
+# --- System Controls ---
+cd "System Controls"
+cd "Controls Software"
+im "./activitydata/SystemControls.Controls_Software.activitydata.csv"
+cd ..
+cd "Operator Equipment"
+im "./activitydata/SystemControls.Operator_Equipment.activitydata.csv"
+cd ..
+cd "PLC Unit"
+im "./activitydata/SystemControls.PLC_Unit.activitydata.csv"
+cd ..
+cd ..
+
+# --- Tanks ---
+cd "Tanks"
+cd "Aeration Tanks"
+im "./activitydata/Tanks.Aeration_Tanks.activitydata.csv"
+cd ..
+cd "Coagulant Mix Tank"
+im "./activitydata/Tanks.Coagulant_Mix_Tank.activitydata.csv"
+cd ..
+cd "Electron Donor Day Tanks"
+im "./activitydata/Tanks.Electron_Donor_Day_Tanks.activitydata.csv"
+cd ..
+cd "Electron Donor Storage Tanks"
+im "./activitydata/Tanks.Electron_Donor_Storage_Tanks.activitydata.csv"
+cd ..
+cd "Ferric Chloride Storage Tanks"
+im "./activitydata/Tanks.Ferric_Chloride_Storage_Tanks.activitydata.csv"
+cd ..
+cd "Phosphoric Acid Storage Tanks"
+im "./activitydata/Tanks.Phosphoric_Acid_Storage_Tanks.activitydata.csv"
+cd ..
+cd "Polymer Storage Tanks"
+im "./activitydata/Tanks.Polymer_Storage_Tanks.activitydata.csv"
+cd ..
+cd "Residuals Holding Tanks/Basins"
+im "./activitydata/Tanks.Residuals_Holding_Tanks.activitydata.csv"
+cd ..
+cd ..
+
+# --- Valves and Fittings ---
+cd "Valves and Fittings"
+cd "Check Valves"
+im "./activitydata/Valvesand_Fittings.Check_Valves.activitydata.csv"
+cd ..
+cd "Manual Valves"
+im "./activitydata/Valvesand_Fittings.Manual_Valves.activitydata.csv"
+cd ..
+cd "Motor Operated Valves"
+im "./activitydata/Valvesand_Fittings.Motor_Operated_Valves.activitydata.csv"
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 6: Import artefact types
+# =============================================================================
+# Path: ~ > Projects > <Project> > Artefact Types
+# Importing from: ./artefacttypedata/artefacttypedata.csv
+
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd "Artefact Types"
+im "./artefacttypedata/artefacttypedata.csv"
+
+
+# =============================================================================
+# STEP 7: Import artefact data fields
+# =============================================================================
+# Path: ~ > Projects > <Project> > Artefact Types > <Type> > Fields
+# Importing per-type field CSV files from artefactfielddata/
+
+cd "Drawing"
+cd Fields
+im "./artefactfielddata/drawing.fielddata.csv"
+cd ..
+cd ..
+
+cd "Calculation"
+cd Fields
+im "./artefactfielddata/calculation.fielddata.csv"
+cd ..
+cd ..
+
+cd "Datasheet"
+cd Fields
+im "./artefactfielddata/datasheet.fielddata.csv"
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 8: Import Drawing artefacts
+# =============================================================================
+# Path: ~ > Projects > <Project> > Artefact Types > Drawing > Artefacts
+# Importing from: ./artefactdata/drawing.artefactdata.csv
+
+cd "Drawing"
+cd Artefacts
+im "./artefactdata/drawing.artefactdata.csv"
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 9: Import Calculation artefacts
+# =============================================================================
+# Importing from: ./artefactdata/calculation.artefactdata.csv
+
+cd "Calculation"
+cd Artefacts
+im "./artefactdata/calculation.artefactdata.csv"
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 10: Import Datasheet artefacts
+# =============================================================================
+# Importing from: ./artefactdata/datasheet.artefactdata.csv
+
+cd "Datasheet"
+cd Artefacts
+im "./artefactdata/datasheet.artefactdata.csv"
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 11: Import milestones
+# =============================================================================
+# Path: ~ > Projects > <Project> > Milestones
+# Importing from: ./milestonedata/milestonedata.csv
+
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd Milestones
+im "./milestonedata/milestonedata.csv"
+
+
+# =============================================================================
+# STEP 12: Import milestone steps
+# =============================================================================
+# Path: ~ > Projects > <Project> > Milestones > <Milestone>
+# Importing from: ./milestonestepdata/milestonestepdata.csv
+
+cd "Document Progress"
+im "./milestonestepdata/milestonestepdata.csv"
+cd ..
+
+
+# =============================================================================
+# STEP 13: Link Drawing artefacts to activities
+# =============================================================================
+# Path: ~ > Projects > <Project> > Artefact Types > Drawing > Artefacts > <Artefact> > Associations
+# Format: ad "activityname:<name>,ratio:<ratio>"
+# Data sourced from: ./artefacttoactivitylinkdata/artefacttoactivitylinkdata.csv
+
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd "Artefact Types"
+cd "Drawing"
+cd Artefacts
+
+# Mechanical GA and Section/Elevation Drawings
+cd "Bioreactors - General Arrangement Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Bioreactors,subcategoryname:Pressure Vessels,ratio:1.0"
+cd ..
+cd ..
+
+cd "Bioreactors - Section and Elevation Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Bioreactors,subcategoryname:Pressure Vessels,ratio:1.0"
+cd ..
+cd ..
+
+cd "Post Treatment Filters - General Arrangement Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Post-Treatment Filters,subcategoryname:Pressure Vessels,ratio:1.0"
+cd ..
+cd ..
+
+cd "Post Treatment Filters - Section and Elevation Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Post-Treatment Filters,subcategoryname:Pressure Vessels,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Storage Tanks - General Arrangement Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Electron Donor Storage Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Storage Tanks - Section and Elevation Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Electron Donor Storage Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Phosphoric Acid Storage Tanks - General Arrangement Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Phosphoric Acid Storage Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Phosphoric Acid Storage Tanks - Section and Elevation Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Phosphoric Acid Storage Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Day Tanks - General Arrangement Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Electron Donor Day Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Day Tanks - Section and Elevation Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Electron Donor Day Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Residuals Holding Tanks/Basins - General Arrangement Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Residuals Holding Tanks/Basins,ratio:1.0"
+cd ..
+cd ..
+
+cd "Residuals Holding Tanks/Basins - Section and Elevation Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Residuals Holding Tanks/Basins,ratio:1.0"
+cd ..
+cd ..
+
+cd "Aeration Tanks - General Arrangement Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Aeration Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Aeration Tanks - Section and Elevation Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Aeration Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Ferric Chloride Storage Tanks - General Arrangement Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Ferric Chloride Storage Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Ferric Chloride Storage Tanks - Section and Elevation Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Ferric Chloride Storage Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Polymer Storage Tanks - General Arrangement Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Polymer Storage Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Polymer Storage Tanks - Section and Elevation Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Polymer Storage Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Coagulant Mix Tank - General Arrangement Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Coagulant Mix Tank,ratio:1.0"
+cd ..
+cd ..
+
+cd "Coagulant Mix Tank - Section and Elevation Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Coagulant Mix Tank,ratio:1.0"
+cd ..
+cd ..
+
+cd "Residuals Pump - General Arrangement Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Residuals Pump,ratio:1.0"
+cd ..
+cd ..
+
+cd "Residuals Pump - Section and Elevation Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Residuals Pump,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Metering - General Arrangement Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Electron Donor Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Metering - Section and Elevation Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Electron Donor Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Phosphoric Acid Metering - General Arrangement Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Phosphoric Acid Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Phosphoric Acid Metering - Section and Elevation Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Phosphoric Acid Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Blowers - General Arrangement Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Blowers,ratio:1.0"
+cd ..
+cd ..
+
+cd "Blowers - Section and Elevation Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Blowers,ratio:1.0"
+cd ..
+cd ..
+
+cd "Ferric Chloride Metering to Post- General Arrangement Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Ferric Chloride Metering to Post-Treatment,ratio:1.0"
+cd ..
+cd ..
+
+cd "Ferric Chloride Metering to Post- Section and Elevation Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Ferric Chloride Metering to Post-Treatment,ratio:1.0"
+cd ..
+cd ..
+
+cd "Polymer Metering - General Arrangement Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Polymer Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Polymer Metering - Section and Elevation Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Polymer Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Residuals Mixers - General Arrangement Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Mixers,subcategoryname:Residuals Mixers,ratio:1.0"
+cd ..
+cd ..
+
+cd "Residuals Mixers - Section and Elevation Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Mixers,subcategoryname:Residuals Mixers,ratio:1.0"
+cd ..
+cd ..
+
+cd "Coagulant Mix Tank Mixers - General Arrangement Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Mixers,subcategoryname:Coagulant Mix Tank Mixers,ratio:1.0"
+cd ..
+cd ..
+
+cd "Coagulant Mix Tank Mixers - Section and Elevation Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Mixers,subcategoryname:Coagulant Mix Tank Mixers,ratio:1.0"
+cd ..
+cd ..
+
+cd "Eductors for Holding Tanks - General Arrangement Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Solids Transfer,subcategoryname:Eductors for Holding Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Eductors for Holding Tanks - Section and Elevation Drawing"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Solids Transfer,subcategoryname:Eductors for Holding Tanks,ratio:1.0"
+cd ..
+cd ..
+
+# Foundation Drawings
+cd "Bioreactors - Foundation Drawing"
+cd Associations
+ad "activityname:Foundation design,categoryname:Bioreactors,subcategoryname:Pressure Vessels,ratio:1.0"
+cd ..
+cd ..
+
+cd "Post Treatment Filters - Foundation Drawing"
+cd Associations
+ad "activityname:Foundation design,categoryname:Post-Treatment Filters,subcategoryname:Pressure Vessels,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Storage Tanks - Foundation Drawing"
+cd Associations
+ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Electron Donor Storage Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Phosphoric Acid Storage Tanks - Foundation Drawing"
+cd Associations
+ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Phosphoric Acid Storage Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Day Tanks - Foundation Drawing"
+cd Associations
+ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Electron Donor Day Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Residuals Holding Tanks/Basins - Foundation Drawing"
+cd Associations
+ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Residuals Holding Tanks/Basins,ratio:1.0"
+cd ..
+cd ..
+
+cd "Aeration Tanks - Foundation Drawing"
+cd Associations
+ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Aeration Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Ferric Chloride Storage Tanks - Foundation Drawing"
+cd Associations
+ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Ferric Chloride Storage Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Polymer Storage Tanks - Foundation Drawing"
+cd Associations
+ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Polymer Storage Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Coagulant Mix Tank - Foundation Drawing"
+cd Associations
+ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Coagulant Mix Tank,ratio:1.0"
+cd ..
+cd ..
+
+cd "Residuals Pump - Foundation Drawing"
+cd Associations
+ad "activityname:Foundation design,categoryname:Pumps and Blowers,subcategoryname:Residuals Pump,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Metering - Foundation Drawing"
+cd Associations
+ad "activityname:Foundation design,categoryname:Pumps and Blowers,subcategoryname:Electron Donor Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Phosphoric Acid Metering - Foundation Drawing"
+cd Associations
+ad "activityname:Foundation design,categoryname:Pumps and Blowers,subcategoryname:Phosphoric Acid Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Blowers - Foundation Drawing"
+cd Associations
+ad "activityname:Foundation design,categoryname:Pumps and Blowers,subcategoryname:Blowers,ratio:1.0"
+cd ..
+cd ..
+
+cd "Ferric Chloride Metering to Post- Foundation Drawing"
+cd Associations
+ad "activityname:Foundation design,categoryname:Pumps and Blowers,subcategoryname:Ferric Chloride Metering to Post-Treatment,ratio:1.0"
+cd ..
+cd ..
+
+cd "Polymer Metering - Foundation Drawing"
+cd Associations
+ad "activityname:Foundation design,categoryname:Pumps and Blowers,subcategoryname:Polymer Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Residuals Mixers - Foundation Drawing"
+cd Associations
+ad "activityname:Foundation design,categoryname:Mixers,subcategoryname:Residuals Mixers,ratio:1.0"
+cd ..
+cd ..
+
+cd "Coagulant Mix Tank Mixers - Foundation Drawing"
+cd Associations
+ad "activityname:Foundation design,categoryname:Mixers,subcategoryname:Coagulant Mix Tank Mixers,ratio:1.0"
+cd ..
+cd ..
+
+# Piping Drawings
+cd "Backwash Piping - Isometric Drawings"
+cd Associations
+ad "activityname:Piping layout,categoryname:Piping,subcategoryname:Backwash Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Backwash Piping - Layout Drawings"
+cd Associations
+ad "activityname:Piping layout,categoryname:Piping,subcategoryname:Backwash Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Backwash Piping - Pipe Support Drawings"
+cd Associations
+ad "activityname:Piping supports,categoryname:Piping,subcategoryname:Backwash Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Piping - Isometric Drawings"
+cd Associations
+ad "activityname:Piping layout,categoryname:Piping,subcategoryname:Electron Donor Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Piping - Layout Drawings"
+cd Associations
+ad "activityname:Piping layout,categoryname:Piping,subcategoryname:Electron Donor Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Piping - Pipe Support Drawings"
+cd Associations
+ad "activityname:Piping supports,categoryname:Piping,subcategoryname:Electron Donor Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Phosphoric Acid Piping - Isometric Drawings"
+cd Associations
+ad "activityname:Piping layout,categoryname:Piping,subcategoryname:Phosphoric Acid Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Phosphoric Acid Piping - Layout Drawings"
+cd Associations
+ad "activityname:Piping layout,categoryname:Piping,subcategoryname:Phosphoric Acid Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Phosphoric Acid Piping - Pipe Support Drawings"
+cd Associations
+ad "activityname:Piping supports,categoryname:Piping,subcategoryname:Phosphoric Acid Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Process Piping - Isometric Drawings"
+cd Associations
+ad "activityname:Piping layout,categoryname:Piping,subcategoryname:Process Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Process Piping - Layout Drawings"
+cd Associations
+ad "activityname:Piping layout,categoryname:Piping,subcategoryname:Process Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Process Piping - Pipe Support Drawings"
+cd Associations
+ad "activityname:Piping supports,categoryname:Piping,subcategoryname:Process Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Influent and Treated Water Piping - Isometric Drawings"
+cd Associations
+ad "activityname:Piping layout,categoryname:Piping,subcategoryname:Influent and Treated Water Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Influent and Treated Water Piping - Layout Drawings"
+cd Associations
+ad "activityname:Piping layout,categoryname:Piping,subcategoryname:Influent and Treated Water Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Influent and Treated Water Piping - Pipe Support Drawings"
+cd Associations
+ad "activityname:Piping supports,categoryname:Piping,subcategoryname:Influent and Treated Water Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Residuals Piping - Isometric Drawings"
+cd Associations
+ad "activityname:Piping layout,categoryname:Piping,subcategoryname:Residuals Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Residuals Piping - Layout Drawings"
+cd Associations
+ad "activityname:Piping layout,categoryname:Piping,subcategoryname:Residuals Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Residuals Piping - Pipe Support Drawings"
+cd Associations
+ad "activityname:Piping supports,categoryname:Piping,subcategoryname:Residuals Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Ferric Chloride Piping - Isometric Drawings"
+cd Associations
+ad "activityname:Piping layout,categoryname:Piping,subcategoryname:Ferric Chloride Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Ferric Chloride Piping - Layout Drawings"
+cd Associations
+ad "activityname:Piping layout,categoryname:Piping,subcategoryname:Ferric Chloride Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Ferric Chloride Piping - Pipe Support Drawings"
+cd Associations
+ad "activityname:Piping supports,categoryname:Piping,subcategoryname:Ferric Chloride Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Polymer Addition Piping - Isometric Drawings"
+cd Associations
+ad "activityname:Piping layout,categoryname:Piping,subcategoryname:Polymer Addition Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Polymer Addition Piping - Layout Drawings"
+cd Associations
+ad "activityname:Piping layout,categoryname:Piping,subcategoryname:Polymer Addition Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Polymer Addition Piping - Pipe Support Drawings"
+cd Associations
+ad "activityname:Piping supports,categoryname:Piping,subcategoryname:Polymer Addition Piping,ratio:1.0"
+cd ..
+cd ..
+
+# Instrumentation Location Plans
+cd "Flow Meters Influent and treated water - Instrument Location Plan"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Flow Meters - Influent and treated water,ratio:1.0"
+cd ..
+cd ..
+
+cd "Flow Meters Backwash - Instrument Location Plan"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Flow Meters - Backwash,ratio:1.0"
+cd ..
+cd ..
+
+cd "Flow Meters Residuals - Instrument Location Plan"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Flow Meters - Residuals,ratio:1.0"
+cd ..
+cd ..
+
+cd "High/Low Alarm - Instrument Location Plan"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:High/Low Alarm (for holding tanks),ratio:1.0"
+cd ..
+cd ..
+
+cd "Temperature meters - Instrument Location Plan"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Temperature meters,ratio:1.0"
+cd ..
+cd ..
+
+cd "Head loss sensors - Instrument Location Plan"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Head loss sensors,ratio:1.0"
+cd ..
+cd ..
+
+cd "Sampling Ports - Instrument Location Plan"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Sampling Ports,ratio:1.0"
+cd ..
+cd ..
+
+cd "ORP sensor - Instrument Location Plan"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:ORP sensor,ratio:1.0"
+cd ..
+cd ..
+
+cd "Turbidity meters - Instrument Location Plan"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Turbidity meters,ratio:1.0"
+cd ..
+cd ..
+
+cd "Perchlorate/Nitrate Analyzer - Instrument Location Plan"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Perchlorate/Nitrate Analyzer,ratio:1.0"
+cd ..
+cd ..
+
+cd "Dissolved Oxygen Analyzer - Instrument Location Plan"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Dissolved Oxygen Analyzer,ratio:1.0"
+cd ..
+cd ..
+
+cd "PLC Unit - Instrument Location Plan"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:System Controls,subcategoryname:PLC Unit,ratio:1.0"
+cd ..
+cd ..
+
+cd "Operator Equipment - Instrument Location Plan"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:System Controls,subcategoryname:Operator Equipment,ratio:1.0"
+cd ..
+cd ..
+
+cd "Controls Software - Instrument Location Plan"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:System Controls,subcategoryname:Controls Software,ratio:1.0"
+cd ..
+cd ..
+
+# Electrical Drawings
+cd "Residuals Pump - Single Line Diagram"
+cd Associations
+ad "activityname:Electrical design,categoryname:Pumps and Blowers,subcategoryname:Residuals Pump,ratio:1.0"
+cd ..
+cd ..
+
+cd "Residuals Pump - Cable Layout"
+cd Associations
+ad "activityname:Electrical design,categoryname:Pumps and Blowers,subcategoryname:Residuals Pump,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Metering - Single Line Diagram"
+cd Associations
+ad "activityname:Electrical design,categoryname:Pumps and Blowers,subcategoryname:Electron Donor Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Metering - Cable Layout"
+cd Associations
+ad "activityname:Electrical design,categoryname:Pumps and Blowers,subcategoryname:Electron Donor Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Phosphoric Acid Metering - Single Line Diagram"
+cd Associations
+ad "activityname:Electrical design,categoryname:Pumps and Blowers,subcategoryname:Phosphoric Acid Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Phosphoric Acid Metering - Cable Layout"
+cd Associations
+ad "activityname:Electrical design,categoryname:Pumps and Blowers,subcategoryname:Phosphoric Acid Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Blowers - Single Line Diagram"
+cd Associations
+ad "activityname:Electrical design,categoryname:Pumps and Blowers,subcategoryname:Blowers,ratio:1.0"
+cd ..
+cd ..
+
+cd "Blowers - Cable Layout"
+cd Associations
+ad "activityname:Electrical design,categoryname:Pumps and Blowers,subcategoryname:Blowers,ratio:1.0"
+cd ..
+cd ..
+
+cd "Ferric Chloride Metering to Post- Single Line Diagram"
+cd Associations
+ad "activityname:Electrical design,categoryname:Pumps and Blowers,subcategoryname:Ferric Chloride Metering to Post-Treatment,ratio:1.0"
+cd ..
+cd ..
+
+cd "Ferric Chloride Metering to Post- Cable Layout"
+cd Associations
+ad "activityname:Electrical design,categoryname:Pumps and Blowers,subcategoryname:Ferric Chloride Metering to Post-Treatment,ratio:1.0"
+cd ..
+cd ..
+
+cd "Polymer Metering - Single Line Diagram"
+cd Associations
+ad "activityname:Electrical design,categoryname:Pumps and Blowers,subcategoryname:Polymer Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Polymer Metering - Cable Layout"
+cd Associations
+ad "activityname:Electrical design,categoryname:Pumps and Blowers,subcategoryname:Polymer Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "PLC Unit - Single Line Diagram"
+cd Associations
+ad "activityname:Electrical design,categoryname:System Controls,subcategoryname:PLC Unit,ratio:1.0"
+cd ..
+cd ..
+
+cd "PLC Unit - Cable Layout"
+cd Associations
+ad "activityname:Electrical design,categoryname:System Controls,subcategoryname:PLC Unit,ratio:1.0"
+cd ..
+cd ..
+
+cd "Operator Equipment - Single Line Diagram"
+cd Associations
+ad "activityname:Electrical design,categoryname:System Controls,subcategoryname:Operator Equipment,ratio:1.0"
+cd ..
+cd ..
+
+cd "Operator Equipment - Cable Layout"
+cd Associations
+ad "activityname:Electrical design,categoryname:System Controls,subcategoryname:Operator Equipment,ratio:1.0"
+cd ..
+cd ..
+
+# Building Drawings
+cd "Building - Ground Floor Plan"
+cd Associations
+ad "activityname:Architectual Design,categoryname:Building Structures and HVAC,subcategoryname:Building,ratio:1.0"
+cd ..
+cd ..
+
+cd "Building - Roof Plan"
+cd Associations
+ad "activityname:Architectual Design,categoryname:Building Structures and HVAC,subcategoryname:Building,ratio:1.0"
+cd ..
+cd ..
+
+cd "Building - Elevations 1"
+cd Associations
+ad "activityname:Architectual Design,categoryname:Building Structures and HVAC,subcategoryname:Building,ratio:1.0"
+ad "activityname:Structural Design,categoryname:Building Structures and HVAC,subcategoryname:Building,ratio:1.0"
+cd ..
+cd ..
+
+cd "Building - Elevations 2"
+cd Associations
+ad "activityname:Architectual Design,categoryname:Building Structures and HVAC,subcategoryname:Building,ratio:1.0"
+ad "activityname:Structural Design,categoryname:Building Structures and HVAC,subcategoryname:Building,ratio:1.0"
+cd ..
+cd ..
+
+cd "Building - Finish Schedule"
+cd Associations
+ad "activityname:Architectual Design,categoryname:Building Structures and HVAC,subcategoryname:Building,ratio:1.0"
+cd ..
+cd ..
+
+cd "Building - General Notes"
+cd Associations
+ad "activityname:Structural Design,categoryname:Building Structures and HVAC,subcategoryname:Building,ratio:1.0"
+cd ..
+cd ..
+
+cd "Building - Foundation Drawing"
+cd Associations
+ad "activityname:Structural Design,categoryname:Building Structures and HVAC,subcategoryname:Building,ratio:1.0"
+cd ..
+cd ..
+
+cd "Building - Grade Slab and Beam Plan"
+cd Associations
+ad "activityname:Structural Design,categoryname:Building Structures and HVAC,subcategoryname:Building,ratio:1.0"
+cd ..
+cd ..
+
+cd "Building - Roof Slab and Beam Plan"
+cd Associations
+ad "activityname:Structural Design,categoryname:Building Structures and HVAC,subcategoryname:Building,ratio:1.0"
+cd ..
+cd ..
+
+cd "Building - HVAC Layout and Details"
+cd Associations
+ad "activityname:Electrical wiring Design,categoryname:Building Structures and HVAC,subcategoryname:Building,ratio:1.0"
+cd ..
+cd ..
+
+cd "Building - Sanitary Sewer"
+cd Associations
+ad "activityname:Plumbing Design,categoryname:Building Structures and HVAC,subcategoryname:Building,ratio:1.0"
+cd ..
+cd ..
+
+cd "Building - Potable Water"
+cd Associations
+ad "activityname:Plumbing Design,categoryname:Building Structures and HVAC,subcategoryname:Building,ratio:1.0"
+cd ..
+cd ..
+
+cd "Building - Fire Protection Layout"
+cd Associations
+ad "activityname:Fire Protection Design,categoryname:Building Structures and HVAC,subcategoryname:Building,ratio:1.0"
+cd ..
+cd ..
+
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 14: Link Calculation artefacts to activities
+# =============================================================================
+
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd "Artefact Types"
+cd "Calculation"
+cd Artefacts
+
+# Mechanical Calculations
+cd "Bioreactors - Calculation"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Bioreactors,subcategoryname:Pressure Vessels,ratio:1.0"
+cd ..
+cd ..
+
+cd "Post Treatment Filters - Calculation"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Post-Treatment Filters,subcategoryname:Pressure Vessels,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Storage Tanks - Calculation"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Electron Donor Storage Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Phosphoric Acid Storage Tanks - Calculation"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Phosphoric Acid Storage Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Day Tanks - Calculation"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Electron Donor Day Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Residuals Holding Tanks/Basins - Calculation"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Residuals Holding Tanks/Basins,ratio:1.0"
+cd ..
+cd ..
+
+cd "Aeration Tanks - Calculation"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Aeration Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Ferric Chloride Storage Tanks - Calculation"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Ferric Chloride Storage Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Polymer Storage Tanks - Calculation"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Polymer Storage Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Coagulant Mix Tank - Calculation"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Coagulant Mix Tank,ratio:1.0"
+cd ..
+cd ..
+
+cd "Residuals Pump - Calculation"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Residuals Pump,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Metering - Calculation"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Electron Donor Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Phosphoric Acid Metering - Calculation"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Phosphoric Acid Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Blowers - Calculation"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Blowers,ratio:1.0"
+cd ..
+cd ..
+
+cd "Ferric Chloride Metering to Post- Calculation"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Ferric Chloride Metering to Post-Treatment,ratio:1.0"
+cd ..
+cd ..
+
+cd "Polymer Metering - Calculation"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Polymer Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Residuals Mixers - Calculation"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Mixers,subcategoryname:Residuals Mixers,ratio:1.0"
+cd ..
+cd ..
+
+cd "Coagulant Mix Tank Mixers - Calculation"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Mixers,subcategoryname:Coagulant Mix Tank Mixers,ratio:1.0"
+cd ..
+cd ..
+
+cd "Eductors for Holding Tanks - Calculation"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Solids Transfer,subcategoryname:Eductors for Holding Tanks,ratio:1.0"
+cd ..
+cd ..
+
+# Foundation Calculations
+cd "Bioreactors - Foundation Calculation"
+cd Associations
+ad "activityname:Foundation design,categoryname:Bioreactors,subcategoryname:Pressure Vessels,ratio:1.0"
+cd ..
+cd ..
+
+cd "Post Treatment Filters - Foundation Calculation"
+cd Associations
+ad "activityname:Foundation design,categoryname:Post-Treatment Filters,subcategoryname:Pressure Vessels,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Storage Tanks - Foundation Calculation"
+cd Associations
+ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Electron Donor Storage Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Phosphoric Acid Storage Tanks - Foundation Calculation"
+cd Associations
+ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Phosphoric Acid Storage Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Day Tanks - Foundation Calculation"
+cd Associations
+ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Electron Donor Day Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Residuals Holding Tanks/Basins - Foundation Calculation"
+cd Associations
+ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Residuals Holding Tanks/Basins,ratio:1.0"
+cd ..
+cd ..
+
+cd "Aeration Tanks - Foundation Calculation"
+cd Associations
+ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Aeration Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Ferric Chloride Storage Tanks - Foundation Calculation"
+cd Associations
+ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Ferric Chloride Storage Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Polymer Storage Tanks - Foundation Calculation"
+cd Associations
+ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Polymer Storage Tanks,ratio:1.0"
+cd ..
+cd ..
+
+cd "Coagulant Mix Tank - Foundation Calculation"
+cd Associations
+ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Coagulant Mix Tank,ratio:1.0"
+cd ..
+cd ..
+
+cd "Residuals Pump - Foundation Calculation"
+cd Associations
+ad "activityname:Foundation design,categoryname:Pumps and Blowers,subcategoryname:Residuals Pump,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Metering - Foundation Calculation"
+cd Associations
+ad "activityname:Foundation design,categoryname:Pumps and Blowers,subcategoryname:Electron Donor Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Phosphoric Acid Metering - Foundation Calculation"
+cd Associations
+ad "activityname:Foundation design,categoryname:Pumps and Blowers,subcategoryname:Phosphoric Acid Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Blowers - Foundation Calculation"
+cd Associations
+ad "activityname:Foundation design,categoryname:Pumps and Blowers,subcategoryname:Blowers,ratio:1.0"
+cd ..
+cd ..
+
+cd "Ferric Chloride Metering to Post- Foundation Calculation"
+cd Associations
+ad "activityname:Foundation design,categoryname:Pumps and Blowers,subcategoryname:Ferric Chloride Metering to Post-Treatment,ratio:1.0"
+cd ..
+cd ..
+
+cd "Polymer Metering - Foundation Calculation"
+cd Associations
+ad "activityname:Foundation design,categoryname:Pumps and Blowers,subcategoryname:Polymer Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Residuals Mixers - Foundation Calculation"
+cd Associations
+ad "activityname:Foundation design,categoryname:Mixers,subcategoryname:Residuals Mixers,ratio:1.0"
+cd ..
+cd ..
+
+cd "Coagulant Mix Tank Mixers - Foundation Calculation"
+cd Associations
+ad "activityname:Foundation design,categoryname:Mixers,subcategoryname:Coagulant Mix Tank Mixers,ratio:1.0"
+cd ..
+cd ..
+
+# Piping Stress Calculations
+cd "Backwash Piping - Stress Calculation"
+cd Associations
+ad "activityname:Piping stress,categoryname:Piping,subcategoryname:Backwash Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Piping - Stress Calculation"
+cd Associations
+ad "activityname:Piping stress,categoryname:Piping,subcategoryname:Electron Donor Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Phosphoric Acid Piping - Stress Calculation"
+cd Associations
+ad "activityname:Piping stress,categoryname:Piping,subcategoryname:Phosphoric Acid Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Process Piping - Stress Calculation"
+cd Associations
+ad "activityname:Piping stress,categoryname:Piping,subcategoryname:Process Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Influent and Treated Water Piping - Stress Calculation"
+cd Associations
+ad "activityname:Piping stress,categoryname:Piping,subcategoryname:Influent and Treated Water Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Residuals Piping - Stress Calculation"
+cd Associations
+ad "activityname:Piping stress,categoryname:Piping,subcategoryname:Residuals Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Ferric Chloride Piping - Stress Calculation"
+cd Associations
+ad "activityname:Piping stress,categoryname:Piping,subcategoryname:Ferric Chloride Piping,ratio:1.0"
+cd ..
+cd ..
+
+cd "Polymer Addition Piping - Stress Calculation"
+cd Associations
+ad "activityname:Piping stress,categoryname:Piping,subcategoryname:Polymer Addition Piping,ratio:1.0"
+cd ..
+cd ..
+
+# Building Calculations
+cd "Building - Structural Calculation"
+cd Associations
+ad "activityname:Structural Design,categoryname:Building Structures and HVAC,subcategoryname:Building,ratio:1.0"
+cd ..
+cd ..
+
+cd "Building - Plumbing Calculations"
+cd Associations
+ad "activityname:Plumbing Design,categoryname:Building Structures and HVAC,subcategoryname:Building,ratio:1.0"
+cd ..
+cd ..
+
+cd "Building - Lighting Calculation"
+cd Associations
+ad "activityname:Electrical wiring Design,categoryname:Building Structures and HVAC,subcategoryname:Building,ratio:1.0"
+cd ..
+cd ..
+
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 15: Link Datasheet artefacts to activities
+# =============================================================================
+
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd "Artefact Types"
+cd "Datasheet"
+cd Artefacts
+
+# Pump and Blower Datasheets
+cd "Residuals Pump - Datasheet"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Residuals Pump,ratio:1.0"
+cd ..
+cd ..
+
+cd "Electron Donor Metering - Datasheet"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Electron Donor Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Phosphoric Acid Metering - Datasheet"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Phosphoric Acid Metering,ratio:1.0"
+cd ..
+cd ..
+
+cd "Blowers - Datasheet"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Blowers,ratio:1.0"
+cd ..
+cd ..
+
+cd "Ferric Chloride Metering to Post- Datasheet"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Ferric Chloride Metering to Post-Treatment,ratio:1.0"
+cd ..
+cd ..
+
+cd "Polymer Metering - Datasheet"
+cd Associations
+ad "activityname:Mechanical design,categoryname:Pumps and Blowers,subcategoryname:Polymer Metering,ratio:1.0"
+cd ..
+cd ..
+
+# Instrumentation Datasheets
+cd "Flow Meters Influent and treated water - Datasheet"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Flow Meters - Influent and treated water,ratio:1.0"
+cd ..
+cd ..
+
+cd "Flow Meters Backwash - Datasheet"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Flow Meters - Backwash,ratio:1.0"
+cd ..
+cd ..
+
+cd "Flow Meters Residuals - Datasheet"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Flow Meters - Residuals,ratio:1.0"
+cd ..
+cd ..
+
+cd "High/Low Alarm - Datasheet"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:High/Low Alarm (for holding tanks),ratio:1.0"
+cd ..
+cd ..
+
+cd "Temperature meters - Datasheet"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Temperature meters,ratio:1.0"
+cd ..
+cd ..
+
+cd "Head loss sensors - Datasheet"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Head loss sensors,ratio:1.0"
+cd ..
+cd ..
+
+cd "Sampling Ports - Datasheet"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Sampling Ports,ratio:1.0"
+cd ..
+cd ..
+
+cd "ORP sensor - Datasheet"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:ORP sensor,ratio:1.0"
+cd ..
+cd ..
+
+cd "Turbidity meters - Datasheet"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Turbidity meters,ratio:1.0"
+cd ..
+cd ..
+
+cd "Perchlorate/Nitrate Analyzer - Datasheet"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Perchlorate/Nitrate Analyzer,ratio:1.0"
+cd ..
+cd ..
+
+cd "Dissolved Oxygen Analyzer - Datasheet"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Dissolved Oxygen Analyzer,ratio:1.0"
+cd ..
+cd ..
+
+# System Controls Datasheets
+cd "PLC Unit - Datasheet"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:System Controls,subcategoryname:PLC Unit,ratio:1.0"
+cd ..
+cd ..
+
+cd "Operator Equipment - Datasheet"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:System Controls,subcategoryname:Operator Equipment,ratio:1.0"
+cd ..
+cd ..
+
+cd "Controls Software - Datasheet"
+cd Associations
+ad "activityname:Instrumentation design,categoryname:System Controls,subcategoryname:Controls Software,ratio:1.0"
+cd ..
+cd ..

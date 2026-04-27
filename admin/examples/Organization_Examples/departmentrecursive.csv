@@ -1,0 +1,6 @@
+departmentname,firstname,lastname,email,password
+Architecture,James,Hargreaves,james.hargreaves@engineering.com,arch001
+Architecture,Priya,Nair,priya.nair@engineering.com,arch002
+Structural Engineering,Leon,Mbeki,leon.mbeki@engineering.com,struct001
+Structural Engineering,Hannah,Bergstrom,hannah.bergstrom@engineering.com,struct002
+Electrical Eng,Omar,Farouk,omar.farouk@engineering.com,elec001
