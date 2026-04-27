@@ -1,7 +1,4 @@
-- [ ] Disable the ability to log in without a password
-- [ ] Create a plan for deployment - Should we use a docker?
-- [ ] Version control.
-
+- [ ] Disable the ability to log in without a password. Make it possible to turn this on or off from the CMake files.
 - [ ] Next Rev: Add a date type field for artefact data.
 - [ ] Next Rev: Add a description field for projects, activity categories and subcategories.
 - [ ] Next Rev: Add a `-r` flag for export to export data recursively.
