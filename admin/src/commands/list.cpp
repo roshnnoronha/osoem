@@ -459,7 +459,7 @@ void listProjects(Database& db, bool showAll){
 
 void listEmployees(Database& db, int departmentId, bool showAll) {
     std::string query = R"(
-        SELECT employeeid, firstname, lastname, email
+        SELECT employeeid, firstname, lastname, email, admin
         FROM Employees
     )";
 
@@ -477,27 +477,32 @@ void listEmployees(Database& db, int departmentId, bool showAll) {
     int count = 0;
     std::cout << "Employees:" << std::endl;
     if (showAll) {
-        std::cout << std::string(90, '=') << std::endl;
+        std::cout << std::string(100, '=') << std::endl;
         std::cout << std::left << std::setw(5) << "ID"
                   << std::setw(20) << "FirstName"
                   << std::setw(20) << "LastName"
                   << std::setw(40) << "Email"
+                  << std::setw(10) << "Admin"
                   << std::endl;
-        std::cout << std::string(90, '-') << std::endl;
+        std::cout << std::string(100, '-') << std::endl;
 
         while (res->next()) {
+            std::string adminStr = res->getBoolean("admin") ? "Yes" : "No";
             std::cout << std::left << std::setw(5) << res->getInt("employeeid")
                       << std::setw(20) << res->getString("firstname").substr(0, 19)
                       << std::setw(20) << res->getString("lastname").substr(0, 19)
                       << std::setw(40) << res->getString("email").substr(0, 39)
+                      << std::setw(10) << adminStr
                       << std::endl;
             count++;
         }
-        std::cout << std::string(90, '=') << std::endl;
+        std::cout << std::string(100, '=') << std::endl;
     } else {
         while (res->next()) {
+            bool isAdmin = res->getBoolean("admin");
             std::cout << "(" << res->getInt("employeeid") << ") "
                       << res->getString("firstname") << " " << res->getString("lastname")
+                      << (isAdmin ? " [Admin]" : "")
                       << std::endl;
             count++;
         }

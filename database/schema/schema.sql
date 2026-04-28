@@ -24,7 +24,7 @@ CREATE TABLE Projects(
     PRIMARY KEY (projectid)
 );
 
-CREATE TABLE Project:eamMembers(
+CREATE TABLE ProjectTeamMembers(
     teammemberid INT NOT NULL AUTO_INCREMENT,
     projectid INT NOT NULL,
     employeeid INT NOT NULL,

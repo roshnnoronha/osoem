@@ -4,60 +4,90 @@ A command-line administrative tool for managing the OSOEM engineering project ma
 
 ## Prerequisites
 
-### System Requirements
 - Linux or WSL (Windows Subsystem for Linux)
 - CMake 3.10 or higher
-- C++17 compatible compiler (g++ or clang++)
+- C++17 compatible compiler (g++)
 - MySQL/MariaDB server
+- Required libraries: `libmysqlcppconn-dev`, `libreadline-dev`, `libssl-dev`
 
-### Installing Dependencies
+## Setup
 
-#### Ubuntu/Debian
+### 1. Create the database
+
+Run the database setup script from the `database/` directory (see: ../database/README.md for more information). This drops and recreates the `osoem_database` MySQL database, applies the schema, and inserts a temporary admin account for first-time login.
+
+### 2. Build the admin tool
+
+Run the setup script from the `admin/` directory:
+
 ```bash
-sudo apt update
+./setup.sh
+```
+
+This will:
+1. Prompt for database connection details (host, port, user, password) and write `config/db_config.h`
+2. Configure the CMake build (creates the `build/` directory if it does not exist)
+3. Compile the `osoem_admin` executable to `build/osoem_admin`
+
+Options:
+```
+./setup.sh -d    # Install build dependencies via apt (requires sudo), then build
+./setup.sh -c    # Reconfigure db_config.h (overwrite existing), then build
+./setup.sh -cd   # Both: install deps and reconfigure
+```
+
+The `-d` flag installs the following packages via `apt`:
+```bash
 sudo apt install cmake g++ libmysqlcppconn-dev libreadline-dev libssl-dev
 ```
 
-#### Fedora/RHEL
+For Fedora/RHEL, install dependencies manually before running `./setup.sh`:
 ```bash
 sudo dnf install cmake gcc-c++ mysql-connector-c++-devel readline-devel openssl-devel
 ```
 
-## Building the Project
+### 3. First-time login
 
+The database setup creates a temporary admin account (`email: admin`, no password). Use it to create your real admin employee, then delete it.
+
+**Log in as the temporary admin:**
 ```bash
-cd admin
-mkdir build
-cd build
-cmake ..
-cd ..
-cmake --build build/ --target=osoem_admin
+./build/osoem_admin -u admin
+# Press Enter when prompted for password (no password set)
 ```
 
-The executable `osoem_admin` will be created in the `build/` directory.
-
-### Optional: Install System-Wide
-```bash
-sudo make install
+**Create a department and your admin employee:**
+```
+cd Organization/Departments
+ad "<department_name>"
+cd "<department_name>"
+ad
+# Fill in: firstname, lastname, email, password
 ```
 
-## Configuration
+**Log out and log back in as your real admin account:**
+```bash
+./build/osoem_admin -u your@email.com
+```
 
-Database connection settings are configured in `config/db_config.h`. Edit this file and rebuild to change the connection parameters. Provide the <username>, <password> to the database.
+> **Security warning:** Delete the temporary admin account after creating your real one. It has no password and full admin privileges.
+> ```
+cd Organization/Departments/IT
+> rm admin
+> ```
 
 ## Usage
 
 ### Interactive Mode
 ```bash
-./osoem_admin                          # Start as admin (default)
-./osoem_admin -u user@example.com      # Start with user authentication
+./build/osoem_admin -u user@example.com    
 ```
 
 When using the `-u` flag, the tool prompts for a password and authenticates against the database. Authenticated users are assigned a role (Admin or User). Non-admin users have read-only access and cannot use data modification commands (`add`, `remove`, `set`, `import`).
 
 ### Batch Mode
 ```bash
-./osoem_admin script.src               # Execute commands from a file
+./build/osoem_admin script.src         # Execute commands from a file
 ```
 
 In batch mode, commands are read from a text file and executed sequentially. Lines starting with `#` are treated as comments. The tool displays the file name and line number during execution. Batch mode runs with admin privileges.
@@ -74,36 +104,46 @@ The root is represented by `~`. The full hierarchy is:
 
 ```
 ~ (root)
- ├── Organization
+ ├── Organization **[Folder]**
  │   └── Departments
- │       └── [Department]
- │           └── Employees
- └── Projects
-     └── [Project]
-         ├── Activity Categories
-         │   └── [Category]
-         │       └── [Subcategory]
-         │           └── [Activity]
-         │               ├── Tasks
-         │               │   └── [Task]
-         │               │       ├── Tasks (sub-tasks, recursive)
-         │               │       └── Assignments
-         │               │           └── [Assignment]
-         │               │               └── Hours
-         │               └── Notes
-         ├── Artefact Types
-         │   └── [Artefact Type]
-         │       ├── Artefacts
-         │       │   └── [Artefact]
-         │       │       ├── Data
-         │       │       └── Associations
-         │       │           └── [Artefact-Activity Link]
-         │       │               └── Milestone-Artefact Links
-         │       └── Fields
-         ├── Milestones
-         │   └── [Milestone]
-         │       └── Milestone Steps
-         └── Team
+ │       └── Employees
+ └── Projects **[Folder]**
+     └── Projects
+         ├── ActivityCategories **[Folder]**
+         │   └── Categories
+         │       └── Sub-categories
+         │           └── Activities
+         │               ├── Tasks **[Folder]**
+         │               │   └── Tasks
+         │               │       ├── Tasks **[Folder]**
+         │               │       │   └── Tasks
+         │               │       │       ├── Tasks **[Folder]**
+         │               │       │       │   └── Tasks
+         │               │       │       │       : 
+         │               │       │       └── Assignments **[Folder]**
+         │               │       │           └── Assignments
+         │               │       │               └── Hours
+         │               │       └── Assignments **[Folder]**
+         │               │           └── Assignments
+         │               │               └── Hours
+         │               └── Notes **[Folder]**
+         │                   └── Notes
+         ├── ArtefactTypes **[Folder]**
+         │   └── ArtefactTypes
+         │       ├── Artefacts **[Folder]**
+         │       │   └── Artefacts
+         │       │       ├── Data **[Folder]**
+         │       │       │   └── ArtefactData
+         │       │       └── Associations **[Folder]**
+         │       │           └── ArtefactToActivityLinks
+         │       │               └── MilestoneToArtefactLinks
+         │       └── Fields **[Folder]**
+         │           └── ArtefactFields
+         ├── Milestones **[Folder]**
+         │   └── Milestones
+         │       └── MilestoneSteps
+         └── Team **[Folder]**
+             └── ProjectTeamMembers
 ```
 
 ## Commands
@@ -198,7 +238,7 @@ im -i employees.csv         # Ignore duplicates (skip silently)
 im -r activities.csv        # Recursive import — resolves parent references and ignores duplicates
 ```
 
-The CSV file must have a header row with column names matching the expected fields for the current location. The `-r` (recursive) flag is used in batch scripts for bulk population where items may already exist across multiple import passes.
+The CSV file must have a header row with column names matching the expected fields for the current location. The `-r` (recursive) flag is used in batch scripts for bulk population from a single large table.
 
 ### export (ex)
 
@@ -224,14 +264,48 @@ Most commands accept names in addition to numeric IDs. Name matching is case-ins
 
 ### Input Validation
 
-- Names cannot start with a number
-- The `:` character is reserved for key-value syntax
-- Foreign key references are validated against the database
-- Artefact data fields are validated by type (text length, numeric range)
+**Name fields** (departments, projects, categories, subcategories, activities, tasks, milestones, milestone steps, artefact types, artefacts, fields, and employee first/last names):
+- Cannot be empty
+- Cannot contain reserved characters: `,  :  /  ~`
+- Cannot start with a number or a `.`
+- Must not exceed 255 characters
+
+**Special string fields:**
+- `projectno`: cannot be empty or contain `,` or `:`; max 255 characters (may start with a number)
+- Employee `email`: cannot be empty, must contain `@`, max 255 characters
+- Employee `password`: cannot be empty, max 255 characters
+- Activity/artefact type `description`: cannot be empty; cannot contain `,` or `:`; max 1000 characters
+- Notes: cannot be empty; max 2000 characters
+- Task `description`: max 2000 characters
+- Artefact data `value`: max 2000 characters
+
+**Date fields** (`plannedstart`, `plannedfinish`, `assigneddate`, `closedate`, `bookeddate`, etc.):
+- Must be in `YYYY-MM-DD` format
+- Start date must not be after end date
+- Assignment `closedate` must not be before `assigneddate`
+- Assignment `assigneddate` cannot be after the activity's actual finish date
+
+**Numeric fields:**
+- `hours`: must be a positive integer
+- `ratio` (artefact-activity link): must be between 0.0 and 1.0
+- `progressratio` (milestone steps): must be between 0 and 1
+- `valuetype` (artefact data field): must be `0` (text) or `1` (numeric)
+- Team member `role`: must be `0` (Member), `1` (Lead), or `2` (Manager)
+- `maximumlength` (text fields): must be positive and not exceed 2000
+- `minimumvalue` must not exceed `maximumvalue` (numeric fields)
+
+**Foreign key and relationship constraints:**
+- Activity manager must be a member of the project team
+- Artefact owner must be a member of the project team
+- Assignment employee must be a member of the project team
+- A team member cannot be removed or have their employee changed if they are the activity manager or artefact owner for any item in the project
+
+**Import-specific:**
+- Ambiguous `parenttaskname` references (matching multiple tasks) must be disambiguated by also supplying `activityname`, `subcategoryname`, or `categoryname`
 
 ### Authentication and Authorization
 
-When started with `-u <email>`, the tool authenticates against the database using SHA-256 hashed passwords with salt. Non-admin users are restricted to read-only commands (`list`, `select`, `export`). Without the `-u` flag, the tool runs with admin privileges.
+The tool authenticates against the database using SHA-256 hashed passwords with salt. Non-admin users are restricted to read-only commands (`list`, `select`, `export`).
 
 ### Batch Scripting
 
@@ -252,56 +326,10 @@ ad "Foundation Design,1,2026-01-01,2026-06-01,500"
 
 Run with:
 ```bash
-./osoem_admin setup_project.src
+./build/osoem_admin setup_project.src
 ```
 
-## Examples
-
-The `examples/` directory contains ready-to-run scripts and CSV data files for several engineering projects.
-
-### Organization Examples (`examples/Organization_Examples/`)
-
-Sets up departments and employees for a typical engineering organization.
-
-```bash
-./osoem_admin examples/Organization_Examples/departments.src
-```
-
-### Residential Building Project (`examples/Residential_Building_Project/`)
-
-A complete residential building project demonstrating the activity and task hierarchy.
-
-```bash
-./osoem_admin examples/Residential_Building_Project/project.src
-```
-
-### Industrial Building Project (`examples/Industrial_Building_Project/`)
-
-An industrial building project example.
-
-```bash
-./osoem_admin examples/Industrial_Building_Project/project.src
-```
-
-### Data Center Design (`examples/Data_Center_Design/`)
-
-A data center design project with artefact types, fields, milestones, and CSV data files for activities and artefacts.
-
-```bash
-./osoem_admin examples/Data_Center_Design/Data_Center_Design.src
-```
-
-### Water Treatment Plant (`examples/Water_Treatment_Plant/`)
-
-A large-scale example with multiple engineering disciplines, artefact types (drawings, calculations, datasheets), milestones, and a comprehensive activity breakdown. Data is organised into per-discipline CSV files.
-
-```bash
-./osoem_admin examples/Water_Treatment_Plant/Water_Treatment_Plant.src
-```
-
-### CSV Examples (`examples/CSV_Examples/`)
-
-Standalone CSV files for each entity type, useful as templates when importing data.
+The `examples/` directory contains ready-to-run scripts and CSV data files for several sample projects.
 
 ## Project Structure
 

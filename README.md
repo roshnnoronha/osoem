@@ -1,6 +1,6 @@
 # Osoem
 
-A database system designed specifically for engineering project management.
+A database system designed specifically for engineering project management. The database is based on my blog article [A Database Schema for Engineering Project Management](https://medium.com/@roshnnoronha/a-database-schema-for-engineering-project-management-51d1b1f1078c).
 
 ## Overview
 
@@ -17,10 +17,15 @@ Osoem provides a unified database that models these relationships explicitly. Pr
 
 ```
 osoem/
-├── database/           # MySQL schema and setup scripts
-│   └── schema/
-│       └── schema.sql  # Complete database schema
-├── admin/              # Command-line administration tool (C++)
+├── database/               # MySQL schema and setup scripts
+│   ├── schema/
+│   │   └── schema.sql      # Complete database schema
+│   ├── seed/               # Seed SQL files (admin account, sample data)
+│   └── setup.sh            # Database setup script
+├── admin/                  # Command-line administration tool (C++)
+│   ├── config/             # Generated database connection header
+│   ├── src/                # C++ source files
+│   └── setup.sh            # Build and configuration script
 ```
 
 ## Database
@@ -49,16 +54,20 @@ The database is implemented in MySQL. The schema covers:
 
 ### Setup
 
-```bash
-mysql -u <user> -p < database/create_database.sql
-mysql -u <user> -p osoem < database/schema/schema.sql
-```
-
-To reset to a clean state:
+Run the database setup script from the repository root:
 
 ```bash
-mysql -u <user> -p osoem < database/reset_database.sql
+./database/setup.sh [-u USER] [-h HOST] [-p] [-s]
 ```
+
+| Flag | Description |
+|---|---|
+| `-u USER` | MySQL user (default: `root`) |
+| `-h HOST` | MySQL host (default: `localhost`) |
+| `-p` | Prompt for password |
+| `-s` | Seed with sample project data |
+
+The script drops and recreates `osoem_database`, applies the schema, and inserts a temporary admin account for first-time login. See [`database/README.md`](database/README.md) for full details.
 
 ## Admin Tool
 
@@ -68,12 +77,11 @@ A C++ interactive command-line tool for navigating and editing the database. See
 
 ```bash
 cd admin
-mkdir build && cd build
-cmake ..
-cd ..
-cmake --build build/ --target=osoem_admin
-./build/osoem_admin
+./setup.sh          # prompts for DB credentials, builds osoem_admin
+./build/osoem_admin -u your@email.com
 ```
+
+Options: `./setup.sh -d` installs build dependencies via `apt`; `./setup.sh -c` reconfigures the database connection.
 
 The shell prompt shows the current location in the data hierarchy:
 

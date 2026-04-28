@@ -176,7 +176,7 @@ std::string promptString(const std::string& prompt) {
             if (select(STDIN_FILENO + 1, &fds, nullptr, nullptr, &tv) > 0) {
                 // Escape sequence (arrow keys, etc.) - read and discard
                 char seq[8];
-                read(STDIN_FILENO, seq, sizeof(seq));
+                (void)read(STDIN_FILENO, seq, sizeof(seq));
             } else {
                 // Standalone ESC - cancel
                 std::cout << std::endl;

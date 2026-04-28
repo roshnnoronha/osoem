@@ -38,22 +38,23 @@ int main(int argc, char* argv[]) {
             return 1;
         }
 
-        // Initialize user context
-        auth::UserContext userContext;
-
-        // If -u flag provided, perform authentication
-        if (!userEmail.empty()) {
-            std::string password = auth::promptPassword("Password: ");
-
-            if (!auth::authenticate(db, userEmail, password, userContext)) {
-                std::cerr << "Authentication failed. Invalid email or password." << std::endl;
-                return 1;
-            }
-
-            std::cout << "Logged in as: " << userContext.firstName << " "
-                      << userContext.lastName << " (" << userContext.email << ")" << std::endl;
-            std::cout << "Role: " << (userContext.isAdmin ? "Admin" : "User") << std::endl;
+        if (userEmail.empty()) {
+            std::cerr << "Usage: osoem_admin -u <email> [<source_file>]" << std::endl;
+            return 1;
         }
+
+        // Authenticate
+        auth::UserContext userContext;
+        std::string password = auth::promptPassword("Password: ");
+
+        if (!auth::authenticate(db, userEmail, password, userContext)) {
+            std::cerr << "Authentication failed. Invalid email or password." << std::endl;
+            return 1;
+        }
+
+        std::cout << "Logged in as: " << userContext.firstName << " "
+                  << userContext.lastName << " (" << userContext.email << ")" << std::endl;
+        std::cout << "Role: " << (userContext.isAdmin ? "Admin" : "User") << std::endl;
 
         // Initialize path
         Path pth;
