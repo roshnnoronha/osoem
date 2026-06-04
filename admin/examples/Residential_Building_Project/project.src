@@ -1,14 +1,26 @@
 # =============================================================================
-# Complete Project Setup - Building Project
+# Complete Project Setup - Residential Building Project
 # Part 2: Project
 # =============================================================================
-# This source file demonstrates all the steps required to set up a complete
-# project in the osoem database, covering every entity type.
+# This source file sets up a complete residential building project in the osoem
+# database, covering every entity type.
 #
 # Prerequisites:
 #   - A clean database with the schema applied
+#   - Organisation departments and employees loaded from:
+#     examples/Organization_Examples/departments.src
 #
-# Auto-increment IDs assumed to start at 1 for all tables.
+# Employees (by ID, from org/departments.src):
+#   1  - John Davis         (Project Management)
+#   2  - Sarah Thompson     (Structural Engineering)
+#   3  - Michael Chen       (Structural Engineering)
+#   4  - Emily Rodriguez    (Architecture)
+#   5  - David Wilson       (Architecture)
+#   6  - Jessica Brown      (Electrical Engineering)
+#   7  - Robert Martinez    (Electrical Engineering)
+#   8  - Amanda Johnson     (Plumbing Engineering)
+#   9  - Christopher Lee    (Plumbing Engineering)
+#   10 - Jennifer Garcia    (Architecture)
 # =============================================================================
 
 
@@ -20,7 +32,7 @@
 
 cd ~
 cd Projects
-ad "projectname:Building Project,projectno:PRO-2026-001"
+ad "projectname:Residential Building Project,projectno:PRO-2026-002"
 
 
 # =============================================================================
@@ -30,7 +42,7 @@ ad "projectname:Building Project,projectno:PRO-2026-001"
 # Format: ad "employeename:<name>,role:<role>"
 # Roles: 1 = Team Member, 2 = Project Manager, 3 = Administrator
 
-cd "Building Project"
+cd "Residential Building Project"
 cd Team
 ad "employeename:John Davis,role:2"
 ad "employeename:Sarah Thompson,role:1"
@@ -52,7 +64,7 @@ ad "employeename:Jennifer Garcia,role:1"
 
 cd ~
 cd Projects
-cd "Building Project"
+cd "Residential Building Project"
 cd "Activity Categories"
 ad "categoryname:Architecture"
 ad "categoryname:Structural Engineering"
@@ -319,7 +331,7 @@ cd ..
 
 cd ~
 cd Projects
-cd "Building Project"
+cd "Residential Building Project"
 cd "Artefact Types"
 ad "artefactname:Drawing,artefactdescription:Engineering drawings including architectural structural electrical and plumbing plans"
 ad "artefactname:Calculation,artefactdescription:Engineering calculation reports and analysis documents"
@@ -502,7 +514,7 @@ cd ..
 
 cd ~
 cd Projects
-cd "Building Project"
+cd "Residential Building Project"
 cd Milestones
 ad "milestonename:Drawing Approval"
 ad "milestonename:Calculation Approval"
@@ -542,7 +554,7 @@ cd ..
 # Mark "Foundation Plan" discipline check as completed
 cd ~
 cd Projects
-cd "Building Project"
+cd "Residential Building Project"
 cd "Artefact Types"
 cd "Drawing"
 cd Artefacts
@@ -564,3 +576,1522 @@ cd "Structural Analysis Report - Foundation Design"
 cd Associations
 cd "Foundation design and analysis"
 ad "milestonestepname:Calculation Review,completedbyname:Michael Chen,completiondate:2026-03-10"
+
+
+# =============================================================================
+# STEP 21: Complete assignments and hours for "Prepare structural drawings"
+# =============================================================================
+
+cd ~
+cd Projects
+cd "Residential Building Project"
+cd "Activity Categories"
+cd "Structural Engineering"
+cd "Design Development"
+cd "Prepare structural drawings"
+cd Tasks
+
+# Assign subtasks under "Model preparation"
+cd "Model preparation"
+cd Tasks
+cd "Prepare a preliminary 3D model"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-02-10,closedate:2026-02-20"
+cd ..
+cd ..
+cd "Prepare final 3D model"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-02-23,closedate:2026-03-06"
+cd ..
+cd ..
+cd "Perform clash check"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-03-09,closedate:2026-03-13"
+cd ..
+cd ..
+cd ..
+cd ..
+
+# Assign "Analysis and design" and its subtasks
+cd "Analysis and design"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-03-02"
+cd ..
+cd Tasks
+cd "Define the structure geometry"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-03-02,closedate:2026-03-06"
+cd ..
+cd ..
+cd "Apply the loads on the analysis model"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-03-09,closedate:2026-03-13"
+cd ..
+cd ..
+cd "Define the design parameters for the model"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-03-16,closedate:2026-03-20"
+cd ..
+cd ..
+cd "Run the analysis and optimize the design"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-03-23,closedate:2026-04-03"
+cd ..
+cd ..
+cd ..
+cd ..
+
+# Assign "Drawing preparation" and its remaining subtasks
+cd "Drawing preparation"
+cd Assignments
+ad "username:Jennifer Garcia,assigneddate:2026-03-02"
+cd ..
+cd Tasks
+cd "Prepare input for drawing drafting"
+cd Assignments
+ad "username:Jennifer Garcia,assigneddate:2026-03-02,closedate:2026-03-06"
+cd ..
+cd ..
+cd "Drawing review"
+cd Assignments
+ad "username:Christopher Lee,assigneddate:2026-04-07,closedate:2026-04-10"
+cd ..
+cd ..
+cd "Drawing comment incorporation"
+cd Assignments
+ad "username:Jennifer Garcia,assigneddate:2026-04-13"
+cd ..
+cd ..
+cd ..
+cd ..
+
+# Assign "Calculation report compilation" and its subtasks
+cd "Calculation report compilation"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-03-16"
+cd ..
+cd Tasks
+cd "Calculation preparation"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-03-16,closedate:2026-04-03"
+cd ..
+cd ..
+cd "Calculation review"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-04-07,closedate:2026-04-10"
+cd ..
+cd ..
+cd "Calculation comment incorporation"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-04-13"
+cd ..
+cd ..
+cd ..
+cd ..
+
+# Assign "Interdisciplinary checks" and its subtasks
+cd "Interdisciplinary checks"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-04-14"
+cd ..
+cd Tasks
+cd "Perform disciplinary checks"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-04-14,closedate:2026-04-17"
+cd ..
+cd ..
+cd "Incorporate comments"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-04-20"
+cd ..
+cd ..
+cd ..
+cd ..
+
+# Assign "Document Approval"
+cd "Document Approval"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-04-21"
+cd ..
+cd ..
+
+# Book hours for "Prepare final 3D model" (Sarah Thompson)
+cd "Model preparation"
+cd Tasks
+cd "Prepare final 3D model"
+cd Assignments
+cd "Sarah Thompson"
+ad "bookeddate:2026-02-23,hours:8"
+ad "bookeddate:2026-02-24,hours:8"
+ad "bookeddate:2026-02-25,hours:8"
+ad "bookeddate:2026-02-26,hours:8"
+ad "bookeddate:2026-02-27,hours:8"
+ad "bookeddate:2026-03-02,hours:8"
+ad "bookeddate:2026-03-03,hours:8"
+ad "bookeddate:2026-03-04,hours:8"
+ad "bookeddate:2026-03-05,hours:8"
+ad "bookeddate:2026-03-06,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Perform clash check"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-03-09,hours:8"
+ad "bookeddate:2026-03-10,hours:8"
+ad "bookeddate:2026-03-11,hours:8"
+ad "bookeddate:2026-03-12,hours:8"
+ad "bookeddate:2026-03-13,hours:8"
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+
+# Book hours for "Analysis and design" subtasks (Michael Chen)
+cd "Analysis and design"
+cd Tasks
+cd "Define the structure geometry"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-03-02,hours:8"
+ad "bookeddate:2026-03-03,hours:8"
+ad "bookeddate:2026-03-04,hours:8"
+ad "bookeddate:2026-03-05,hours:8"
+ad "bookeddate:2026-03-06,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Apply the loads on the analysis model"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-03-09,hours:8"
+ad "bookeddate:2026-03-10,hours:8"
+ad "bookeddate:2026-03-11,hours:8"
+ad "bookeddate:2026-03-12,hours:8"
+ad "bookeddate:2026-03-13,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Define the design parameters for the model"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-03-16,hours:8"
+ad "bookeddate:2026-03-17,hours:8"
+ad "bookeddate:2026-03-18,hours:8"
+ad "bookeddate:2026-03-19,hours:8"
+ad "bookeddate:2026-03-20,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Run the analysis and optimize the design"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-03-23,hours:8"
+ad "bookeddate:2026-03-24,hours:8"
+ad "bookeddate:2026-03-25,hours:8"
+ad "bookeddate:2026-03-26,hours:8"
+ad "bookeddate:2026-03-27,hours:8"
+ad "bookeddate:2026-03-30,hours:8"
+ad "bookeddate:2026-03-31,hours:8"
+ad "bookeddate:2026-04-01,hours:8"
+ad "bookeddate:2026-04-02,hours:8"
+ad "bookeddate:2026-04-03,hours:8"
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+
+# Book hours for "Drawing preparation" subtasks (Jennifer Garcia)
+cd "Drawing preparation"
+cd Tasks
+cd "Prepare input for drawing drafting"
+cd Assignments
+cd "Jennifer Garcia"
+ad "bookeddate:2026-03-02,hours:8"
+ad "bookeddate:2026-03-03,hours:8"
+ad "bookeddate:2026-03-04,hours:8"
+ad "bookeddate:2026-03-05,hours:8"
+ad "bookeddate:2026-03-06,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Drawing drafting"
+cd Assignments
+cd "Jennifer Garcia"
+ad "bookeddate:2026-03-09,hours:8"
+ad "bookeddate:2026-03-10,hours:8"
+ad "bookeddate:2026-03-11,hours:8"
+ad "bookeddate:2026-03-12,hours:8"
+ad "bookeddate:2026-03-13,hours:8"
+ad "bookeddate:2026-03-16,hours:8"
+ad "bookeddate:2026-03-17,hours:8"
+ad "bookeddate:2026-03-18,hours:8"
+ad "bookeddate:2026-03-19,hours:8"
+ad "bookeddate:2026-03-20,hours:8"
+ad "bookeddate:2026-03-23,hours:8"
+ad "bookeddate:2026-03-24,hours:8"
+ad "bookeddate:2026-03-25,hours:8"
+ad "bookeddate:2026-03-26,hours:8"
+ad "bookeddate:2026-03-27,hours:8"
+ad "bookeddate:2026-03-30,hours:8"
+ad "bookeddate:2026-03-31,hours:8"
+ad "bookeddate:2026-04-01,hours:8"
+ad "bookeddate:2026-04-02,hours:8"
+ad "bookeddate:2026-04-03,hours:6"
+cd ..
+cd ..
+cd ..
+
+cd "Drawing review"
+cd Assignments
+cd "Christopher Lee"
+ad "bookeddate:2026-04-07,hours:8"
+ad "bookeddate:2026-04-08,hours:8"
+ad "bookeddate:2026-04-09,hours:8"
+ad "bookeddate:2026-04-10,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Drawing comment incorporation"
+cd Assignments
+cd "Jennifer Garcia"
+ad "bookeddate:2026-04-13,hours:8"
+ad "bookeddate:2026-04-14,hours:8"
+ad "bookeddate:2026-04-15,hours:8"
+ad "bookeddate:2026-04-16,hours:8"
+ad "bookeddate:2026-04-17,hours:8"
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+
+# Book hours for "Calculation report compilation" subtasks (Sarah Thompson)
+cd "Calculation report compilation"
+cd Tasks
+cd "Calculation preparation"
+cd Assignments
+cd "Sarah Thompson"
+ad "bookeddate:2026-03-16,hours:8"
+ad "bookeddate:2026-03-17,hours:8"
+ad "bookeddate:2026-03-18,hours:8"
+ad "bookeddate:2026-03-19,hours:8"
+ad "bookeddate:2026-03-20,hours:8"
+ad "bookeddate:2026-03-23,hours:8"
+ad "bookeddate:2026-03-24,hours:8"
+ad "bookeddate:2026-03-25,hours:8"
+ad "bookeddate:2026-03-26,hours:8"
+ad "bookeddate:2026-03-27,hours:8"
+ad "bookeddate:2026-03-30,hours:8"
+ad "bookeddate:2026-03-31,hours:8"
+ad "bookeddate:2026-04-01,hours:8"
+ad "bookeddate:2026-04-02,hours:8"
+ad "bookeddate:2026-04-03,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Calculation review"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-04-07,hours:8"
+ad "bookeddate:2026-04-08,hours:8"
+ad "bookeddate:2026-04-09,hours:8"
+ad "bookeddate:2026-04-10,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Calculation comment incorporation"
+cd Assignments
+cd "Sarah Thompson"
+ad "bookeddate:2026-04-13,hours:8"
+ad "bookeddate:2026-04-14,hours:8"
+ad "bookeddate:2026-04-15,hours:8"
+ad "bookeddate:2026-04-16,hours:8"
+ad "bookeddate:2026-04-17,hours:8"
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+
+# Book hours for "Interdisciplinary checks" subtasks
+cd "Interdisciplinary checks"
+cd Tasks
+cd "Perform disciplinary checks"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-04-14,hours:8"
+ad "bookeddate:2026-04-15,hours:8"
+ad "bookeddate:2026-04-16,hours:8"
+ad "bookeddate:2026-04-17,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Incorporate comments"
+cd Assignments
+cd "Sarah Thompson"
+ad "bookeddate:2026-04-20,hours:8"
+ad "bookeddate:2026-04-21,hours:8"
+ad "bookeddate:2026-04-22,hours:8"
+ad "bookeddate:2026-04-23,hours:8"
+ad "bookeddate:2026-04-24,hours:8"
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+
+# Book hours for "Document Approval"
+cd "Document Approval"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-04-21,hours:8"
+ad "bookeddate:2026-04-22,hours:8"
+ad "bookeddate:2026-04-23,hours:8"
+ad "bookeddate:2026-04-24,hours:4"
+cd ..
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 22: Add tasks, assignments, and hours for "Foundation design and analysis"
+# =============================================================================
+
+cd ~
+cd Projects
+cd "Residential Building Project"
+cd "Activity Categories"
+cd "Structural Engineering"
+cd "Design Development"
+cd "Foundation design and analysis"
+cd Tasks
+ad "taskname:Review geotechnical report"
+ad "taskname:Foundation type selection"
+ad "taskname:Foundation design calculations"
+ad "taskname:Reinforcement detailing"
+ad "taskname:Document approval"
+cd ..
+
+cd Tasks
+cd "Review geotechnical report"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-01-20,closedate:2026-01-23"
+cd ..
+cd ..
+cd "Foundation type selection"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-01-26,closedate:2026-01-30"
+cd ..
+cd ..
+cd "Foundation design calculations"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-02-02,closedate:2026-02-20"
+cd ..
+cd ..
+cd "Reinforcement detailing"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-02-23,closedate:2026-02-27"
+cd ..
+cd ..
+cd "Document approval"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-02-28"
+cd ..
+cd ..
+
+cd "Review geotechnical report"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-01-20,hours:8"
+ad "bookeddate:2026-01-21,hours:8"
+ad "bookeddate:2026-01-22,hours:8"
+ad "bookeddate:2026-01-23,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Foundation type selection"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-01-26,hours:8"
+ad "bookeddate:2026-01-27,hours:8"
+ad "bookeddate:2026-01-28,hours:8"
+ad "bookeddate:2026-01-29,hours:8"
+ad "bookeddate:2026-01-30,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Foundation design calculations"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-02-02,hours:8"
+ad "bookeddate:2026-02-09,hours:8"
+ad "bookeddate:2026-02-10,hours:8"
+ad "bookeddate:2026-02-11,hours:8"
+ad "bookeddate:2026-02-12,hours:8"
+ad "bookeddate:2026-02-13,hours:8"
+ad "bookeddate:2026-02-16,hours:8"
+ad "bookeddate:2026-02-17,hours:8"
+ad "bookeddate:2026-02-18,hours:8"
+ad "bookeddate:2026-02-19,hours:8"
+ad "bookeddate:2026-02-20,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Reinforcement detailing"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-02-23,hours:8"
+ad "bookeddate:2026-02-24,hours:8"
+ad "bookeddate:2026-02-25,hours:8"
+ad "bookeddate:2026-02-26,hours:8"
+ad "bookeddate:2026-02-27,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Document approval"
+cd Assignments
+cd "Sarah Thompson"
+ad "bookeddate:2026-02-28,hours:4"
+cd ..
+cd ..
+cd ..
+
+cd ..
+cd ..
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 23: Add tasks, assignments, and hours for Architecture activities
+# =============================================================================
+
+cd ~
+cd Projects
+cd "Residential Building Project"
+cd "Activity Categories"
+cd "Architecture"
+cd "Architectural Design"
+
+# Assign all tasks for "Prepare architectural drawings"
+cd "Prepare architectural drawings"
+cd Tasks
+cd "Develop concept design"
+cd Assignments
+ad "username:Emily Rodriguez,assigneddate:2026-02-02,closedate:2026-02-20"
+cd ..
+cd ..
+cd "Prepare floor plan layouts"
+cd Assignments
+ad "username:Emily Rodriguez,assigneddate:2026-02-23,closedate:2026-03-13"
+cd ..
+cd ..
+cd "Prepare elevation drawings"
+cd Assignments
+ad "username:Emily Rodriguez,assigneddate:2026-03-16,closedate:2026-04-03"
+cd ..
+cd ..
+cd "Prepare section drawings"
+cd Assignments
+ad "username:Emily Rodriguez,assigneddate:2026-04-07,closedate:2026-04-14"
+cd ..
+cd ..
+cd "Design review"
+cd Assignments
+ad "username:David Wilson,assigneddate:2026-04-15"
+cd ..
+cd ..
+
+cd "Develop concept design"
+cd Assignments
+cd "Emily Rodriguez"
+ad "bookeddate:2026-02-02,hours:8"
+ad "bookeddate:2026-02-03,hours:8"
+ad "bookeddate:2026-02-04,hours:8"
+ad "bookeddate:2026-02-05,hours:8"
+ad "bookeddate:2026-02-06,hours:8"
+ad "bookeddate:2026-02-09,hours:8"
+ad "bookeddate:2026-02-10,hours:8"
+ad "bookeddate:2026-02-11,hours:8"
+ad "bookeddate:2026-02-12,hours:8"
+ad "bookeddate:2026-02-13,hours:8"
+ad "bookeddate:2026-02-16,hours:8"
+ad "bookeddate:2026-02-17,hours:8"
+ad "bookeddate:2026-02-18,hours:8"
+ad "bookeddate:2026-02-19,hours:8"
+ad "bookeddate:2026-02-20,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Prepare floor plan layouts"
+cd Assignments
+cd "Emily Rodriguez"
+ad "bookeddate:2026-02-23,hours:8"
+ad "bookeddate:2026-02-24,hours:8"
+ad "bookeddate:2026-02-25,hours:8"
+ad "bookeddate:2026-02-26,hours:8"
+ad "bookeddate:2026-02-27,hours:8"
+ad "bookeddate:2026-03-02,hours:8"
+ad "bookeddate:2026-03-03,hours:8"
+ad "bookeddate:2026-03-04,hours:8"
+ad "bookeddate:2026-03-05,hours:8"
+ad "bookeddate:2026-03-06,hours:8"
+ad "bookeddate:2026-03-09,hours:8"
+ad "bookeddate:2026-03-10,hours:8"
+ad "bookeddate:2026-03-11,hours:8"
+ad "bookeddate:2026-03-12,hours:8"
+ad "bookeddate:2026-03-13,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Prepare elevation drawings"
+cd Assignments
+cd "Emily Rodriguez"
+ad "bookeddate:2026-03-16,hours:8"
+ad "bookeddate:2026-03-17,hours:8"
+ad "bookeddate:2026-03-18,hours:8"
+ad "bookeddate:2026-03-19,hours:8"
+ad "bookeddate:2026-03-20,hours:8"
+ad "bookeddate:2026-03-23,hours:8"
+ad "bookeddate:2026-03-24,hours:8"
+ad "bookeddate:2026-03-25,hours:8"
+ad "bookeddate:2026-03-26,hours:8"
+ad "bookeddate:2026-03-27,hours:8"
+ad "bookeddate:2026-03-30,hours:8"
+ad "bookeddate:2026-03-31,hours:8"
+ad "bookeddate:2026-04-01,hours:8"
+ad "bookeddate:2026-04-02,hours:8"
+ad "bookeddate:2026-04-03,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Prepare section drawings"
+cd Assignments
+cd "Emily Rodriguez"
+ad "bookeddate:2026-04-07,hours:8"
+ad "bookeddate:2026-04-08,hours:8"
+ad "bookeddate:2026-04-09,hours:8"
+ad "bookeddate:2026-04-10,hours:8"
+ad "bookeddate:2026-04-13,hours:8"
+ad "bookeddate:2026-04-14,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd ..
+cd ..
+
+# Tasks for "Prepare floor plans" (David Wilson)
+cd "Prepare floor plans"
+cd Tasks
+ad "taskname:Space analysis and room scheduling"
+ad "taskname:Preliminary floor plans"
+ad "taskname:Final floor plans"
+ad "taskname:Drawing review"
+cd ..
+
+cd Tasks
+cd "Space analysis and room scheduling"
+cd Assignments
+ad "username:David Wilson,assigneddate:2026-02-16,closedate:2026-02-27"
+cd ..
+cd ..
+cd "Preliminary floor plans"
+cd Assignments
+ad "username:David Wilson,assigneddate:2026-03-02,closedate:2026-03-13"
+cd ..
+cd ..
+cd "Final floor plans"
+cd Assignments
+ad "username:David Wilson,assigneddate:2026-03-16,closedate:2026-03-27"
+cd ..
+cd ..
+cd "Drawing review"
+cd Assignments
+ad "username:Jennifer Garcia,assigneddate:2026-03-30"
+cd ..
+cd ..
+
+cd "Space analysis and room scheduling"
+cd Assignments
+cd "David Wilson"
+ad "bookeddate:2026-02-16,hours:8"
+ad "bookeddate:2026-02-17,hours:8"
+ad "bookeddate:2026-02-18,hours:8"
+ad "bookeddate:2026-02-19,hours:8"
+ad "bookeddate:2026-02-20,hours:8"
+ad "bookeddate:2026-02-23,hours:8"
+ad "bookeddate:2026-02-24,hours:8"
+ad "bookeddate:2026-02-25,hours:8"
+ad "bookeddate:2026-02-26,hours:8"
+ad "bookeddate:2026-02-27,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Preliminary floor plans"
+cd Assignments
+cd "David Wilson"
+ad "bookeddate:2026-03-02,hours:8"
+ad "bookeddate:2026-03-03,hours:8"
+ad "bookeddate:2026-03-04,hours:8"
+ad "bookeddate:2026-03-05,hours:8"
+ad "bookeddate:2026-03-06,hours:8"
+ad "bookeddate:2026-03-09,hours:8"
+ad "bookeddate:2026-03-10,hours:8"
+ad "bookeddate:2026-03-11,hours:8"
+ad "bookeddate:2026-03-12,hours:8"
+ad "bookeddate:2026-03-13,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Final floor plans"
+cd Assignments
+cd "David Wilson"
+ad "bookeddate:2026-03-16,hours:8"
+ad "bookeddate:2026-03-17,hours:8"
+ad "bookeddate:2026-03-18,hours:8"
+ad "bookeddate:2026-03-19,hours:8"
+ad "bookeddate:2026-03-20,hours:8"
+ad "bookeddate:2026-03-23,hours:8"
+ad "bookeddate:2026-03-24,hours:8"
+ad "bookeddate:2026-03-25,hours:8"
+ad "bookeddate:2026-03-26,hours:8"
+ad "bookeddate:2026-03-27,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd ..
+cd ..
+
+# Tasks for "Landscape planning and design" (David Wilson)
+cd ..
+cd "Landscape Design"
+cd "Landscape planning and design"
+cd Tasks
+ad "taskname:Site analysis and constraints review"
+ad "taskname:Landscape concept design"
+ad "taskname:Detailed planting and hardscape design"
+cd ..
+
+cd Tasks
+cd "Site analysis and constraints review"
+cd Assignments
+ad "username:David Wilson,assigneddate:2026-06-01,closedate:2026-06-12"
+cd ..
+cd ..
+cd "Landscape concept design"
+cd Assignments
+ad "username:David Wilson,assigneddate:2026-06-15,closedate:2026-06-26"
+cd ..
+cd ..
+cd "Detailed planting and hardscape design"
+cd Assignments
+ad "username:David Wilson,assigneddate:2026-06-29"
+cd ..
+cd ..
+
+cd "Site analysis and constraints review"
+cd Assignments
+cd "David Wilson"
+ad "bookeddate:2026-06-01,hours:8"
+ad "bookeddate:2026-06-02,hours:8"
+ad "bookeddate:2026-06-03,hours:8"
+ad "bookeddate:2026-06-04,hours:8"
+ad "bookeddate:2026-06-05,hours:8"
+ad "bookeddate:2026-06-08,hours:8"
+ad "bookeddate:2026-06-09,hours:8"
+ad "bookeddate:2026-06-10,hours:8"
+ad "bookeddate:2026-06-11,hours:8"
+ad "bookeddate:2026-06-12,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Landscape concept design"
+cd Assignments
+cd "David Wilson"
+ad "bookeddate:2026-06-15,hours:8"
+ad "bookeddate:2026-06-16,hours:8"
+ad "bookeddate:2026-06-17,hours:8"
+ad "bookeddate:2026-06-18,hours:8"
+ad "bookeddate:2026-06-19,hours:8"
+ad "bookeddate:2026-06-22,hours:8"
+ad "bookeddate:2026-06-23,hours:8"
+ad "bookeddate:2026-06-24,hours:8"
+ad "bookeddate:2026-06-25,hours:8"
+ad "bookeddate:2026-06-26,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Detailed planting and hardscape design"
+cd Assignments
+cd "David Wilson"
+ad "bookeddate:2026-06-29,hours:8"
+ad "bookeddate:2026-06-30,hours:8"
+ad "bookeddate:2026-07-01,hours:8"
+ad "bookeddate:2026-07-02,hours:8"
+ad "bookeddate:2026-07-03,hours:8"
+ad "bookeddate:2026-07-06,hours:8"
+ad "bookeddate:2026-07-07,hours:8"
+ad "bookeddate:2026-07-08,hours:8"
+ad "bookeddate:2026-07-09,hours:8"
+ad "bookeddate:2026-07-10,hours:8"
+ad "bookeddate:2026-07-13,hours:8"
+ad "bookeddate:2026-07-14,hours:8"
+ad "bookeddate:2026-07-15,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd ..
+cd ..
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 24: Add tasks, assignments, and hours for Structural Detailed Design
+# =============================================================================
+
+cd ~
+cd Projects
+cd "Residential Building Project"
+cd "Activity Categories"
+cd "Structural Engineering"
+cd "Detailed Design"
+
+# Tasks for "Structural steel detailing" (Sarah Thompson)
+cd "Structural steel detailing"
+cd Tasks
+ad "taskname:Review structural analysis results"
+ad "taskname:Beam and column detailing"
+ad "taskname:Connection detail drawings"
+ad "taskname:Drawing review and comment incorporation"
+cd ..
+
+cd Tasks
+cd "Review structural analysis results"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-03-16,closedate:2026-03-20"
+cd ..
+cd ..
+cd "Beam and column detailing"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-03-23,closedate:2026-04-17"
+cd ..
+cd ..
+cd "Connection detail drawings"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-04-20,closedate:2026-05-15"
+cd ..
+cd ..
+cd "Drawing review and comment incorporation"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-05-18"
+cd ..
+cd ..
+
+cd "Review structural analysis results"
+cd Assignments
+cd "Sarah Thompson"
+ad "bookeddate:2026-03-16,hours:8"
+ad "bookeddate:2026-03-17,hours:8"
+ad "bookeddate:2026-03-18,hours:8"
+ad "bookeddate:2026-03-19,hours:8"
+ad "bookeddate:2026-03-20,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Beam and column detailing"
+cd Assignments
+cd "Sarah Thompson"
+ad "bookeddate:2026-03-23,hours:8"
+ad "bookeddate:2026-03-24,hours:8"
+ad "bookeddate:2026-03-25,hours:8"
+ad "bookeddate:2026-03-26,hours:8"
+ad "bookeddate:2026-03-27,hours:8"
+ad "bookeddate:2026-03-30,hours:8"
+ad "bookeddate:2026-03-31,hours:8"
+ad "bookeddate:2026-04-01,hours:8"
+ad "bookeddate:2026-04-02,hours:8"
+ad "bookeddate:2026-04-03,hours:8"
+ad "bookeddate:2026-04-07,hours:8"
+ad "bookeddate:2026-04-08,hours:8"
+ad "bookeddate:2026-04-09,hours:8"
+ad "bookeddate:2026-04-10,hours:8"
+ad "bookeddate:2026-04-13,hours:8"
+ad "bookeddate:2026-04-14,hours:8"
+ad "bookeddate:2026-04-15,hours:8"
+ad "bookeddate:2026-04-16,hours:8"
+ad "bookeddate:2026-04-17,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Connection detail drawings"
+cd Assignments
+cd "Sarah Thompson"
+ad "bookeddate:2026-04-20,hours:8"
+ad "bookeddate:2026-04-21,hours:8"
+ad "bookeddate:2026-04-22,hours:8"
+ad "bookeddate:2026-04-23,hours:8"
+ad "bookeddate:2026-04-24,hours:8"
+ad "bookeddate:2026-04-27,hours:8"
+ad "bookeddate:2026-04-28,hours:8"
+ad "bookeddate:2026-04-29,hours:8"
+ad "bookeddate:2026-04-30,hours:8"
+ad "bookeddate:2026-05-04,hours:8"
+ad "bookeddate:2026-05-05,hours:8"
+ad "bookeddate:2026-05-06,hours:8"
+ad "bookeddate:2026-05-07,hours:8"
+ad "bookeddate:2026-05-08,hours:8"
+ad "bookeddate:2026-05-11,hours:8"
+ad "bookeddate:2026-05-12,hours:8"
+ad "bookeddate:2026-05-13,hours:8"
+ad "bookeddate:2026-05-14,hours:8"
+ad "bookeddate:2026-05-15,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd ..
+cd ..
+
+# Tasks for "Concrete reinforcement detailing" (Michael Chen)
+cd "Concrete reinforcement detailing"
+cd Tasks
+ad "taskname:Review structural design calculations"
+ad "taskname:Bar bending schedule preparation"
+ad "taskname:Reinforcement layout drawings"
+ad "taskname:Drawing review"
+cd ..
+
+cd Tasks
+cd "Review structural design calculations"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-03-23,closedate:2026-03-27"
+cd ..
+cd ..
+cd "Bar bending schedule preparation"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-03-30,closedate:2026-04-24"
+cd ..
+cd ..
+cd "Reinforcement layout drawings"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-04-27,closedate:2026-05-29"
+cd ..
+cd ..
+cd "Drawing review"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-06-01"
+cd ..
+cd ..
+
+cd "Review structural design calculations"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-03-23,hours:8"
+ad "bookeddate:2026-03-24,hours:8"
+ad "bookeddate:2026-03-25,hours:8"
+ad "bookeddate:2026-03-26,hours:8"
+ad "bookeddate:2026-03-27,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Bar bending schedule preparation"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-03-30,hours:8"
+ad "bookeddate:2026-03-31,hours:8"
+ad "bookeddate:2026-04-01,hours:8"
+ad "bookeddate:2026-04-02,hours:8"
+ad "bookeddate:2026-04-03,hours:8"
+ad "bookeddate:2026-04-07,hours:8"
+ad "bookeddate:2026-04-08,hours:8"
+ad "bookeddate:2026-04-09,hours:8"
+ad "bookeddate:2026-04-10,hours:8"
+ad "bookeddate:2026-04-13,hours:8"
+ad "bookeddate:2026-04-14,hours:8"
+ad "bookeddate:2026-04-15,hours:8"
+ad "bookeddate:2026-04-16,hours:8"
+ad "bookeddate:2026-04-17,hours:8"
+ad "bookeddate:2026-04-20,hours:8"
+ad "bookeddate:2026-04-21,hours:8"
+ad "bookeddate:2026-04-22,hours:8"
+ad "bookeddate:2026-04-23,hours:8"
+ad "bookeddate:2026-04-24,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Reinforcement layout drawings"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-04-27,hours:8"
+ad "bookeddate:2026-04-28,hours:8"
+ad "bookeddate:2026-04-29,hours:8"
+ad "bookeddate:2026-04-30,hours:8"
+ad "bookeddate:2026-05-04,hours:8"
+ad "bookeddate:2026-05-05,hours:8"
+ad "bookeddate:2026-05-06,hours:8"
+ad "bookeddate:2026-05-07,hours:8"
+ad "bookeddate:2026-05-08,hours:8"
+ad "bookeddate:2026-05-11,hours:8"
+ad "bookeddate:2026-05-12,hours:8"
+ad "bookeddate:2026-05-13,hours:8"
+ad "bookeddate:2026-05-14,hours:8"
+ad "bookeddate:2026-05-15,hours:8"
+ad "bookeddate:2026-05-18,hours:8"
+ad "bookeddate:2026-05-19,hours:8"
+ad "bookeddate:2026-05-20,hours:8"
+ad "bookeddate:2026-05-21,hours:8"
+ad "bookeddate:2026-05-22,hours:8"
+ad "bookeddate:2026-05-25,hours:8"
+ad "bookeddate:2026-05-26,hours:8"
+ad "bookeddate:2026-05-27,hours:8"
+ad "bookeddate:2026-05-28,hours:8"
+ad "bookeddate:2026-05-29,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Drawing review"
+cd Assignments
+cd "Sarah Thompson"
+ad "bookeddate:2026-06-01,hours:8"
+ad "bookeddate:2026-06-02,hours:8"
+ad "bookeddate:2026-06-03,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd ..
+cd ..
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 25: Add tasks, assignments, and hours for Plumbing activities
+# =============================================================================
+
+cd ~
+cd Projects
+cd "Residential Building Project"
+cd "Activity Categories"
+cd "Plumbing Engineering"
+cd "Plumbing Design"
+cd "Prepare plumbing drawings"
+cd Tasks
+ad "taskname:Pipe sizing calculations"
+ad "taskname:Plumbing layout drawings"
+ad "taskname:Sanitary drainage design"
+ad "taskname:Drawing review"
+cd ..
+
+cd Tasks
+cd "Pipe sizing calculations"
+cd Assignments
+ad "username:Amanda Johnson,assigneddate:2026-03-02,closedate:2026-03-20"
+cd ..
+cd ..
+cd "Plumbing layout drawings"
+cd Assignments
+ad "username:Amanda Johnson,assigneddate:2026-03-23,closedate:2026-04-17"
+cd ..
+cd ..
+cd "Sanitary drainage design"
+cd Assignments
+ad "username:Amanda Johnson,assigneddate:2026-04-20,closedate:2026-05-08"
+cd ..
+cd ..
+cd "Drawing review"
+cd Assignments
+ad "username:Christopher Lee,assigneddate:2026-05-11"
+cd ..
+cd ..
+
+cd "Pipe sizing calculations"
+cd Assignments
+cd "Amanda Johnson"
+ad "bookeddate:2026-03-02,hours:8"
+ad "bookeddate:2026-03-03,hours:8"
+ad "bookeddate:2026-03-04,hours:8"
+ad "bookeddate:2026-03-05,hours:8"
+ad "bookeddate:2026-03-06,hours:8"
+ad "bookeddate:2026-03-09,hours:8"
+ad "bookeddate:2026-03-10,hours:8"
+ad "bookeddate:2026-03-11,hours:8"
+ad "bookeddate:2026-03-12,hours:8"
+ad "bookeddate:2026-03-13,hours:8"
+ad "bookeddate:2026-03-16,hours:8"
+ad "bookeddate:2026-03-17,hours:8"
+ad "bookeddate:2026-03-18,hours:8"
+ad "bookeddate:2026-03-19,hours:8"
+ad "bookeddate:2026-03-20,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Plumbing layout drawings"
+cd Assignments
+cd "Amanda Johnson"
+ad "bookeddate:2026-03-23,hours:8"
+ad "bookeddate:2026-03-24,hours:8"
+ad "bookeddate:2026-03-25,hours:8"
+ad "bookeddate:2026-03-26,hours:8"
+ad "bookeddate:2026-03-27,hours:8"
+ad "bookeddate:2026-03-30,hours:8"
+ad "bookeddate:2026-03-31,hours:8"
+ad "bookeddate:2026-04-01,hours:8"
+ad "bookeddate:2026-04-02,hours:8"
+ad "bookeddate:2026-04-03,hours:8"
+ad "bookeddate:2026-04-07,hours:8"
+ad "bookeddate:2026-04-08,hours:8"
+ad "bookeddate:2026-04-09,hours:8"
+ad "bookeddate:2026-04-10,hours:8"
+ad "bookeddate:2026-04-13,hours:8"
+ad "bookeddate:2026-04-14,hours:8"
+ad "bookeddate:2026-04-15,hours:8"
+ad "bookeddate:2026-04-16,hours:8"
+ad "bookeddate:2026-04-17,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Sanitary drainage design"
+cd Assignments
+cd "Amanda Johnson"
+ad "bookeddate:2026-04-20,hours:8"
+ad "bookeddate:2026-04-21,hours:8"
+ad "bookeddate:2026-04-22,hours:8"
+ad "bookeddate:2026-04-23,hours:8"
+ad "bookeddate:2026-04-24,hours:8"
+ad "bookeddate:2026-04-27,hours:8"
+ad "bookeddate:2026-04-28,hours:8"
+ad "bookeddate:2026-04-29,hours:8"
+ad "bookeddate:2026-04-30,hours:8"
+ad "bookeddate:2026-05-04,hours:8"
+ad "bookeddate:2026-05-05,hours:8"
+ad "bookeddate:2026-05-06,hours:8"
+ad "bookeddate:2026-05-07,hours:8"
+ad "bookeddate:2026-05-08,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Drawing review"
+cd Assignments
+cd "Christopher Lee"
+ad "bookeddate:2026-05-11,hours:8"
+ad "bookeddate:2026-05-12,hours:8"
+ad "bookeddate:2026-05-13,hours:8"
+ad "bookeddate:2026-05-14,hours:8"
+ad "bookeddate:2026-05-15,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd ..
+cd ..
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 26: Add tasks, assignments, and hours for Electrical activities
+# =============================================================================
+
+cd ~
+cd Projects
+cd "Residential Building Project"
+cd "Activity Categories"
+cd "Electrical Engineering"
+cd "Electrical Design"
+
+# Tasks for "Prepare electrical wiring drawings" (Jessica Brown)
+cd "Prepare electrical wiring drawings"
+cd Tasks
+ad "taskname:Electrical load calculations"
+ad "taskname:Wiring layout design"
+ad "taskname:Switchboard schedule"
+ad "taskname:Drawing review"
+cd ..
+
+cd Tasks
+cd "Electrical load calculations"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-03-16,closedate:2026-04-03"
+cd ..
+cd ..
+cd "Wiring layout design"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-04-07,closedate:2026-05-01"
+cd ..
+cd ..
+cd "Switchboard schedule"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-05-04,closedate:2026-05-22"
+cd ..
+cd ..
+cd "Drawing review"
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-05-25"
+cd ..
+cd ..
+
+cd "Electrical load calculations"
+cd Assignments
+cd "Jessica Brown"
+ad "bookeddate:2026-03-16,hours:8"
+ad "bookeddate:2026-03-17,hours:8"
+ad "bookeddate:2026-03-18,hours:8"
+ad "bookeddate:2026-03-19,hours:8"
+ad "bookeddate:2026-03-20,hours:8"
+ad "bookeddate:2026-03-23,hours:8"
+ad "bookeddate:2026-03-24,hours:8"
+ad "bookeddate:2026-03-25,hours:8"
+ad "bookeddate:2026-03-26,hours:8"
+ad "bookeddate:2026-03-27,hours:8"
+ad "bookeddate:2026-03-30,hours:8"
+ad "bookeddate:2026-03-31,hours:8"
+ad "bookeddate:2026-04-01,hours:8"
+ad "bookeddate:2026-04-02,hours:8"
+ad "bookeddate:2026-04-03,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Wiring layout design"
+cd Assignments
+cd "Jessica Brown"
+ad "bookeddate:2026-04-07,hours:8"
+ad "bookeddate:2026-04-08,hours:8"
+ad "bookeddate:2026-04-09,hours:8"
+ad "bookeddate:2026-04-10,hours:8"
+ad "bookeddate:2026-04-13,hours:8"
+ad "bookeddate:2026-04-14,hours:8"
+ad "bookeddate:2026-04-15,hours:8"
+ad "bookeddate:2026-04-16,hours:8"
+ad "bookeddate:2026-04-17,hours:8"
+ad "bookeddate:2026-04-20,hours:8"
+ad "bookeddate:2026-04-21,hours:8"
+ad "bookeddate:2026-04-22,hours:8"
+ad "bookeddate:2026-04-23,hours:8"
+ad "bookeddate:2026-04-24,hours:8"
+ad "bookeddate:2026-04-27,hours:8"
+ad "bookeddate:2026-04-28,hours:8"
+ad "bookeddate:2026-04-29,hours:8"
+ad "bookeddate:2026-04-30,hours:8"
+ad "bookeddate:2026-05-01,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Switchboard schedule"
+cd Assignments
+cd "Jessica Brown"
+ad "bookeddate:2026-05-04,hours:8"
+ad "bookeddate:2026-05-05,hours:8"
+ad "bookeddate:2026-05-06,hours:8"
+ad "bookeddate:2026-05-07,hours:8"
+ad "bookeddate:2026-05-08,hours:8"
+ad "bookeddate:2026-05-11,hours:8"
+ad "bookeddate:2026-05-12,hours:8"
+ad "bookeddate:2026-05-13,hours:8"
+ad "bookeddate:2026-05-14,hours:8"
+ad "bookeddate:2026-05-15,hours:8"
+ad "bookeddate:2026-05-18,hours:8"
+ad "bookeddate:2026-05-19,hours:8"
+ad "bookeddate:2026-05-20,hours:8"
+ad "bookeddate:2026-05-21,hours:8"
+ad "bookeddate:2026-05-22,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd ..
+cd ..
+
+# Tasks for "HVAC system design" (Robert Martinez)
+cd "HVAC system design"
+cd Tasks
+ad "taskname:Heating and cooling load calculations"
+ad "taskname:Duct system layout design"
+ad "taskname:Equipment selection and specification"
+ad "taskname:Drawing preparation"
+cd ..
+
+cd Tasks
+cd "Heating and cooling load calculations"
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-04-01,closedate:2026-04-24"
+cd ..
+cd ..
+cd "Duct system layout design"
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-04-27,closedate:2026-05-22"
+cd ..
+cd ..
+cd "Equipment selection and specification"
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-05-25,closedate:2026-06-12"
+cd ..
+cd ..
+cd "Drawing preparation"
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-06-15"
+cd ..
+cd ..
+
+cd "Heating and cooling load calculations"
+cd Assignments
+cd "Robert Martinez"
+ad "bookeddate:2026-04-01,hours:8"
+ad "bookeddate:2026-04-02,hours:8"
+ad "bookeddate:2026-04-03,hours:8"
+ad "bookeddate:2026-04-07,hours:8"
+ad "bookeddate:2026-04-08,hours:8"
+ad "bookeddate:2026-04-09,hours:8"
+ad "bookeddate:2026-04-10,hours:8"
+ad "bookeddate:2026-04-13,hours:8"
+ad "bookeddate:2026-04-14,hours:8"
+ad "bookeddate:2026-04-15,hours:8"
+ad "bookeddate:2026-04-16,hours:8"
+ad "bookeddate:2026-04-17,hours:8"
+ad "bookeddate:2026-04-20,hours:8"
+ad "bookeddate:2026-04-21,hours:8"
+ad "bookeddate:2026-04-22,hours:8"
+ad "bookeddate:2026-04-23,hours:8"
+ad "bookeddate:2026-04-24,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Duct system layout design"
+cd Assignments
+cd "Robert Martinez"
+ad "bookeddate:2026-04-27,hours:8"
+ad "bookeddate:2026-04-28,hours:8"
+ad "bookeddate:2026-04-29,hours:8"
+ad "bookeddate:2026-04-30,hours:8"
+ad "bookeddate:2026-05-04,hours:8"
+ad "bookeddate:2026-05-05,hours:8"
+ad "bookeddate:2026-05-06,hours:8"
+ad "bookeddate:2026-05-07,hours:8"
+ad "bookeddate:2026-05-08,hours:8"
+ad "bookeddate:2026-05-11,hours:8"
+ad "bookeddate:2026-05-12,hours:8"
+ad "bookeddate:2026-05-13,hours:8"
+ad "bookeddate:2026-05-14,hours:8"
+ad "bookeddate:2026-05-15,hours:8"
+ad "bookeddate:2026-05-18,hours:8"
+ad "bookeddate:2026-05-19,hours:8"
+ad "bookeddate:2026-05-20,hours:8"
+ad "bookeddate:2026-05-21,hours:8"
+ad "bookeddate:2026-05-22,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Equipment selection and specification"
+cd Assignments
+cd "Robert Martinez"
+ad "bookeddate:2026-05-25,hours:8"
+ad "bookeddate:2026-05-26,hours:8"
+ad "bookeddate:2026-05-27,hours:8"
+ad "bookeddate:2026-05-28,hours:8"
+ad "bookeddate:2026-05-29,hours:8"
+ad "bookeddate:2026-06-01,hours:8"
+ad "bookeddate:2026-06-02,hours:8"
+ad "bookeddate:2026-06-03,hours:8"
+ad "bookeddate:2026-06-04,hours:8"
+ad "bookeddate:2026-06-05,hours:8"
+ad "bookeddate:2026-06-08,hours:8"
+ad "bookeddate:2026-06-09,hours:8"
+ad "bookeddate:2026-06-10,hours:8"
+ad "bookeddate:2026-06-11,hours:8"
+ad "bookeddate:2026-06-12,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd ..
+cd ..
+
+# Tasks for "Fire protection system design" (Jessica Brown)
+cd "Fire protection system design"
+cd Tasks
+ad "taskname:Fire risk assessment"
+ad "taskname:Sprinkler system design"
+ad "taskname:Fire detection layout"
+ad "taskname:Drawing review"
+cd ..
+
+cd Tasks
+cd "Fire risk assessment"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-04-15,closedate:2026-04-30"
+cd ..
+cd ..
+cd "Sprinkler system design"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-05-04,closedate:2026-05-29"
+cd ..
+cd ..
+cd "Fire detection layout"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-06-01,closedate:2026-06-19"
+cd ..
+cd ..
+cd "Drawing review"
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-06-22"
+cd ..
+cd ..
+
+cd "Fire risk assessment"
+cd Assignments
+cd "Jessica Brown"
+ad "bookeddate:2026-04-15,hours:8"
+ad "bookeddate:2026-04-16,hours:8"
+ad "bookeddate:2026-04-17,hours:8"
+ad "bookeddate:2026-04-20,hours:8"
+ad "bookeddate:2026-04-21,hours:8"
+ad "bookeddate:2026-04-22,hours:8"
+ad "bookeddate:2026-04-23,hours:8"
+ad "bookeddate:2026-04-24,hours:8"
+ad "bookeddate:2026-04-27,hours:8"
+ad "bookeddate:2026-04-28,hours:8"
+ad "bookeddate:2026-04-29,hours:8"
+ad "bookeddate:2026-04-30,hours:4"
+cd ..
+cd ..
+cd ..
+
+cd "Sprinkler system design"
+cd Assignments
+cd "Jessica Brown"
+ad "bookeddate:2026-05-04,hours:8"
+ad "bookeddate:2026-05-05,hours:8"
+ad "bookeddate:2026-05-06,hours:8"
+ad "bookeddate:2026-05-07,hours:8"
+ad "bookeddate:2026-05-08,hours:8"
+ad "bookeddate:2026-05-11,hours:8"
+ad "bookeddate:2026-05-12,hours:8"
+ad "bookeddate:2026-05-13,hours:8"
+ad "bookeddate:2026-05-14,hours:8"
+ad "bookeddate:2026-05-15,hours:8"
+ad "bookeddate:2026-05-18,hours:8"
+ad "bookeddate:2026-05-19,hours:8"
+ad "bookeddate:2026-05-20,hours:8"
+ad "bookeddate:2026-05-21,hours:8"
+ad "bookeddate:2026-05-22,hours:8"
+ad "bookeddate:2026-05-25,hours:8"
+ad "bookeddate:2026-05-26,hours:8"
+ad "bookeddate:2026-05-27,hours:8"
+ad "bookeddate:2026-05-28,hours:8"
+ad "bookeddate:2026-05-29,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Fire detection layout"
+cd Assignments
+cd "Jessica Brown"
+ad "bookeddate:2026-06-01,hours:8"
+ad "bookeddate:2026-06-02,hours:8"
+ad "bookeddate:2026-06-03,hours:8"
+ad "bookeddate:2026-06-04,hours:8"
+ad "bookeddate:2026-06-05,hours:8"
+ad "bookeddate:2026-06-08,hours:8"
+ad "bookeddate:2026-06-09,hours:8"
+ad "bookeddate:2026-06-10,hours:8"
+ad "bookeddate:2026-06-11,hours:8"
+ad "bookeddate:2026-06-12,hours:8"
+ad "bookeddate:2026-06-15,hours:8"
+ad "bookeddate:2026-06-16,hours:8"
+ad "bookeddate:2026-06-17,hours:8"
+ad "bookeddate:2026-06-18,hours:8"
+ad "bookeddate:2026-06-19,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd ..
+cd ..
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 27: Add descriptions to all activities
+# =============================================================================
+# Path: ... > <Category> > <Subcategory>
+# Format: st "<activityname>" "activitydescription:<description>"
+
+cd ~
+cd Projects
+cd "Residential Building Project"
+cd "Activity Categories"
+
+cd "Architecture"
+cd "Architectural Design"
+st "Prepare architectural drawings" "activitydescription:Full set of architectural drawings including floor plans elevations sections and details for the residential building"
+st "Prepare floor plans" "activitydescription:Detailed floor plan layouts showing room arrangements dimensions and spatial relationships for all levels of the building"
+cd ..
+cd "Landscape Design"
+st "Landscape planning and design" "activitydescription:Design and documentation of external landscape works including planting schemes pathways and outdoor living spaces"
+cd ..
+cd ..
+
+cd "Structural Engineering"
+cd "Design Development"
+st "Prepare structural drawings" "activitydescription:Comprehensive structural engineering drawings covering all structural elements of the residential building including framing plans and details"
+st "Foundation design and analysis" "activitydescription:Geotechnical report review and structural design of the building foundation system including pad foundation sizing and reinforcement"
+cd ..
+cd "Detailed Design"
+st "Structural steel detailing" "activitydescription:Detailed shop drawings for structural steel elements including beams columns and connection details for fabrication and construction"
+st "Concrete reinforcement detailing" "activitydescription:Preparation of reinforced concrete detailing drawings and bar bending schedules for all concrete structural members"
+cd ..
+cd ..
+
+cd "Plumbing Engineering"
+cd "Plumbing Design"
+st "Prepare plumbing drawings" "activitydescription:Design and documentation of the domestic water supply sanitary drainage and plumbing systems for the residential building"
+cd ..
+cd ..
+
+cd "Electrical Engineering"
+cd "Electrical Design"
+st "Prepare electrical wiring drawings" "activitydescription:Electrical wiring layout drawings including load calculations switchboard schedules and cable routing for the residential building"
+st "HVAC system design" "activitydescription:Design of the heating ventilation and air conditioning system including ductwork layout equipment selection and energy load calculations"
+st "Fire protection system design" "activitydescription:Design of the fire detection alarm and suppression systems including sprinkler layout and fire risk assessment for the residential building"
+cd ..
+cd ..

@@ -1,0 +1,2915 @@
+# =============================================================================
+# Complete Project Setup - Data Center Design West
+# =============================================================================
+# This source file sets up the Data Center Design West project (349025)
+# in the osoem database.
+#
+# Prerequisites:
+#   - A clean database with the schema applied
+#   - The organization source file loaded (examples/Organization_Examples/departments.src)
+#     or the following employees already present in the database:
+#       John Davis, David Wilson, Sarah Thompson, Michael Chen,
+#       Jessica Brown, Robert Martinez, Marcus Brown
+#
+# All data is imported directly from CSV files:
+#   projectdata.csv
+#   teamdata.csv           (flat file: employee + role per row)
+#   activitydata.csv       (flat file: category + subcategory + activity per row)
+#   milestonedata.csv      (flat file: milestone + step per row)
+#   artefactdata.csv       (flat file: type + artefact + activity link + milestone link per row)
+#   fielddata.csv          (flat file: artefact type + field definition per row)
+#   artefactfielddata.csv  (flat file: artefact type + artefact + field value per row)
+#   notesdata.csv          (flat file: category + subcategory + activity + note per row)
+# =============================================================================
+
+
+
+# =============================================================================
+# STEP 1: Create the project
+# =============================================================================
+# Path: ~ > Projects
+# Importing from: ./projectdata.csv
+
+cd ~
+cd Projects
+im "./projectdata.csv"
+
+
+# =============================================================================
+# STEP 2: Add team members to the project
+# =============================================================================
+# Path: ~ > Projects > <Project> > Team
+# Importing from: ./teamdata.csv
+#
+# The CSV contains EmployeeName and Role columns.
+# Roles: 0 = No role, 1 = Team Member, 2 = Project Manager, 3 = Administrator
+
+cd "Data Center Design West Project"
+cd Team
+im -r "./teamdata.csv"
+
+
+# =============================================================================
+# STEP 3: Import activity categories, subcategories, and activities
+# =============================================================================
+# Path: ~ > Projects > <Project> > Activity Categories
+# Importing from: ./activitydata.csv
+#
+# The flat CSV contains categoryname, subcategoryname, and activityname columns.
+# Recursive import (-r) creates categories, subcategories, and activities in one pass.
+
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+im -r "./activitydata.csv"
+
+
+# =============================================================================
+# STEP 4: Import milestones and milestone steps
+# =============================================================================
+# Path: ~ > Projects > <Project> > Milestones
+# Importing from: ./milestonedata.csv
+#
+# The flat CSV contains milestonename, milestonestepname, and progressratio columns.
+# Recursive import (-r) creates milestones and their steps in one pass.
+#
+# NOTE: Milestones must be imported before artefacts, as artefactdata.csv references
+#       milestone step names.
+
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd Milestones
+im -r "./milestonedata.csv"
+
+
+# =============================================================================
+# STEP 5: Import artefact types, artefacts, activity links, and milestone links
+# =============================================================================
+# Path: ~ > Projects > <Project> > Artefact Types
+# Importing from: ./artefactdata.csv
+#
+# The flat CSV contains:
+#   artefactname      - artefact type (Drawing / Calculation / Datasheet)
+#   artefacttitle     - artefact title
+#   artefactownername - artefact owner (looked up by name)
+#   categoryname      - activity category (for disambiguation)
+#   subcategoryname   - activity subcategory (for disambiguation)
+#   activityname      - activity to link the artefact to
+#   ratio             - proportion of the artefact assigned to the activity
+#   milestonestepname - milestone step to mark (optional)
+#   completedbyname   - employee who completed the step (optional)
+#   completiondate    - date the step was completed (optional)
+#
+# Recursive import (-r) handles the full hierarchy in one pass:
+#   ArtefactType > Artefact > ArtefactToActivityLink > MilestoneToArtefactLink
+
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Artefact Types"
+im -r "./artefactdata.csv"
+
+
+# =============================================================================
+# STEP 6: Import artefact data field definitions
+# =============================================================================
+# Path: ~ > Projects > <Project> > Artefact Types
+# Importing from: ./fielddata.csv
+#
+# The flat CSV contains artefactname, fieldtitle, valuetype, and maximumlength columns.
+# Recursive import (-r) creates field definitions per artefact type in one pass.
+
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Artefact Types"
+im -r "./fielddata.csv"
+
+
+# =============================================================================
+# STEP 7: Import artefact field data values
+# =============================================================================
+# Path: ~ > Projects > <Project> > Artefact Types
+# Importing from: ./artefactfielddata.csv
+#
+# The flat CSV contains artefactname, artefacttitle, artefactownername,
+# fieldname, and value columns.
+# Recursive import (-r) populates data values per artefact in one pass.
+
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Artefact Types"
+im -r "./artefactfielddata.csv"
+
+
+# =============================================================================
+# STEP 8: Add tasks, assignments, and hours
+# =============================================================================
+# Tasks, assignments, and hours are defined inline below, organised in three
+# sub-steps:
+#   8a - Create tasks and sub-tasks for each activity
+#   8b - Create task assignments (employee + date range)
+#   8c - Book hours against each assignment
+
+# =============================================================================
+# STEP 8a: Create tasks and sub-tasks for each activity
+# =============================================================================
+# Path: ~ > Projects > <Project> > Activity Categories > <Category> > <Subcategory> > <Activity> > Tasks
+# Format: ad "taskname:<name>,taskdescription:<desc>,departmentname:<dept>"
+
+# Initiation and Planning > Project Charter > Project Charter
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Charter"
+cd "Project Charter"
+cd Tasks
+ad "taskname:Requirements gathering,taskdescription:Gather project requirements from key stakeholders,departmentname:Project Management"
+ad "taskname:Initial draft,taskdescription:Prepare the first draft of the project charter document,departmentname:Project Management"
+ad "taskname:Internal review,taskdescription:Conduct internal review of the draft charter,departmentname:Project Management"
+ad "taskname:Revision and finalization,taskdescription:Revise and finalize the charter based on review feedback,departmentname:Project Management"
+ad "taskname:Formal sign-off,taskdescription:Obtain formal sign-off on the approved project charter,departmentname:Project Management"
+cd "Requirements gathering"
+cd Tasks
+ad "taskname:Stakeholder interviews,taskdescription:Conduct one-on-one interviews with project stakeholders,departmentname:Project Management"
+cd ..
+cd ..
+
+# Initiation and Planning > Feasibility Study > Feasibility Study
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Feasibility Study"
+cd "Feasibility Study"
+cd Tasks
+ad "taskname:Scope definition,taskdescription:Define the scope and objectives of the feasibility study,departmentname:Project Management"
+ad "taskname:Site survey,taskdescription:Conduct physical and environmental site survey,departmentname:Project Management"
+ad "taskname:Technology assessment,taskdescription:Assess applicable technologies for the data center,departmentname:Project Management"
+ad "taskname:Cost-benefit analysis,taskdescription:Prepare detailed cost-benefit analysis for the project,departmentname:Project Management"
+ad "taskname:Report preparation,taskdescription:Compile and issue the final feasibility study report,departmentname:Project Management"
+cd "Site survey"
+cd Tasks
+ad "taskname:Environmental assessment,taskdescription:Assess environmental constraints and regulatory requirements,departmentname:Project Management"
+ad "taskname:Infrastructure review,taskdescription:Review existing infrastructure capacity and constraints,departmentname:Project Management"
+cd ..
+cd ..
+
+# Initiation and Planning > Project Planning > Project Planning
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Planning"
+cd "Project Planning"
+cd Tasks
+ad "taskname:Scope management plan,taskdescription:Develop the project scope management plan,departmentname:Project Management"
+ad "taskname:Project schedule,taskdescription:Develop the detailed project schedule,departmentname:Project Management"
+ad "taskname:Budget plan,taskdescription:Develop the project budget and cost management plan,departmentname:Project Management"
+ad "taskname:Quality management plan,taskdescription:Develop the project quality management plan,departmentname:Project Management"
+ad "taskname:Procurement plan,taskdescription:Develop the project procurement management plan,departmentname:Project Management"
+cd "Project schedule"
+cd Tasks
+ad "taskname:Critical path analysis,taskdescription:Identify and analyse the project critical path,departmentname:Project Management"
+cd ..
+cd ..
+
+# Initiation and Planning > Resource Allocation > Resource Allocation
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Resource Allocation"
+cd "Resource Allocation"
+cd Tasks
+ad "taskname:Staffing plan,taskdescription:Develop the project staffing and resourcing plan,departmentname:Project Management"
+ad "taskname:Equipment procurement schedule,taskdescription:Develop equipment procurement and delivery schedule,departmentname:Project Management"
+ad "taskname:Vendor selection,taskdescription:Evaluate and select key project vendors and contractors,departmentname:Project Management"
+
+# Design and Engineering > Architectural Design > Architectural Design
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Architectural Design"
+cd "Architectural Design"
+cd Tasks
+ad "taskname:Site analysis,taskdescription:Analyse site constraints and design opportunities,departmentname:Architecture"
+ad "taskname:Space planning,taskdescription:Develop the internal space planning layout,departmentname:Architecture"
+ad "taskname:Facade design,taskdescription:Develop the building facade and external design,departmentname:Architecture"
+ad "taskname:Detailed design package,taskdescription:Compile the full detailed design drawing package,departmentname:Architecture"
+ad "taskname:Drawing issue,taskdescription:Issue design drawings for review and approval,departmentname:Architecture"
+cd "Space planning"
+cd Tasks
+ad "taskname:Server hall layout,taskdescription:Develop detailed server hall floor plan,departmentname:Architecture"
+ad "taskname:Support area layout,taskdescription:Develop support and auxiliary area layouts,departmentname:Architecture"
+cd ..
+cd ..
+
+# Design and Engineering > Structural Design > Structural Design
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Structural Design"
+cd "Structural Design"
+cd Tasks
+ad "taskname:Geotechnical assessment,taskdescription:Review geotechnical reports and assess ground conditions,departmentname:Structural Engineering"
+ad "taskname:Foundation scheme,taskdescription:Develop the foundation design scheme,departmentname:Structural Engineering"
+ad "taskname:Superstructure design,taskdescription:Design the primary superstructure frame,departmentname:Structural Engineering"
+ad "taskname:Connection design,taskdescription:Design all structural connections and fixings,departmentname:Structural Engineering"
+ad "taskname:Design check,taskdescription:Conduct independent check of the structural design,departmentname:Structural Engineering"
+cd "Foundation scheme"
+cd Tasks
+ad "taskname:Pile design,taskdescription:Design the pile foundation system,departmentname:Structural Engineering"
+ad "taskname:Raft design,taskdescription:Design the raft foundation where applicable,departmentname:Structural Engineering"
+cd ..
+cd ..
+
+# Design and Engineering > Electrical System Design > Electrical System Design
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Electrical System Design"
+cd "Electrical System Design"
+cd Tasks
+ad "taskname:Load schedule,taskdescription:Prepare the electrical load schedule for all systems,departmentname:Electrical Engineering"
+ad "taskname:HV_LV system design,taskdescription:Design the high and low voltage distribution system,departmentname:Electrical Engineering"
+ad "taskname:Backup power design,taskdescription:Design the UPS and generator backup power systems,departmentname:Electrical Engineering"
+ad "taskname:Cable schedule,taskdescription:Prepare the electrical cable and tray schedule,departmentname:Electrical Engineering"
+ad "taskname:Design review,taskdescription:Conduct design review and respond to comments,departmentname:Electrical Engineering"
+cd "HV_LV system design"
+cd Tasks
+ad "taskname:Single line diagram,taskdescription:Produce the electrical single line diagram,departmentname:Electrical Engineering"
+ad "taskname:Protection coordination,taskdescription:Perform protection coordination study and settings,departmentname:Electrical Engineering"
+cd ..
+cd ..
+
+# Design and Engineering > Cooling System Design > Cooling System Design
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Cooling System Design"
+cd "Cooling System Design"
+cd Tasks
+ad "taskname:Thermal load calculation,taskdescription:Calculate the heat load for all areas of the data center,departmentname:Mechanical Engineering"
+ad "taskname:HVAC system selection,taskdescription:Select and specify the HVAC equipment and systems,departmentname:Mechanical Engineering"
+ad "taskname:Ductwork and piping layout,taskdescription:Design the ductwork and chilled water piping layout,departmentname:Mechanical Engineering"
+ad "taskname:Controls strategy,taskdescription:Develop the cooling controls and automation strategy,departmentname:Mechanical Engineering"
+cd "Ductwork and piping layout"
+cd Tasks
+ad "taskname:Supply air layout,taskdescription:Design supply air distribution and diffuser layout,departmentname:Mechanical Engineering"
+ad "taskname:Return air layout,taskdescription:Design return air path and collection layout,departmentname:Mechanical Engineering"
+cd ..
+cd ..
+
+# Design and Engineering > Fire Suppression Design > Fire Suppression Design
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Fire Suppression Design"
+cd "Fire Suppression Design"
+cd Tasks
+ad "taskname:Hazard assessment,taskdescription:Identify and classify fire hazards within the facility,departmentname:Mechanical Engineering"
+ad "taskname:System selection,taskdescription:Select and specify the fire suppression system type,departmentname:Mechanical Engineering"
+ad "taskname:Suppression layout,taskdescription:Design the fire suppression pipework and nozzle layout,departmentname:Mechanical Engineering"
+ad "taskname:Detection layout,taskdescription:Design the fire detection sensor and alarm panel layout,departmentname:Mechanical Engineering"
+
+# Facility Construction and Fit-Out > Site Preparation > Site Preparation
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Site Preparation"
+cd "Site Preparation"
+cd Tasks
+ad "taskname:Demolition survey,taskdescription:Survey and document existing structures for demolition,departmentname:Structural Engineering"
+ad "taskname:Site clearance,taskdescription:Clear vegetation debris and obstructions from the site,departmentname:Structural Engineering"
+ad "taskname:Bulk earthworks,taskdescription:Excavate and grade the site to formation level,departmentname:Structural Engineering"
+ad "taskname:Drainage installation,taskdescription:Install site drainage and stormwater management systems,departmentname:Structural Engineering"
+
+# Facility Construction and Fit-Out > Structural Work > Structural Work
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Structural Work"
+cd "Structural Work"
+cd Tasks
+ad "taskname:Piling,taskdescription:Drive and test foundation piles,departmentname:Structural Engineering"
+ad "taskname:Ground beams,taskdescription:Cast reinforced concrete ground beams,departmentname:Structural Engineering"
+ad "taskname:Columns and slabs,taskdescription:Erect columns and cast floor slabs,departmentname:Structural Engineering"
+ad "taskname:Cladding,taskdescription:Install external cladding and roofing system,departmentname:Structural Engineering"
+
+# Facility Construction and Fit-Out > Raised Floor Installation > Raised Floor Installation
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Raised Floor Installation"
+cd "Raised Floor Installation"
+cd Tasks
+ad "taskname:Survey and marking,taskdescription:Survey floor levels and mark out raised floor grid,departmentname:Structural Engineering"
+ad "taskname:Stringer installation,taskdescription:Install raised floor stringers and supports,departmentname:Structural Engineering"
+ad "taskname:Panel laying,taskdescription:Lay and secure raised floor panels,departmentname:Structural Engineering"
+ad "taskname:QA inspection,taskdescription:Inspect and certify the completed raised floor installation,departmentname:Structural Engineering"
+
+# Facility Construction and Fit-Out > Building Finishing > Building Finishing
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Building Finishing"
+cd "Building Finishing"
+cd Tasks
+ad "taskname:Partition walls,taskdescription:Construct internal partition walls and fire-rated walls,departmentname:Structural Engineering"
+ad "taskname:Suspended ceiling,taskdescription:Install suspended ceiling systems in ancillary areas,departmentname:Structural Engineering"
+ad "taskname:Door installation,taskdescription:Install doors and frames including fire-rated assemblies,departmentname:Structural Engineering"
+
+# Facility Construction and Fit-Out > Power Supply Installation > Power Supply Installation
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Power Supply Installation"
+cd "Power Supply Installation"
+cd Tasks
+ad "taskname:HV switchgear installation,taskdescription:Install high voltage switchgear and protection equipment,departmentname:Electrical Engineering"
+ad "taskname:Transformer installation,taskdescription:Install and commission step-down transformers,departmentname:Electrical Engineering"
+ad "taskname:LV switchboard installation,taskdescription:Install low voltage switchboards and distribution boards,departmentname:Electrical Engineering"
+ad "taskname:Cabling works,taskdescription:Install and terminate all power cabling,departmentname:Electrical Engineering"
+
+# Facility Construction and Fit-Out > Cooling System Installation > Cooling System Installation
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Cooling System Installation"
+cd "Cooling System Installation"
+cd Tasks
+ad "taskname:Chilled water plant,taskdescription:Install and commission chilled water plant and cooling towers,departmentname:Mechanical Engineering"
+ad "taskname:Cooling towers,taskdescription:Install and commission cooling towers,departmentname:Mechanical Engineering"
+ad "taskname:CRAC units,taskdescription:Install and commission CRAC units in the server hall,departmentname:Mechanical Engineering"
+ad "taskname:Insulation,taskdescription:Apply thermal and acoustic insulation to pipework,departmentname:Mechanical Engineering"
+
+# Facility Construction and Fit-Out > Fire System Installation > Fire System Installation
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Fire System Installation"
+cd "Fire System Installation"
+cd Tasks
+ad "taskname:Suppression pipework,taskdescription:Install suppression system pipework and cylinders,departmentname:Mechanical Engineering"
+ad "taskname:Nozzle installation,taskdescription:Install suppression nozzles and end-of-line fittings,departmentname:Mechanical Engineering"
+ad "taskname:Detection devices,taskdescription:Install smoke and heat detection devices,departmentname:Mechanical Engineering"
+ad "taskname:Panel and wiring,taskdescription:Install fire alarm control panels and field wiring,departmentname:Mechanical Engineering"
+
+# IT Infrastructure Installation > Cable Tray and Network Cabling > Cable Tray and Network Cabling
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "IT Infrastructure Installation"
+cd "Cable Tray and Network Cabling"
+cd "Cable Tray and Network Cabling"
+cd Tasks
+ad "taskname:Tray and basket installation,taskdescription:Install cable trays and wire baskets throughout the facility,departmentname:Electrical Engineering"
+ad "taskname:Structured cabling,taskdescription:Install and terminate structured copper cabling,departmentname:Electrical Engineering"
+ad "taskname:Fibre optic installation,taskdescription:Install and splice backbone fibre optic cabling,departmentname:Electrical Engineering"
+
+# IT Infrastructure Installation > Rack and Cabinet Installation > Rack and Cabinet Installation
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "IT Infrastructure Installation"
+cd "Rack and Cabinet Installation"
+cd "Rack and Cabinet Installation"
+cd Tasks
+ad "taskname:Floor marking and survey,taskdescription:Mark rack positions and verify raised floor load capacity,departmentname:Electrical Engineering"
+ad "taskname:Rack installation,taskdescription:Install and anchor server and network racks,departmentname:Electrical Engineering"
+ad "taskname:PDU fitting,taskdescription:Install and connect rack-mounted power distribution units,departmentname:Electrical Engineering"
+
+# IT Infrastructure Installation > Server and Storage Hardware Installation > Server and Storage Hardware Installation
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "IT Infrastructure Installation"
+cd "Server and Storage Hardware Installation"
+cd "Server and Storage Hardware Installation"
+cd Tasks
+ad "taskname:Unboxing and inspection,taskdescription:Unbox and inspect all server and storage equipment,departmentname:Electrical Engineering"
+ad "taskname:Server installation,taskdescription:Install servers into racks and connect power and data,departmentname:Electrical Engineering"
+ad "taskname:Storage installation,taskdescription:Install storage arrays and connect SAN/NAS fabric,departmentname:Electrical Engineering"
+ad "taskname:Initial power-on testing,taskdescription:Power on equipment and verify basic operation,departmentname:Electrical Engineering"
+
+# IT Infrastructure Installation > Network Switch and Router Configuration > Network Switch and Router Configuration
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "IT Infrastructure Installation"
+cd "Network Switch and Router Configuration"
+cd "Network Switch and Router Configuration"
+cd Tasks
+ad "taskname:Network design review,taskdescription:Review network design and confirm configuration requirements,departmentname:Electrical Engineering"
+ad "taskname:Switch stacking and configuration,taskdescription:Stack and configure access and distribution switches,departmentname:Electrical Engineering"
+ad "taskname:Router configuration,taskdescription:Configure edge and core routers,departmentname:Electrical Engineering"
+ad "taskname:End-to-end testing,taskdescription:Test end-to-end network connectivity and failover,departmentname:Electrical Engineering"
+cd "Switch stacking and configuration"
+cd Tasks
+ad "taskname:Core switch config,taskdescription:Configure the core switching layer,departmentname:Electrical Engineering"
+ad "taskname:Access switch config,taskdescription:Configure access layer switches and port assignments,departmentname:Electrical Engineering"
+cd ..
+cd ..
+
+# Testing and Commissioning > Electrical Load Testing > Electrical Load Testing
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Testing and Commissioning"
+cd "Electrical Load Testing"
+cd "Electrical Load Testing"
+cd Tasks
+ad "taskname:Pre-test checks,taskdescription:Complete pre-commissioning checks and documentation,departmentname:Electrical Engineering"
+ad "taskname:Generator load test,taskdescription:Conduct full-load generator capacity testing,departmentname:Electrical Engineering"
+ad "taskname:UPS capacity test,taskdescription:Test UPS capacity and battery backup duration,departmentname:Electrical Engineering"
+ad "taskname:Transfer test,taskdescription:Test automatic transfer switching under simulated outage,departmentname:Electrical Engineering"
+
+# Testing and Commissioning > Cooling Performance Verification > Cooling Performance Verification
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Testing and Commissioning"
+cd "Cooling Performance Verification"
+cd "Cooling Performance Verification"
+cd Tasks
+ad "taskname:Commissioning checks,taskdescription:Complete cooling system commissioning checks,departmentname:Mechanical Engineering"
+ad "taskname:Airflow balancing,taskdescription:Balance airflow across the server hall,departmentname:Mechanical Engineering"
+ad "taskname:Temperature stability test,taskdescription:Verify temperature stability under design load conditions,departmentname:Mechanical Engineering"
+
+# Testing and Commissioning > Network and Security Testing > Network and Security Testing
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Testing and Commissioning"
+cd "Network and Security Testing"
+cd "Network and Security Testing"
+cd Tasks
+ad "taskname:Infrastructure testing,taskdescription:Test physical infrastructure performance and resilience,departmentname:Electrical Engineering"
+ad "taskname:Application layer testing,taskdescription:Test application-layer connectivity and performance,departmentname:Electrical Engineering"
+ad "taskname:Security audit,taskdescription:Conduct security configuration audit and vulnerability scan,departmentname:Electrical Engineering"
+ad "taskname:Remediation,taskdescription:Remediate findings from security audit,departmentname:Electrical Engineering"
+
+# Closure and Handover > Final Inspection and Sign-off > Final Inspection and Sign-off
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Closure and Handover"
+cd "Final Inspection and Sign-off"
+cd "Final Inspection and Sign-off"
+cd Tasks
+ad "taskname:Snagging survey,taskdescription:Conduct comprehensive snagging survey of all areas,departmentname:Project Management"
+ad "taskname:Defect rectification,taskdescription:Manage and verify rectification of all snagging items,departmentname:Project Management"
+ad "taskname:Authority sign-off,taskdescription:Obtain regulatory and authority sign-off for occupancy,departmentname:Project Management"
+
+# Closure and Handover > Documentation and As-Built Drawings > Documentation and As-Built Drawings
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Closure and Handover"
+cd "Documentation and As-Built Drawings"
+cd "Documentation and As-Built Drawings"
+cd Tasks
+ad "taskname:Drawing compilation,taskdescription:Compile and verify as-built drawings from all disciplines,departmentname:Project Management"
+ad "taskname:Operation manuals,taskdescription:Compile operation and maintenance manuals for all systems,departmentname:Project Management"
+ad "taskname:Maintenance schedules,taskdescription:Prepare preventive maintenance schedules for all systems,departmentname:Project Management"
+ad "taskname:Final handover package,taskdescription:Compile and deliver the complete project handover package,departmentname:Project Management"
+
+
+# =============================================================================
+# STEP 8b: Create task assignments
+# =============================================================================
+# Path: ... > Tasks > <Task> > Assignments
+# Format: ad "username:<name>,assigneddate:<date>,closedate:<date>"
+# Omit closedate for open assignments
+
+# Initiation and Planning > Project Charter > Project Charter
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Charter"
+cd "Project Charter"
+cd Tasks
+cd "Requirements gathering"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-01-06,closedate:2026-01-09"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Charter"
+cd "Project Charter"
+cd Tasks
+cd "Requirements gathering"
+cd Tasks
+cd "Stakeholder interviews"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-01-06,closedate:2026-01-07"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Charter"
+cd "Project Charter"
+cd Tasks
+cd "Initial draft"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-01-08,closedate:2026-01-15"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Charter"
+cd "Project Charter"
+cd Tasks
+cd "Internal review"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-01-14,closedate:2026-01-19"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Charter"
+cd "Project Charter"
+cd Tasks
+cd "Revision and finalization"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-01-19,closedate:2026-01-26"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Charter"
+cd "Project Charter"
+cd Tasks
+cd "Formal sign-off"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-01-27,closedate:2026-01-30"
+
+# Initiation and Planning > Feasibility Study > Feasibility Study
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Feasibility Study"
+cd "Feasibility Study"
+cd Tasks
+cd "Scope definition"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-01-13,closedate:2026-01-16"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Feasibility Study"
+cd "Feasibility Study"
+cd Tasks
+cd "Site survey"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-01-19,closedate:2026-01-30"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Feasibility Study"
+cd "Feasibility Study"
+cd Tasks
+cd "Site survey"
+cd Tasks
+cd "Environmental assessment"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-01-19,closedate:2026-01-23"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Feasibility Study"
+cd "Feasibility Study"
+cd Tasks
+cd "Site survey"
+cd Tasks
+cd "Infrastructure review"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-01-26,closedate:2026-01-30"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Feasibility Study"
+cd "Feasibility Study"
+cd Tasks
+cd "Technology assessment"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-02-02,closedate:2026-02-13"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Feasibility Study"
+cd "Feasibility Study"
+cd Tasks
+cd "Cost-benefit analysis"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-02-16,closedate:2026-02-20"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Feasibility Study"
+cd "Feasibility Study"
+cd Tasks
+cd "Report preparation"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-02-23,closedate:2026-02-27"
+
+# Initiation and Planning > Project Planning > Project Planning
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Planning"
+cd "Project Planning"
+cd Tasks
+cd "Scope management plan"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-01-27,closedate:2026-02-06"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Planning"
+cd "Project Planning"
+cd Tasks
+cd "Project schedule"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-02-09,closedate:2026-02-27"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Planning"
+cd "Project Planning"
+cd Tasks
+cd "Project schedule"
+cd Tasks
+cd "Critical path analysis"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-02-16,closedate:2026-02-20"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Planning"
+cd "Project Planning"
+cd Tasks
+cd "Budget plan"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-02-23,closedate:2026-03-06"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Planning"
+cd "Project Planning"
+cd Tasks
+cd "Quality management plan"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-03-02,closedate:2026-03-06"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Planning"
+cd "Project Planning"
+cd Tasks
+cd "Procurement plan"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-03-09,closedate:2026-03-13"
+
+# Initiation and Planning > Resource Allocation > Resource Allocation
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Resource Allocation"
+cd "Resource Allocation"
+cd Tasks
+cd "Staffing plan"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-02-10,closedate:2026-02-20"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Resource Allocation"
+cd "Resource Allocation"
+cd Tasks
+cd "Equipment procurement schedule"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-02-23,closedate:2026-03-06"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Resource Allocation"
+cd "Resource Allocation"
+cd Tasks
+cd "Vendor selection"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-03-09,closedate:2026-03-27"
+
+# Design and Engineering > Architectural Design > Architectural Design
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Architectural Design"
+cd "Architectural Design"
+cd Tasks
+cd "Site analysis"
+cd Assignments
+ad "username:David Wilson,assigneddate:2026-02-03,closedate:2026-02-13"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Architectural Design"
+cd "Architectural Design"
+cd Tasks
+cd "Space planning"
+cd Assignments
+ad "username:David Wilson,assigneddate:2026-02-16,closedate:2026-03-06"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Architectural Design"
+cd "Architectural Design"
+cd Tasks
+cd "Space planning"
+cd Tasks
+cd "Server hall layout"
+cd Assignments
+ad "username:David Wilson,assigneddate:2026-02-16,closedate:2026-02-27"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Architectural Design"
+cd "Architectural Design"
+cd Tasks
+cd "Space planning"
+cd Tasks
+cd "Support area layout"
+cd Assignments
+ad "username:David Wilson,assigneddate:2026-03-02,closedate:2026-03-06"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Architectural Design"
+cd "Architectural Design"
+cd Tasks
+cd "Facade design"
+cd Assignments
+ad "username:David Wilson,assigneddate:2026-03-09,closedate:2026-03-27"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Architectural Design"
+cd "Architectural Design"
+cd Tasks
+cd "Detailed design package"
+cd Assignments
+ad "username:David Wilson,assigneddate:2026-03-30,closedate:2026-05-01"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Architectural Design"
+cd "Architectural Design"
+cd Tasks
+cd "Drawing issue"
+cd Assignments
+ad "username:David Wilson,assigneddate:2026-05-04,closedate:2026-05-22"
+
+# Design and Engineering > Structural Design > Structural Design
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Structural Design"
+cd "Structural Design"
+cd Tasks
+cd "Geotechnical assessment"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-02-17,closedate:2026-02-27"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Structural Design"
+cd "Structural Design"
+cd Tasks
+cd "Foundation scheme"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-03-02,closedate:2026-03-20"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Structural Design"
+cd "Structural Design"
+cd Tasks
+cd "Foundation scheme"
+cd Tasks
+cd "Pile design"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-03-02,closedate:2026-03-13"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Structural Design"
+cd "Structural Design"
+cd Tasks
+cd "Foundation scheme"
+cd Tasks
+cd "Raft design"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-03-16,closedate:2026-03-20"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Structural Design"
+cd "Structural Design"
+cd Tasks
+cd "Superstructure design"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-03-23,closedate:2026-04-17"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Structural Design"
+cd "Structural Design"
+cd Tasks
+cd "Connection design"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-04-20,closedate:2026-05-01"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Structural Design"
+cd "Structural Design"
+cd Tasks
+cd "Design check"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-05-04,closedate:2026-05-22"
+
+# Design and Engineering > Electrical System Design > Electrical System Design
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Electrical System Design"
+cd "Electrical System Design"
+cd Tasks
+cd "Load schedule"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-02-17,closedate:2026-03-06"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Electrical System Design"
+cd "Electrical System Design"
+cd Tasks
+cd "HV_LV system design"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-03-09,closedate:2026-04-03"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Electrical System Design"
+cd "Electrical System Design"
+cd Tasks
+cd "HV_LV system design"
+cd Tasks
+cd "Single line diagram"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-03-09,closedate:2026-03-20"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Electrical System Design"
+cd "Electrical System Design"
+cd Tasks
+cd "HV_LV system design"
+cd Tasks
+cd "Protection coordination"
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-03-23,closedate:2026-04-03"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Electrical System Design"
+cd "Electrical System Design"
+cd Tasks
+cd "Backup power design"
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-04-06,closedate:2026-04-30"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Electrical System Design"
+cd "Electrical System Design"
+cd Tasks
+cd "Cable schedule"
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-05-04,closedate:2026-05-22"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Electrical System Design"
+cd "Electrical System Design"
+cd Tasks
+cd "Design review"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-05-25,closedate:2026-06-12"
+
+# Design and Engineering > Cooling System Design > Cooling System Design
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Cooling System Design"
+cd "Cooling System Design"
+cd Tasks
+cd "Thermal load calculation"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-02-24,closedate:2026-03-13"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Cooling System Design"
+cd "Cooling System Design"
+cd Tasks
+cd "HVAC system selection"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-03-16,closedate:2026-04-03"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Cooling System Design"
+cd "Cooling System Design"
+cd Tasks
+cd "Ductwork and piping layout"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-04-06,closedate:2026-05-08"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Cooling System Design"
+cd "Cooling System Design"
+cd Tasks
+cd "Ductwork and piping layout"
+cd Tasks
+cd "Supply air layout"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-04-06,closedate:2026-04-24"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Cooling System Design"
+cd "Cooling System Design"
+cd Tasks
+cd "Ductwork and piping layout"
+cd Tasks
+cd "Return air layout"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-04-27,closedate:2026-05-08"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Cooling System Design"
+cd "Cooling System Design"
+cd Tasks
+cd "Controls strategy"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-05-11,closedate:2026-06-19"
+
+# Design and Engineering > Fire Suppression Design > Fire Suppression Design
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Fire Suppression Design"
+cd "Fire Suppression Design"
+cd Tasks
+cd "Hazard assessment"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-03-10,closedate:2026-03-20"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Fire Suppression Design"
+cd "Fire Suppression Design"
+cd Tasks
+cd "System selection"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-03-23,closedate:2026-03-27"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Fire Suppression Design"
+cd "Fire Suppression Design"
+cd Tasks
+cd "Suppression layout"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-03-30,closedate:2026-04-24"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Fire Suppression Design"
+cd "Fire Suppression Design"
+cd Tasks
+cd "Detection layout"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-04-27,closedate:2026-05-29"
+
+# Facility Construction and Fit-Out > Site Preparation > Site Preparation
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Site Preparation"
+cd "Site Preparation"
+cd Tasks
+cd "Demolition survey"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-05-05,closedate:2026-05-08"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Site Preparation"
+cd "Site Preparation"
+cd Tasks
+cd "Site clearance"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-05-11,closedate:2026-05-22"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Site Preparation"
+cd "Site Preparation"
+cd Tasks
+cd "Bulk earthworks"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-05-25,closedate:2026-06-05"
+ad "username:Sarah Thompson,assigneddate:2026-05-25,closedate:2026-06-05"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Site Preparation"
+cd "Site Preparation"
+cd Tasks
+cd "Drainage installation"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-06-08,closedate:2026-06-12"
+
+# Facility Construction and Fit-Out > Structural Work > Structural Work
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Structural Work"
+cd "Structural Work"
+cd Tasks
+cd Piling
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-05-26,closedate:2026-06-19"
+ad "username:Michael Chen,assigneddate:2026-05-26,closedate:2026-06-19"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Structural Work"
+cd "Structural Work"
+cd Tasks
+cd "Ground beams"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-06-22,closedate:2026-07-10"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Structural Work"
+cd "Structural Work"
+cd Tasks
+cd "Columns and slabs"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-07-13,closedate:2026-07-31"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Structural Work"
+cd "Structural Work"
+cd Tasks
+cd Cladding
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-07-20,closedate:2026-07-31"
+
+# Facility Construction and Fit-Out > Raised Floor Installation > Raised Floor Installation
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Raised Floor Installation"
+cd "Raised Floor Installation"
+cd Tasks
+cd "Survey and marking"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-07-07,closedate:2026-07-10"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Raised Floor Installation"
+cd "Raised Floor Installation"
+cd Tasks
+cd "Stringer installation"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-07-13,closedate:2026-07-24"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Raised Floor Installation"
+cd "Raised Floor Installation"
+cd Tasks
+cd "Panel laying"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-07-27,closedate:2026-08-07"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Raised Floor Installation"
+cd "Raised Floor Installation"
+cd Tasks
+cd "QA inspection"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-08-03,closedate:2026-08-07"
+
+# Facility Construction and Fit-Out > Building Finishing > Building Finishing
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Building Finishing"
+cd "Building Finishing"
+cd Tasks
+cd "Partition walls"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-07-28,closedate:2026-08-14"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Building Finishing"
+cd "Building Finishing"
+cd Tasks
+cd "Suspended ceiling"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-08-10,closedate:2026-08-21"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Building Finishing"
+cd "Building Finishing"
+cd Tasks
+cd "Door installation"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-08-17,closedate:2026-08-28"
+
+# Facility Construction and Fit-Out > Power Supply Installation > Power Supply Installation
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Power Supply Installation"
+cd "Power Supply Installation"
+cd Tasks
+cd "HV switchgear installation"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-06-23,closedate:2026-07-10"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Power Supply Installation"
+cd "Power Supply Installation"
+cd Tasks
+cd "Transformer installation"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-07-13,closedate:2026-07-24"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Power Supply Installation"
+cd "Power Supply Installation"
+cd Tasks
+cd "LV switchboard installation"
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-07-27,closedate:2026-08-07"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Power Supply Installation"
+cd "Power Supply Installation"
+cd Tasks
+cd "Cabling works"
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-08-03,closedate:2026-08-21"
+
+# Facility Construction and Fit-Out > Cooling System Installation > Cooling System Installation
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Cooling System Installation"
+cd "Cooling System Installation"
+cd Tasks
+cd "Chilled water plant"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-06-23,closedate:2026-07-17"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Cooling System Installation"
+cd "Cooling System Installation"
+cd Tasks
+cd "Cooling towers"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-07-06,closedate:2026-07-24"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Cooling System Installation"
+cd "Cooling System Installation"
+cd Tasks
+cd "CRAC units"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-07-27,closedate:2026-08-14"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Cooling System Installation"
+cd "Cooling System Installation"
+cd Tasks
+cd Insulation
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-08-10,closedate:2026-08-28"
+
+# Facility Construction and Fit-Out > Fire System Installation > Fire System Installation
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Fire System Installation"
+cd "Fire System Installation"
+cd Tasks
+cd "Suppression pipework"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-07-14,closedate:2026-08-07"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Fire System Installation"
+cd "Fire System Installation"
+cd Tasks
+cd "Nozzle installation"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-07-27,closedate:2026-08-14"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Fire System Installation"
+cd "Fire System Installation"
+cd Tasks
+cd "Detection devices"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-08-03,closedate:2026-08-21"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Fire System Installation"
+cd "Fire System Installation"
+cd Tasks
+cd "Panel and wiring"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-08-17,closedate:2026-08-28"
+
+# IT Infrastructure Installation > Cable Tray and Network Cabling > Cable Tray and Network Cabling
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "IT Infrastructure Installation"
+cd "Cable Tray and Network Cabling"
+cd "Cable Tray and Network Cabling"
+cd Tasks
+cd "Tray and basket installation"
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-08-04,closedate:2026-08-21"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "IT Infrastructure Installation"
+cd "Cable Tray and Network Cabling"
+cd "Cable Tray and Network Cabling"
+cd Tasks
+cd "Structured cabling"
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-08-17,closedate:2026-09-04"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "IT Infrastructure Installation"
+cd "Cable Tray and Network Cabling"
+cd "Cable Tray and Network Cabling"
+cd Tasks
+cd "Fibre optic installation"
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-08-31,closedate:2026-09-11"
+
+# IT Infrastructure Installation > Rack and Cabinet Installation > Rack and Cabinet Installation
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "IT Infrastructure Installation"
+cd "Rack and Cabinet Installation"
+cd "Rack and Cabinet Installation"
+cd Tasks
+cd "Floor marking and survey"
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-08-18,closedate:2026-08-21"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "IT Infrastructure Installation"
+cd "Rack and Cabinet Installation"
+cd "Rack and Cabinet Installation"
+cd Tasks
+cd "Rack installation"
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-08-24,closedate:2026-09-11"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "IT Infrastructure Installation"
+cd "Rack and Cabinet Installation"
+cd "Rack and Cabinet Installation"
+cd Tasks
+cd "PDU fitting"
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-09-14,closedate:2026-09-18"
+
+# IT Infrastructure Installation > Server and Storage Hardware Installation > Server and Storage Hardware Installation
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "IT Infrastructure Installation"
+cd "Server and Storage Hardware Installation"
+cd "Server and Storage Hardware Installation"
+cd Tasks
+cd "Unboxing and inspection"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-09-01,closedate:2026-09-04"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "IT Infrastructure Installation"
+cd "Server and Storage Hardware Installation"
+cd "Server and Storage Hardware Installation"
+cd Tasks
+cd "Server installation"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-09-07,closedate:2026-09-25"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "IT Infrastructure Installation"
+cd "Server and Storage Hardware Installation"
+cd "Server and Storage Hardware Installation"
+cd Tasks
+cd "Storage installation"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-09-28,closedate:2026-10-09"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "IT Infrastructure Installation"
+cd "Server and Storage Hardware Installation"
+cd "Server and Storage Hardware Installation"
+cd Tasks
+cd "Initial power-on testing"
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-10-05,closedate:2026-10-09"
+
+# IT Infrastructure Installation > Network Switch and Router Configuration > Network Switch and Router Configuration
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "IT Infrastructure Installation"
+cd "Network Switch and Router Configuration"
+cd "Network Switch and Router Configuration"
+cd Tasks
+cd "Network design review"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-09-15,closedate:2026-09-18"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "IT Infrastructure Installation"
+cd "Network Switch and Router Configuration"
+cd "Network Switch and Router Configuration"
+cd Tasks
+cd "Switch stacking and configuration"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-09-21,closedate:2026-10-16"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "IT Infrastructure Installation"
+cd "Network Switch and Router Configuration"
+cd "Network Switch and Router Configuration"
+cd Tasks
+cd "Switch stacking and configuration"
+cd Tasks
+cd "Core switch config"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-09-21,closedate:2026-10-02"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "IT Infrastructure Installation"
+cd "Network Switch and Router Configuration"
+cd "Network Switch and Router Configuration"
+cd Tasks
+cd "Switch stacking and configuration"
+cd Tasks
+cd "Access switch config"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-10-05,closedate:2026-10-16"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "IT Infrastructure Installation"
+cd "Network Switch and Router Configuration"
+cd "Network Switch and Router Configuration"
+cd Tasks
+cd "Router configuration"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-10-19,closedate:2026-10-23"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "IT Infrastructure Installation"
+cd "Network Switch and Router Configuration"
+cd "Network Switch and Router Configuration"
+cd Tasks
+cd "End-to-end testing"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-10-26,closedate:2026-10-30"
+
+# Testing and Commissioning > Electrical Load Testing > Electrical Load Testing
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Testing and Commissioning"
+cd "Electrical Load Testing"
+cd "Electrical Load Testing"
+cd Tasks
+cd "Pre-test checks"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-09-22,closedate:2026-09-25"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Testing and Commissioning"
+cd "Electrical Load Testing"
+cd "Electrical Load Testing"
+cd Tasks
+cd "Generator load test"
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-09-28,closedate:2026-10-09"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Testing and Commissioning"
+cd "Electrical Load Testing"
+cd "Electrical Load Testing"
+cd Tasks
+cd "UPS capacity test"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-10-12,closedate:2026-10-16"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Testing and Commissioning"
+cd "Electrical Load Testing"
+cd "Electrical Load Testing"
+cd Tasks
+cd "Transfer test"
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-10-19,closedate:2026-10-23"
+
+# Testing and Commissioning > Cooling Performance Verification > Cooling Performance Verification
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Testing and Commissioning"
+cd "Cooling Performance Verification"
+cd "Cooling Performance Verification"
+cd Tasks
+cd "Commissioning checks"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-10-06,closedate:2026-10-16"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Testing and Commissioning"
+cd "Cooling Performance Verification"
+cd "Cooling Performance Verification"
+cd Tasks
+cd "Airflow balancing"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-10-19,closedate:2026-10-23"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Testing and Commissioning"
+cd "Cooling Performance Verification"
+cd "Cooling Performance Verification"
+cd Tasks
+cd "Temperature stability test"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-10-26,closedate:2026-11-06"
+
+# Testing and Commissioning > Network and Security Testing > Network and Security Testing
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Testing and Commissioning"
+cd "Network and Security Testing"
+cd "Network and Security Testing"
+cd Tasks
+cd "Infrastructure testing"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-10-20,closedate:2026-10-30"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Testing and Commissioning"
+cd "Network and Security Testing"
+cd "Network and Security Testing"
+cd Tasks
+cd "Application layer testing"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-11-02,closedate:2026-11-06"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Testing and Commissioning"
+cd "Network and Security Testing"
+cd "Network and Security Testing"
+cd Tasks
+cd "Security audit"
+cd Assignments
+ad "username:Jessica Brown,assigneddate:2026-11-09,closedate:2026-11-20"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Testing and Commissioning"
+cd "Network and Security Testing"
+cd "Network and Security Testing"
+cd Tasks
+cd Remediation
+cd Assignments
+ad "username:Robert Martinez,assigneddate:2026-11-23,closedate:2026-11-27"
+
+# Closure and Handover > Final Inspection and Sign-off > Final Inspection and Sign-off
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Closure and Handover"
+cd "Final Inspection and Sign-off"
+cd "Final Inspection and Sign-off"
+cd Tasks
+cd "Snagging survey"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-11-17,closedate:2026-11-21"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Closure and Handover"
+cd "Final Inspection and Sign-off"
+cd "Final Inspection and Sign-off"
+cd Tasks
+cd "Defect rectification"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-11-24,closedate:2026-11-27"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Closure and Handover"
+cd "Final Inspection and Sign-off"
+cd "Final Inspection and Sign-off"
+cd Tasks
+cd "Authority sign-off"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-12-01,closedate:2026-12-04"
+
+# Closure and Handover > Documentation and As-Built Drawings > Documentation and As-Built Drawings
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Closure and Handover"
+cd "Documentation and As-Built Drawings"
+cd "Documentation and As-Built Drawings"
+cd Tasks
+cd "Drawing compilation"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-11-17,closedate:2026-12-04"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Closure and Handover"
+cd "Documentation and As-Built Drawings"
+cd "Documentation and As-Built Drawings"
+cd Tasks
+cd "Operation manuals"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-11-24,closedate:2026-12-11"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Closure and Handover"
+cd "Documentation and As-Built Drawings"
+cd "Documentation and As-Built Drawings"
+cd Tasks
+cd "Maintenance schedules"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-12-07,closedate:2026-12-11"
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Closure and Handover"
+cd "Documentation and As-Built Drawings"
+cd "Documentation and As-Built Drawings"
+cd Tasks
+cd "Final handover package"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-12-14,closedate:2026-12-18"
+
+
+# =============================================================================
+# STEP 8c: Book hours against assignments
+# =============================================================================
+# Path: ... > Assignments > <Assignment (username)>
+# Format: ad "bookeddate:<date>,hours:<hours>"
+
+# Initiation and Planning > Project Charter > Project Charter > Requirements gathering (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Charter"
+cd "Project Charter"
+cd Tasks
+cd "Requirements gathering"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-01-06,hours:8"
+ad "bookeddate:2026-01-07,hours:4"
+
+# Initiation and Planning > Project Charter > Project Charter > Stakeholder interviews (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Charter"
+cd "Project Charter"
+cd Tasks
+cd "Requirements gathering"
+cd Tasks
+cd "Stakeholder interviews"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-01-06,hours:8"
+
+# Initiation and Planning > Project Charter > Project Charter > Initial draft (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Charter"
+cd "Project Charter"
+cd Tasks
+cd "Initial draft"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-01-08,hours:8"
+ad "bookeddate:2026-01-09,hours:8"
+ad "bookeddate:2026-01-12,hours:8"
+ad "bookeddate:2026-01-13,hours:8"
+
+# Initiation and Planning > Project Charter > Project Charter > Internal review (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Charter"
+cd "Project Charter"
+cd Tasks
+cd "Internal review"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-01-14,hours:8"
+ad "bookeddate:2026-01-15,hours:8"
+ad "bookeddate:2026-01-16,hours:4"
+
+# Initiation and Planning > Project Charter > Project Charter > Revision and finalization (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Charter"
+cd "Project Charter"
+cd Tasks
+cd "Revision and finalization"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-01-19,hours:8"
+ad "bookeddate:2026-01-20,hours:8"
+ad "bookeddate:2026-01-21,hours:4"
+
+# Initiation and Planning > Project Charter > Project Charter > Formal sign-off (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Charter"
+cd "Project Charter"
+cd Tasks
+cd "Formal sign-off"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-01-27,hours:8"
+ad "bookeddate:2026-01-28,hours:4"
+
+# Initiation and Planning > Feasibility Study > Feasibility Study > Scope definition (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Feasibility Study"
+cd "Feasibility Study"
+cd Tasks
+cd "Scope definition"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-01-13,hours:8"
+ad "bookeddate:2026-01-14,hours:8"
+
+# Initiation and Planning > Feasibility Study > Feasibility Study > Site survey (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Feasibility Study"
+cd "Feasibility Study"
+cd Tasks
+cd "Site survey"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-01-19,hours:8"
+ad "bookeddate:2026-01-20,hours:8"
+ad "bookeddate:2026-01-21,hours:8"
+
+# Initiation and Planning > Feasibility Study > Feasibility Study > Environmental assessment (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Feasibility Study"
+cd "Feasibility Study"
+cd Tasks
+cd "Site survey"
+cd Tasks
+cd "Environmental assessment"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-01-19,hours:4"
+
+# Initiation and Planning > Feasibility Study > Feasibility Study > Infrastructure review (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Feasibility Study"
+cd "Feasibility Study"
+cd Tasks
+cd "Site survey"
+cd Tasks
+cd "Infrastructure review"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-01-26,hours:8"
+
+# Initiation and Planning > Feasibility Study > Feasibility Study > Technology assessment (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Feasibility Study"
+cd "Feasibility Study"
+cd Tasks
+cd "Technology assessment"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-02-02,hours:8"
+ad "bookeddate:2026-02-03,hours:8"
+ad "bookeddate:2026-02-04,hours:8"
+ad "bookeddate:2026-02-05,hours:8"
+
+# Initiation and Planning > Feasibility Study > Feasibility Study > Cost-benefit analysis (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Feasibility Study"
+cd "Feasibility Study"
+cd Tasks
+cd "Cost-benefit analysis"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-02-16,hours:8"
+ad "bookeddate:2026-02-17,hours:8"
+ad "bookeddate:2026-02-18,hours:8"
+ad "bookeddate:2026-02-19,hours:8"
+
+# Initiation and Planning > Feasibility Study > Feasibility Study > Report preparation (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Feasibility Study"
+cd "Feasibility Study"
+cd Tasks
+cd "Report preparation"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-02-23,hours:8"
+ad "bookeddate:2026-02-24,hours:8"
+ad "bookeddate:2026-02-25,hours:8"
+
+# Initiation and Planning > Project Planning > Project Planning > Scope management plan (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Planning"
+cd "Project Planning"
+cd Tasks
+cd "Scope management plan"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-01-27,hours:8"
+ad "bookeddate:2026-01-28,hours:8"
+ad "bookeddate:2026-01-29,hours:8"
+
+# Initiation and Planning > Project Planning > Project Planning > Project schedule (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Planning"
+cd "Project Planning"
+cd Tasks
+cd "Project schedule"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-02-09,hours:8"
+ad "bookeddate:2026-02-10,hours:8"
+ad "bookeddate:2026-02-11,hours:8"
+ad "bookeddate:2026-02-12,hours:8"
+ad "bookeddate:2026-02-13,hours:8"
+
+# Initiation and Planning > Project Planning > Project Planning > Critical path analysis (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Planning"
+cd "Project Planning"
+cd Tasks
+cd "Project schedule"
+cd Tasks
+cd "Critical path analysis"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-02-16,hours:8"
+ad "bookeddate:2026-02-17,hours:8"
+
+# Initiation and Planning > Project Planning > Project Planning > Budget plan (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Planning"
+cd "Project Planning"
+cd Tasks
+cd "Budget plan"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-02-23,hours:8"
+ad "bookeddate:2026-02-24,hours:8"
+ad "bookeddate:2026-02-25,hours:8"
+
+# Initiation and Planning > Project Planning > Project Planning > Quality management plan (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Planning"
+cd "Project Planning"
+cd Tasks
+cd "Quality management plan"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-03-02,hours:8"
+ad "bookeddate:2026-03-03,hours:8"
+
+# Initiation and Planning > Project Planning > Project Planning > Procurement plan (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Project Planning"
+cd "Project Planning"
+cd Tasks
+cd "Procurement plan"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-03-09,hours:8"
+ad "bookeddate:2026-03-10,hours:8"
+ad "bookeddate:2026-03-11,hours:8"
+
+# Initiation and Planning > Resource Allocation > Resource Allocation > Staffing plan (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Resource Allocation"
+cd "Resource Allocation"
+cd Tasks
+cd "Staffing plan"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-02-10,hours:8"
+ad "bookeddate:2026-02-11,hours:8"
+ad "bookeddate:2026-02-12,hours:8"
+
+# Initiation and Planning > Resource Allocation > Resource Allocation > Equipment procurement schedule (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Resource Allocation"
+cd "Resource Allocation"
+cd Tasks
+cd "Equipment procurement schedule"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-02-23,hours:8"
+ad "bookeddate:2026-02-24,hours:8"
+ad "bookeddate:2026-02-25,hours:8"
+
+# Initiation and Planning > Resource Allocation > Resource Allocation > Vendor selection (John Davis)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Initiation and Planning"
+cd "Resource Allocation"
+cd "Resource Allocation"
+cd Tasks
+cd "Vendor selection"
+cd Assignments
+cd "John Davis"
+ad "bookeddate:2026-03-09,hours:8"
+ad "bookeddate:2026-03-10,hours:8"
+ad "bookeddate:2026-03-11,hours:8"
+ad "bookeddate:2026-03-16,hours:8"
+ad "bookeddate:2026-03-17,hours:8"
+
+# Design and Engineering > Architectural Design > Architectural Design > Site analysis (David Wilson)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Architectural Design"
+cd "Architectural Design"
+cd Tasks
+cd "Site analysis"
+cd Assignments
+cd "David Wilson"
+ad "bookeddate:2026-02-03,hours:8"
+ad "bookeddate:2026-02-04,hours:8"
+ad "bookeddate:2026-02-05,hours:8"
+
+# Design and Engineering > Architectural Design > Architectural Design > Space planning (David Wilson)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Architectural Design"
+cd "Architectural Design"
+cd Tasks
+cd "Space planning"
+cd Assignments
+cd "David Wilson"
+ad "bookeddate:2026-02-16,hours:8"
+ad "bookeddate:2026-02-17,hours:8"
+ad "bookeddate:2026-02-18,hours:8"
+ad "bookeddate:2026-02-19,hours:8"
+ad "bookeddate:2026-02-20,hours:8"
+
+# Design and Engineering > Architectural Design > Architectural Design > Server hall layout (David Wilson)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Architectural Design"
+cd "Architectural Design"
+cd Tasks
+cd "Space planning"
+cd Tasks
+cd "Server hall layout"
+cd Assignments
+cd "David Wilson"
+ad "bookeddate:2026-02-16,hours:8"
+ad "bookeddate:2026-02-17,hours:8"
+ad "bookeddate:2026-02-18,hours:8"
+
+# Design and Engineering > Architectural Design > Architectural Design > Support area layout (David Wilson)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Architectural Design"
+cd "Architectural Design"
+cd Tasks
+cd "Space planning"
+cd Tasks
+cd "Support area layout"
+cd Assignments
+cd "David Wilson"
+ad "bookeddate:2026-03-02,hours:8"
+ad "bookeddate:2026-03-03,hours:8"
+
+# Design and Engineering > Architectural Design > Architectural Design > Facade design (David Wilson)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Architectural Design"
+cd "Architectural Design"
+cd Tasks
+cd "Facade design"
+cd Assignments
+cd "David Wilson"
+ad "bookeddate:2026-03-09,hours:8"
+ad "bookeddate:2026-03-10,hours:8"
+ad "bookeddate:2026-03-11,hours:8"
+ad "bookeddate:2026-03-12,hours:8"
+
+# Design and Engineering > Architectural Design > Architectural Design > Detailed design package (David Wilson)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Architectural Design"
+cd "Architectural Design"
+cd Tasks
+cd "Detailed design package"
+cd Assignments
+cd "David Wilson"
+ad "bookeddate:2026-03-30,hours:8"
+ad "bookeddate:2026-03-31,hours:8"
+ad "bookeddate:2026-04-01,hours:8"
+ad "bookeddate:2026-04-07,hours:8"
+ad "bookeddate:2026-04-08,hours:8"
+ad "bookeddate:2026-04-09,hours:8"
+ad "bookeddate:2026-04-13,hours:8"
+ad "bookeddate:2026-04-14,hours:8"
+
+# Design and Engineering > Architectural Design > Architectural Design > Drawing issue (David Wilson)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Architectural Design"
+cd "Architectural Design"
+cd Tasks
+cd "Drawing issue"
+cd Assignments
+cd "David Wilson"
+ad "bookeddate:2026-05-04,hours:8"
+ad "bookeddate:2026-05-05,hours:8"
+ad "bookeddate:2026-05-06,hours:8"
+
+# Design and Engineering > Structural Design > Structural Design > Geotechnical assessment (Sarah Thompson)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Structural Design"
+cd "Structural Design"
+cd Tasks
+cd "Geotechnical assessment"
+cd Assignments
+cd "Sarah Thompson"
+ad "bookeddate:2026-02-17,hours:8"
+ad "bookeddate:2026-02-18,hours:8"
+ad "bookeddate:2026-02-19,hours:8"
+
+# Design and Engineering > Structural Design > Structural Design > Foundation scheme (Sarah Thompson)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Structural Design"
+cd "Structural Design"
+cd Tasks
+cd "Foundation scheme"
+cd Assignments
+cd "Sarah Thompson"
+ad "bookeddate:2026-03-02,hours:8"
+ad "bookeddate:2026-03-03,hours:8"
+ad "bookeddate:2026-03-04,hours:8"
+ad "bookeddate:2026-03-05,hours:8"
+
+# Design and Engineering > Structural Design > Structural Design > Pile design (Michael Chen)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Structural Design"
+cd "Structural Design"
+cd Tasks
+cd "Foundation scheme"
+cd Tasks
+cd "Pile design"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-03-02,hours:8"
+ad "bookeddate:2026-03-03,hours:8"
+
+# Design and Engineering > Structural Design > Structural Design > Raft design (Michael Chen)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Structural Design"
+cd "Structural Design"
+cd Tasks
+cd "Foundation scheme"
+cd Tasks
+cd "Raft design"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-03-16,hours:8"
+ad "bookeddate:2026-03-17,hours:8"
+
+# Design and Engineering > Structural Design > Structural Design > Superstructure design (Sarah Thompson)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Structural Design"
+cd "Structural Design"
+cd Tasks
+cd "Superstructure design"
+cd Assignments
+cd "Sarah Thompson"
+ad "bookeddate:2026-03-23,hours:8"
+ad "bookeddate:2026-03-24,hours:8"
+ad "bookeddate:2026-03-25,hours:8"
+ad "bookeddate:2026-03-26,hours:8"
+ad "bookeddate:2026-03-27,hours:8"
+
+# Design and Engineering > Structural Design > Structural Design > Connection design (Michael Chen)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Structural Design"
+cd "Structural Design"
+cd Tasks
+cd "Connection design"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-04-20,hours:8"
+ad "bookeddate:2026-04-21,hours:8"
+ad "bookeddate:2026-04-22,hours:8"
+
+# Design and Engineering > Structural Design > Structural Design > Design check (Sarah Thompson)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Structural Design"
+cd "Structural Design"
+cd Tasks
+cd "Design check"
+cd Assignments
+cd "Sarah Thompson"
+ad "bookeddate:2026-05-04,hours:8"
+ad "bookeddate:2026-05-05,hours:8"
+ad "bookeddate:2026-05-06,hours:8"
+
+# Design and Engineering > Electrical System Design > Electrical System Design > Load schedule (Jessica Brown)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Electrical System Design"
+cd "Electrical System Design"
+cd Tasks
+cd "Load schedule"
+cd Assignments
+cd "Jessica Brown"
+ad "bookeddate:2026-02-17,hours:8"
+ad "bookeddate:2026-02-18,hours:8"
+ad "bookeddate:2026-02-19,hours:8"
+ad "bookeddate:2026-02-20,hours:8"
+
+# Design and Engineering > Electrical System Design > Electrical System Design > HV_LV system design (Jessica Brown)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Electrical System Design"
+cd "Electrical System Design"
+cd Tasks
+cd "HV_LV system design"
+cd Assignments
+cd "Jessica Brown"
+ad "bookeddate:2026-03-09,hours:8"
+ad "bookeddate:2026-03-10,hours:8"
+ad "bookeddate:2026-03-11,hours:8"
+ad "bookeddate:2026-03-12,hours:8"
+ad "bookeddate:2026-03-13,hours:8"
+
+# Design and Engineering > Electrical System Design > Electrical System Design > Single line diagram (Jessica Brown)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Electrical System Design"
+cd "Electrical System Design"
+cd Tasks
+cd "HV_LV system design"
+cd Tasks
+cd "Single line diagram"
+cd Assignments
+cd "Jessica Brown"
+ad "bookeddate:2026-03-09,hours:8"
+ad "bookeddate:2026-03-10,hours:8"
+ad "bookeddate:2026-03-11,hours:8"
+
+# Design and Engineering > Electrical System Design > Electrical System Design > Protection coordination (Robert Martinez)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Electrical System Design"
+cd "Electrical System Design"
+cd Tasks
+cd "HV_LV system design"
+cd Tasks
+cd "Protection coordination"
+cd Assignments
+cd "Robert Martinez"
+ad "bookeddate:2026-03-23,hours:8"
+ad "bookeddate:2026-03-24,hours:8"
+ad "bookeddate:2026-03-25,hours:8"
+
+# Design and Engineering > Electrical System Design > Electrical System Design > Backup power design (Robert Martinez)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Electrical System Design"
+cd "Electrical System Design"
+cd Tasks
+cd "Backup power design"
+cd Assignments
+cd "Robert Martinez"
+ad "bookeddate:2026-04-06,hours:8"
+ad "bookeddate:2026-04-07,hours:8"
+ad "bookeddate:2026-04-08,hours:8"
+ad "bookeddate:2026-04-09,hours:8"
+ad "bookeddate:2026-04-13,hours:8"
+
+# Design and Engineering > Electrical System Design > Electrical System Design > Cable schedule (Robert Martinez)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Electrical System Design"
+cd "Electrical System Design"
+cd Tasks
+cd "Cable schedule"
+cd Assignments
+cd "Robert Martinez"
+ad "bookeddate:2026-05-04,hours:8"
+ad "bookeddate:2026-05-05,hours:8"
+ad "bookeddate:2026-05-06,hours:8"
+ad "bookeddate:2026-05-07,hours:8"
+
+# Design and Engineering > Electrical System Design > Electrical System Design > Design review (Jessica Brown)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Electrical System Design"
+cd "Electrical System Design"
+cd Tasks
+cd "Design review"
+cd Assignments
+cd "Jessica Brown"
+ad "bookeddate:2026-05-25,hours:8"
+ad "bookeddate:2026-05-26,hours:8"
+ad "bookeddate:2026-05-27,hours:8"
+ad "bookeddate:2026-05-28,hours:8"
+
+# Design and Engineering > Cooling System Design > Cooling System Design > Thermal load calculation (Marcus Brown)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Cooling System Design"
+cd "Cooling System Design"
+cd Tasks
+cd "Thermal load calculation"
+cd Assignments
+cd "Marcus Brown"
+ad "bookeddate:2026-02-24,hours:8"
+ad "bookeddate:2026-02-25,hours:8"
+ad "bookeddate:2026-02-26,hours:8"
+ad "bookeddate:2026-02-27,hours:8"
+
+# Design and Engineering > Cooling System Design > Cooling System Design > HVAC system selection (Marcus Brown)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Cooling System Design"
+cd "Cooling System Design"
+cd Tasks
+cd "HVAC system selection"
+cd Assignments
+cd "Marcus Brown"
+ad "bookeddate:2026-03-16,hours:8"
+ad "bookeddate:2026-03-17,hours:8"
+ad "bookeddate:2026-03-18,hours:8"
+ad "bookeddate:2026-03-19,hours:8"
+
+# Design and Engineering > Cooling System Design > Cooling System Design > Ductwork and piping layout (Marcus Brown)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Cooling System Design"
+cd "Cooling System Design"
+cd Tasks
+cd "Ductwork and piping layout"
+cd Assignments
+cd "Marcus Brown"
+ad "bookeddate:2026-04-06,hours:8"
+ad "bookeddate:2026-04-07,hours:8"
+ad "bookeddate:2026-04-08,hours:8"
+ad "bookeddate:2026-04-09,hours:8"
+ad "bookeddate:2026-04-13,hours:8"
+
+# Design and Engineering > Cooling System Design > Cooling System Design > Supply air layout (Marcus Brown)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Cooling System Design"
+cd "Cooling System Design"
+cd Tasks
+cd "Ductwork and piping layout"
+cd Tasks
+cd "Supply air layout"
+cd Assignments
+cd "Marcus Brown"
+ad "bookeddate:2026-04-06,hours:8"
+ad "bookeddate:2026-04-07,hours:8"
+ad "bookeddate:2026-04-08,hours:8"
+
+# Design and Engineering > Cooling System Design > Cooling System Design > Return air layout (Marcus Brown)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Cooling System Design"
+cd "Cooling System Design"
+cd Tasks
+cd "Ductwork and piping layout"
+cd Tasks
+cd "Return air layout"
+cd Assignments
+cd "Marcus Brown"
+ad "bookeddate:2026-04-27,hours:8"
+ad "bookeddate:2026-04-28,hours:8"
+
+# Design and Engineering > Cooling System Design > Cooling System Design > Controls strategy (Marcus Brown)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Cooling System Design"
+cd "Cooling System Design"
+cd Tasks
+cd "Controls strategy"
+cd Assignments
+cd "Marcus Brown"
+ad "bookeddate:2026-05-11,hours:8"
+ad "bookeddate:2026-05-12,hours:8"
+ad "bookeddate:2026-05-13,hours:8"
+ad "bookeddate:2026-05-14,hours:8"
+
+# Design and Engineering > Fire Suppression Design > Fire Suppression Design > Hazard assessment (Marcus Brown)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Fire Suppression Design"
+cd "Fire Suppression Design"
+cd Tasks
+cd "Hazard assessment"
+cd Assignments
+cd "Marcus Brown"
+ad "bookeddate:2026-03-10,hours:8"
+ad "bookeddate:2026-03-11,hours:8"
+ad "bookeddate:2026-03-12,hours:8"
+
+# Design and Engineering > Fire Suppression Design > Fire Suppression Design > System selection (Marcus Brown)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Fire Suppression Design"
+cd "Fire Suppression Design"
+cd Tasks
+cd "System selection"
+cd Assignments
+cd "Marcus Brown"
+ad "bookeddate:2026-03-23,hours:8"
+ad "bookeddate:2026-03-24,hours:8"
+
+# Design and Engineering > Fire Suppression Design > Fire Suppression Design > Suppression layout (Marcus Brown)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Fire Suppression Design"
+cd "Fire Suppression Design"
+cd Tasks
+cd "Suppression layout"
+cd Assignments
+cd "Marcus Brown"
+ad "bookeddate:2026-03-30,hours:8"
+ad "bookeddate:2026-03-31,hours:8"
+ad "bookeddate:2026-04-01,hours:8"
+ad "bookeddate:2026-04-02,hours:8"
+
+# Design and Engineering > Fire Suppression Design > Fire Suppression Design > Detection layout (Marcus Brown)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Design and Engineering"
+cd "Fire Suppression Design"
+cd "Fire Suppression Design"
+cd Tasks
+cd "Detection layout"
+cd Assignments
+cd "Marcus Brown"
+ad "bookeddate:2026-04-27,hours:8"
+ad "bookeddate:2026-04-28,hours:8"
+ad "bookeddate:2026-04-29,hours:8"
+
+# Facility Construction and Fit-Out > Site Preparation > Site Preparation > Demolition survey (Sarah Thompson)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Site Preparation"
+cd "Site Preparation"
+cd Tasks
+cd "Demolition survey"
+cd Assignments
+cd "Sarah Thompson"
+ad "bookeddate:2026-05-05,hours:8"
+ad "bookeddate:2026-05-06,hours:8"
+
+# Facility Construction and Fit-Out > Site Preparation > Site Preparation > Site clearance (Michael Chen)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Site Preparation"
+cd "Site Preparation"
+cd Tasks
+cd "Site clearance"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-05-11,hours:8"
+ad "bookeddate:2026-05-12,hours:8"
+ad "bookeddate:2026-05-13,hours:8"
+
+# Facility Construction and Fit-Out > Site Preparation > Site Preparation > Bulk earthworks (Michael Chen)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Site Preparation"
+cd "Site Preparation"
+cd Tasks
+cd "Bulk earthworks"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-05-25,hours:8"
+ad "bookeddate:2026-05-26,hours:8"
+
+# Facility Construction and Fit-Out > Site Preparation > Site Preparation > Bulk earthworks (Sarah Thompson)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Site Preparation"
+cd "Site Preparation"
+cd Tasks
+cd "Bulk earthworks"
+cd Assignments
+cd "Sarah Thompson"
+ad "bookeddate:2026-05-25,hours:8"
+ad "bookeddate:2026-05-26,hours:8"
+
+# Facility Construction and Fit-Out > Site Preparation > Site Preparation > Drainage installation (Michael Chen)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Site Preparation"
+cd "Site Preparation"
+cd Tasks
+cd "Drainage installation"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-06-08,hours:8"
+ad "bookeddate:2026-06-09,hours:8"
+
+# Facility Construction and Fit-Out > Structural Work > Structural Work > Piling (Sarah Thompson)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Structural Work"
+cd "Structural Work"
+cd Tasks
+cd Piling
+cd Assignments
+cd "Sarah Thompson"
+ad "bookeddate:2026-05-26,hours:8"
+ad "bookeddate:2026-05-27,hours:8"
+
+# Facility Construction and Fit-Out > Structural Work > Structural Work > Piling (Michael Chen)
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+cd "Facility Construction and Fit-Out"
+cd "Structural Work"
+cd "Structural Work"
+cd Tasks
+cd Piling
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-05-27,hours:8"
+
+
+# =============================================================================
+# STEP 9: Import activity notes
+# =============================================================================
+# Path: ~ > Projects > <Project> > Activity Categories
+# Importing from: ./notesdata.csv
+#
+# The flat CSV contains categoryname, subcategoryname, activityname,
+# username, notedate, and note columns.
+# Recursive import (-r) creates notes per activity in one pass.
+
+cd ~
+cd Projects
+cd "Data Center Design West Project"
+cd "Activity Categories"
+im -r "./notesdata.csv"

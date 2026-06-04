@@ -1,0 +1,12 @@
+#ifndef API_CONFIG_H
+#define API_CONFIG_H
+
+#include <string>
+
+namespace config {
+    const std::string OPENAI_API_KEY = "<your-openai-api-key>";
+    const std::string OPENAI_MODEL   = "gpt-4o";
+    const std::string OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
+}
+
+#endif // API_CONFIG_H

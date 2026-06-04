@@ -1,0 +1,30 @@
+-[x] Create tool to get a list of employees
+-[x] Create a tool to get a list of projects
+-[x] Create a tool to get time booked by an employee in a project
+-[x] Update ./src/planner/agent_tool.h and create a tool to get a list of activities in a project
+-[x] Update ./src/planner/agent_tool.h and create a tool to get a list of tasks in a project
+-[x] Create a tool to create an activity category in the working project. The working project ID is in the `workingProjectID` private variable. File to update: `./src/planner/agent_tool.h`.
+-[x] Create a tool to create an activity sub-category in the working project. The working project ID is in the `workingProjectID` private variable. File to update: `./src/planner/agent_tool.h`.
+-[x] Create a tool to create an activity in the working project. The working project ID is in the `workingProjectID` private variable. File to update: `./src/planner/agent_tool.h`.
+-[x] Create a tool to create a task in an activity or within another task in the working project.The working project ID is in the `workingProjectID` private variable. File to update: `./src/planner/agent_tool.h`.
+-[x] Create a tool to update the description of an activity.File to update: `./src/planner/agent_tool.h`.
+-[x] Create a tool to update the manager of an activity.File to update: `./src/planner/agent_tool.h`.
+-[x] Create a tool to update the planned start date of an activity. File to update: `./src/planner/agent_tool.h`.
+-[x] Create a tool to update the planned finish date of an activity. File to update: `./src/planner/agent_tool.h`.
+-[x] Create a tool to update the planned hours of an activityFile to update: `./src/planner/agent_tool.h`.
+-[x] Create a tool to update the forecast start date of an activity. File to update: `./src/planner/agent_tool.h`.
+-[x] Create a tool to update the forecast finish date of an activity. File to update: `./src/planner/agent_tool.h`.
+-[x] Create a tool to update the forecast hours of an activity. File to update: `./src/planner/agent_tool.h`.
+-[x] Create a tool to update the description of a task. File to update: `./src/planner/agent_tool.h`.
+-[x] Create a tool to update the department id of a task. File to update: `./src/planner/agent_tool.h`.
+-[x] Create a tool to get the current working project. File to update: `./src/planner/agent_tool.h`.
+-[x] In all the update tools in the file `./src/planner/agent_tool.cpp`, add a check to ensure the details that are updated is for the current working project.
+-[x] Create a tool to get the task assignments of an employee in a particular task in a project. File to update: `./src/planner/agent_tool.h`.
+-[x] Create a tool to get time booked by an employee in an task. File to update: `./src/planner/agent_tool.h`.
+-[x] When logging in the user should be asked for a working project. The input could be either a project id or project name. The user should be able to partly fill the project name and press tab to auto complete similar to the terminal.
+-[x] Create a tool to get the list of team members.File to update: `./src/planner/agent_tool.h`.
+-[x] Create a tool to add a team member.File to update: `./src/planner/agent_tool.h`.
+-[x] Create a tool to fetch the departments.File to update: `./src/planner/agent_tool.h`.
+-[x] Create a tool to update a team member's role in a project.role: 0=Member, 1=Lead, 2=Manager. File to update: `./src/planner/agent_tool.h`.
+-[x] Update the add_team_member tool to allow only the following values for role.role: 0=Member, 1=Lead, 2=Manager.File to update: `./src/planner/agent_tool.h`.
+

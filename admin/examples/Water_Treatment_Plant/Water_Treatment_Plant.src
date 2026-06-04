@@ -6,24 +6,25 @@
 #
 # Prerequisites:
 #   - A clean database with the schema applied
-#   - The organization source file loaded (examples/Organization/departments.src)
+#   - The organization source file loaded (examples-Organization_Examples-departments.src)
 #     or the following employees already present in the database:
 #       John Davis, Sarah Thompson, Michael Chen, Emily Rodriguez,
-#       Robert Martinez, Jessica Brown, Amanda Johnson
+#       Robert Martinez, Jessica Brown, Amanda Johnson,
+#       Marcus Brown, Patricia Taylor, Kevin Zhang
 #
 #
 # All data is imported directly from CSV files:
-#   projectdata/projectdata.csv
-#   categorydata/categorydata.csv
-#   subcategorydata/<category>.subcategorydata.csv
-#   activitydata/<category>.<subcategory>.activitydata.csv
-#   artefacttypedata/artefacttypedata.csv
-#   artefactfielddata/<type>.fielddata.csv
-#   artefactdata/drawing.artefactdata.csv
-#   artefactdata/calculation.artefactdata.csv
-#   artefactdata/datasheet.artefactdata.csv
-#   milestonedata/milestonedata.csv
-#   milestonestepdata/milestonestepdata.csv
+#   projectdata-projectdata.csv
+#   categorydata-categorydata.csv
+#   subcategorydata-<category>.subcategorydata.csv
+#   activitydata-<category>.<subcategory>.activitydata.csv
+#   artefacttypedata-artefacttypedata.csv
+#   artefactfielddata-<type>.fielddata.csv
+#   artefactdata-drawing.artefactdata.csv
+#   artefactdata-calculation.artefactdata.csv
+#   artefactdata-datasheet.artefactdata.csv
+#   milestonedata-milestonedata.csv
+#   milestonestepdata-milestonestepdata.csv
 # =============================================================================
 
 
@@ -32,7 +33,7 @@
 # STEP 1: Create the project
 # =============================================================================
 # Path: ~ > Projects
-# Importing from: ./projectdata/projectdata.csv
+# Importing from: .-projectdata-projectdata.csv
 
 cd ~
 cd Projects
@@ -77,7 +78,7 @@ im "./categorydata/categorydata.csv"
 # STEP 4: Import activity subcategories
 # =============================================================================
 # Path: ~ > Projects > <Project> > Activity Categories > <Category>
-# Importing per-category CSV files from subcategorydata/
+# Importing per-category CSV files from subcategorydata-
 
 cd "Bioreactors"
 im "./subcategorydata/bioreactors.subcategorydata.csv"
@@ -128,7 +129,7 @@ cd ..
 # STEP 5: Import activities
 # =============================================================================
 # Path: ~ > Projects > <Project> > Activity Categories > <Category> > <Subcategory>
-# Importing per-subcategory CSV files from activitydata/
+# Importing per-subcategory CSV files from activitydata-
 
 # --- Bioreactors > Pressure Vessels ---
 cd "Bioreactors"
@@ -161,13 +162,13 @@ cd ..
 cd "Head loss sensors"
 im "./activitydata/Instrumentation.Head_loss_sensors.activitydata.csv"
 cd ..
-cd "High/Low Alarm (for holding tanks)"
+cd "High-Low Alarm (for holding tanks)"
 im "./activitydata/Instrumentation.High_Low_Alarm_(for_holding_tanks).activitydata.csv"
 cd ..
 cd "ORP sensor"
 im "./activitydata/Instrumentation.ORP_sensor.activitydata.csv"
 cd ..
-cd "Perchlorate/Nitrate Analyzer"
+cd "Perchlorate-Nitrate Analyzer"
 im "./activitydata/Instrumentation.Perchlorate_Nitrate_Analyzer.activitydata.csv"
 cd ..
 cd "Sampling Ports"
@@ -291,7 +292,7 @@ cd ..
 cd "Polymer Storage Tanks"
 im "./activitydata/Tanks.Polymer_Storage_Tanks.activitydata.csv"
 cd ..
-cd "Residuals Holding Tanks/Basins"
+cd "Residuals Holding Tanks-Basins"
 im "./activitydata/Tanks.Residuals_Holding_Tanks.activitydata.csv"
 cd ..
 cd ..
@@ -314,7 +315,7 @@ cd ..
 # STEP 6: Import artefact types
 # =============================================================================
 # Path: ~ > Projects > <Project> > Artefact Types
-# Importing from: ./artefacttypedata/artefacttypedata.csv
+# Importing from: .-artefacttypedata-artefacttypedata.csv
 
 cd ~
 cd Projects
@@ -327,7 +328,7 @@ im "./artefacttypedata/artefacttypedata.csv"
 # STEP 7: Import artefact data fields
 # =============================================================================
 # Path: ~ > Projects > <Project> > Artefact Types > <Type> > Fields
-# Importing per-type field CSV files from artefactfielddata/
+# Importing per-type field CSV files from artefactfielddata-
 
 cd "Drawing"
 cd Fields
@@ -352,7 +353,7 @@ cd ..
 # STEP 8: Import Drawing artefacts
 # =============================================================================
 # Path: ~ > Projects > <Project> > Artefact Types > Drawing > Artefacts
-# Importing from: ./artefactdata/drawing.artefactdata.csv
+# Importing from: .-artefactdata-drawing.artefactdata.csv
 
 cd "Drawing"
 cd Artefacts
@@ -364,7 +365,7 @@ cd ..
 # =============================================================================
 # STEP 9: Import Calculation artefacts
 # =============================================================================
-# Importing from: ./artefactdata/calculation.artefactdata.csv
+# Importing from: .-artefactdata-calculation.artefactdata.csv
 
 cd "Calculation"
 cd Artefacts
@@ -376,7 +377,7 @@ cd ..
 # =============================================================================
 # STEP 10: Import Datasheet artefacts
 # =============================================================================
-# Importing from: ./artefactdata/datasheet.artefactdata.csv
+# Importing from: .-artefactdata-datasheet.artefactdata.csv
 
 cd "Datasheet"
 cd Artefacts
@@ -389,7 +390,7 @@ cd ..
 # STEP 11: Import milestones
 # =============================================================================
 # Path: ~ > Projects > <Project> > Milestones
-# Importing from: ./milestonedata/milestonedata.csv
+# Importing from: .-milestonedata-milestonedata.csv
 
 cd ~
 cd Projects
@@ -402,7 +403,7 @@ im "./milestonedata/milestonedata.csv"
 # STEP 12: Import milestone steps
 # =============================================================================
 # Path: ~ > Projects > <Project> > Milestones > <Milestone>
-# Importing from: ./milestonestepdata/milestonestepdata.csv
+# Importing from: .-milestonestepdata-milestonestepdata.csv
 
 cd "Document Progress"
 im "./milestonestepdata/milestonestepdata.csv"
@@ -414,7 +415,7 @@ cd ..
 # =============================================================================
 # Path: ~ > Projects > <Project> > Artefact Types > Drawing > Artefacts > <Artefact> > Associations
 # Format: ad "activityname:<name>,ratio:<ratio>"
-# Data sourced from: ./artefacttoactivitylinkdata/artefacttoactivitylinkdata.csv
+# Data sourced from: .-artefacttoactivitylinkdata-artefacttoactivitylinkdata.csv
 
 cd ~
 cd Projects
@@ -423,7 +424,7 @@ cd "Artefact Types"
 cd "Drawing"
 cd Artefacts
 
-# Mechanical GA and Section/Elevation Drawings
+# Mechanical GA and Section-Elevation Drawings
 cd "Bioreactors - General Arrangement Drawing"
 cd Associations
 ad "activityname:Mechanical design,categoryname:Bioreactors,subcategoryname:Pressure Vessels,ratio:1.0"
@@ -484,15 +485,15 @@ ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Electron D
 cd ..
 cd ..
 
-cd "Residuals Holding Tanks/Basins - General Arrangement Drawing"
+cd "Residuals Holding Tanks-Basins - General Arrangement Drawing"
 cd Associations
-ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Residuals Holding Tanks/Basins,ratio:1.0"
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Residuals Holding Tanks-Basins,ratio:1.0"
 cd ..
 cd ..
 
-cd "Residuals Holding Tanks/Basins - Section and Elevation Drawing"
+cd "Residuals Holding Tanks-Basins - Section and Elevation Drawing"
 cd Associations
-ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Residuals Holding Tanks/Basins,ratio:1.0"
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Residuals Holding Tanks-Basins,ratio:1.0"
 cd ..
 cd ..
 
@@ -683,9 +684,9 @@ ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Electron D
 cd ..
 cd ..
 
-cd "Residuals Holding Tanks/Basins - Foundation Drawing"
+cd "Residuals Holding Tanks-Basins - Foundation Drawing"
 cd Associations
-ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Residuals Holding Tanks/Basins,ratio:1.0"
+ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Residuals Holding Tanks-Basins,ratio:1.0"
 cd ..
 cd ..
 
@@ -925,9 +926,9 @@ ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategory
 cd ..
 cd ..
 
-cd "High/Low Alarm - Instrument Location Plan"
+cd "High-Low Alarm - Instrument Location Plan"
 cd Associations
-ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:High/Low Alarm (for holding tanks),ratio:1.0"
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:High-Low Alarm (for holding tanks),ratio:1.0"
 cd ..
 cd ..
 
@@ -961,9 +962,9 @@ ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategory
 cd ..
 cd ..
 
-cd "Perchlorate/Nitrate Analyzer - Instrument Location Plan"
+cd "Perchlorate-Nitrate Analyzer - Instrument Location Plan"
 cd Associations
-ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Perchlorate/Nitrate Analyzer,ratio:1.0"
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Perchlorate-Nitrate Analyzer,ratio:1.0"
 cd ..
 cd ..
 
@@ -1215,9 +1216,9 @@ ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Electron D
 cd ..
 cd ..
 
-cd "Residuals Holding Tanks/Basins - Calculation"
+cd "Residuals Holding Tanks-Basins - Calculation"
 cd Associations
-ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Residuals Holding Tanks/Basins,ratio:1.0"
+ad "activityname:Mechanical design,categoryname:Tanks,subcategoryname:Residuals Holding Tanks-Basins,ratio:1.0"
 cd ..
 cd ..
 
@@ -1330,9 +1331,9 @@ ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Electron D
 cd ..
 cd ..
 
-cd "Residuals Holding Tanks/Basins - Foundation Calculation"
+cd "Residuals Holding Tanks-Basins - Foundation Calculation"
 cd Associations
-ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Residuals Holding Tanks/Basins,ratio:1.0"
+ad "activityname:Foundation design,categoryname:Tanks,subcategoryname:Residuals Holding Tanks-Basins,ratio:1.0"
 cd ..
 cd ..
 
@@ -1547,9 +1548,9 @@ ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategory
 cd ..
 cd ..
 
-cd "High/Low Alarm - Datasheet"
+cd "High-Low Alarm - Datasheet"
 cd Associations
-ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:High/Low Alarm (for holding tanks),ratio:1.0"
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:High-Low Alarm (for holding tanks),ratio:1.0"
 cd ..
 cd ..
 
@@ -1583,9 +1584,9 @@ ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategory
 cd ..
 cd ..
 
-cd "Perchlorate/Nitrate Analyzer - Datasheet"
+cd "Perchlorate-Nitrate Analyzer - Datasheet"
 cd Associations
-ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Perchlorate/Nitrate Analyzer,ratio:1.0"
+ad "activityname:Instrumentation design,categoryname:Instrumentation,subcategoryname:Perchlorate-Nitrate Analyzer,ratio:1.0"
 cd ..
 cd ..
 
@@ -1611,5 +1612,774 @@ cd ..
 cd "Controls Software - Datasheet"
 cd Associations
 ad "activityname:Instrumentation design,categoryname:System Controls,subcategoryname:Controls Software,ratio:1.0"
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 16: Add tasks for Bioreactors > Pressure Vessels > Mechanical design
+# =============================================================================
+# Path: ... > Bioreactors > Pressure Vessels > Mechanical design > Tasks
+# Format: ad "taskname:<name>"
+
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd "Activity Categories"
+cd "Bioreactors"
+cd "Pressure Vessels"
+cd "Mechanical design"
+cd Tasks
+ad "taskname:Equipment specification review"
+ad "taskname:Preliminary mechanical design"
+ad "taskname:Detailed mechanical design"
+ad "taskname:Drawing preparation"
+ad "taskname:Calculation report compilation"
+ad "taskname:Document approval"
+cd ..
+
+# Subtasks under "Detailed mechanical design"
+cd Tasks
+cd "Detailed mechanical design"
+cd Tasks
+ad "taskname:Vessel wall thickness design"
+ad "taskname:Nozzle and fitting design"
+ad "taskname:Internal structural design"
+cd ..
+cd ..
+
+# Subtasks under "Drawing preparation"
+cd "Drawing preparation"
+cd Tasks
+ad "taskname:Prepare general arrangement drawings"
+ad "taskname:Prepare section and elevation drawings"
+ad "taskname:Drawing review and comment incorporation"
+cd ..
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 17: Assign tasks for Bioreactors > Mechanical design
+# =============================================================================
+# Path: ... > Tasks > <Task> > Assignments
+# Format: ad "username:<name>,assigneddate:<date>,closedate:<date>"
+
+cd Tasks
+cd "Equipment specification review"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-03-24,closedate:2026-04-03"
+cd ..
+cd ..
+
+cd "Preliminary mechanical design"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-04-06,closedate:2026-04-24"
+cd ..
+cd ..
+
+cd "Detailed mechanical design"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-04-27,closedate:2026-05-22"
+cd ..
+
+cd Tasks
+cd "Vessel wall thickness design"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-04-27,closedate:2026-05-08"
+cd ..
+cd ..
+
+cd "Nozzle and fitting design"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-05-11,closedate:2026-05-15"
+cd ..
+cd ..
+
+cd "Internal structural design"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-05-18,closedate:2026-05-22"
+cd ..
+cd ..
+cd ..
+cd ..
+
+cd "Drawing preparation"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-05-25"
+cd ..
+
+cd Tasks
+cd "Prepare general arrangement drawings"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-05-25,closedate:2026-06-05"
+cd ..
+cd ..
+
+cd "Prepare section and elevation drawings"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-06-08,closedate:2026-06-12"
+cd ..
+cd ..
+
+cd "Drawing review and comment incorporation"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-06-15"
+cd ..
+cd ..
+cd ..
+cd ..
+
+cd "Calculation report compilation"
+cd Assignments
+ad "username:Marcus Brown,assigneddate:2026-06-01,closedate:2026-06-12"
+cd ..
+cd ..
+
+cd "Document approval"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-06-15"
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 18: Book hours for Bioreactors > Mechanical design
+# =============================================================================
+# Path: ... > Assignments > <Assignment>
+# Format: ad "bookeddate:<date>,hours:<hours>"
+
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd "Activity Categories"
+cd "Bioreactors"
+cd "Pressure Vessels"
+cd "Mechanical design"
+cd Tasks
+
+cd "Equipment specification review"
+cd Assignments
+cd "Marcus Brown"
+ad "bookeddate:2026-03-24,hours:8"
+ad "bookeddate:2026-03-25,hours:8"
+ad "bookeddate:2026-03-26,hours:8"
+ad "bookeddate:2026-03-27,hours:8"
+ad "bookeddate:2026-03-28,hours:8"
+ad "bookeddate:2026-03-31,hours:8"
+ad "bookeddate:2026-04-01,hours:8"
+ad "bookeddate:2026-04-02,hours:8"
+ad "bookeddate:2026-04-03,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Preliminary mechanical design"
+cd Assignments
+cd "Marcus Brown"
+ad "bookeddate:2026-04-06,hours:8"
+ad "bookeddate:2026-04-07,hours:8"
+ad "bookeddate:2026-04-08,hours:8"
+ad "bookeddate:2026-04-09,hours:8"
+ad "bookeddate:2026-04-10,hours:8"
+ad "bookeddate:2026-04-13,hours:8"
+ad "bookeddate:2026-04-14,hours:8"
+ad "bookeddate:2026-04-15,hours:8"
+ad "bookeddate:2026-04-16,hours:8"
+ad "bookeddate:2026-04-17,hours:8"
+ad "bookeddate:2026-04-20,hours:8"
+ad "bookeddate:2026-04-21,hours:8"
+ad "bookeddate:2026-04-22,hours:8"
+ad "bookeddate:2026-04-23,hours:8"
+ad "bookeddate:2026-04-24,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Calculation report compilation"
+cd Assignments
+cd "Marcus Brown"
+ad "bookeddate:2026-06-01,hours:8"
+ad "bookeddate:2026-06-02,hours:8"
+ad "bookeddate:2026-06-03,hours:8"
+ad "bookeddate:2026-06-04,hours:8"
+ad "bookeddate:2026-06-05,hours:8"
+ad "bookeddate:2026-06-08,hours:8"
+ad "bookeddate:2026-06-09,hours:8"
+ad "bookeddate:2026-06-10,hours:8"
+ad "bookeddate:2026-06-11,hours:8"
+ad "bookeddate:2026-06-12,hours:8"
+cd ..
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 19: Add tasks for Building > Structural Design
+# =============================================================================
+
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd "Activity Categories"
+cd "Building Structures and HVAC"
+cd "Building"
+cd "Structural Design"
+cd Tasks
+ad "taskname:Site survey and geotechnical data review"
+ad "taskname:Structural concept design"
+ad "taskname:Detailed structural analysis"
+ad "taskname:Structural drawings preparation"
+ad "taskname:Calculation report compilation"
+ad "taskname:Document approval"
+cd ..
+
+# Subtasks under "Detailed structural analysis"
+cd Tasks
+cd "Detailed structural analysis"
+cd Tasks
+ad "taskname:Foundation design"
+ad "taskname:Wall and column design"
+ad "taskname:Roof structure design"
+cd ..
+cd ..
+
+# Subtasks under "Structural drawings preparation"
+cd "Structural drawings preparation"
+cd Tasks
+ad "taskname:General arrangement drawings"
+ad "taskname:Structural detail drawings"
+ad "taskname:Drawing review"
+cd ..
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 20: Assign and book hours for Building > Structural Design
+# =============================================================================
+
+cd Tasks
+cd "Site survey and geotechnical data review"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-03-24,closedate:2026-04-03"
+cd ..
+cd ..
+
+cd "Structural concept design"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-04-06,closedate:2026-04-24"
+cd ..
+cd ..
+
+cd "Detailed structural analysis"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-04-27,closedate:2026-05-29"
+cd ..
+
+cd Tasks
+cd "Foundation design"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-04-27,closedate:2026-05-15"
+cd ..
+cd ..
+
+cd "Wall and column design"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-04-27,closedate:2026-05-15"
+cd ..
+cd ..
+
+cd "Roof structure design"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-05-18,closedate:2026-05-29"
+cd ..
+cd ..
+cd ..
+cd ..
+
+cd "Structural drawings preparation"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-06-01"
+cd ..
+
+cd Tasks
+cd "General arrangement drawings"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-06-01,closedate:2026-06-19"
+cd ..
+cd ..
+
+cd "Structural detail drawings"
+cd Assignments
+ad "username:Michael Chen,assigneddate:2026-06-22,closedate:2026-07-03"
+cd ..
+cd ..
+
+cd "Drawing review"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-07-06"
+cd ..
+cd ..
+cd ..
+cd ..
+
+cd "Calculation report compilation"
+cd Assignments
+ad "username:Sarah Thompson,assigneddate:2026-06-01,closedate:2026-06-19"
+cd ..
+cd ..
+
+cd "Document approval"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-06-22"
+cd ..
+cd ..
+
+# Hours for Sarah Thompson on "Site survey and geotechnical data review"
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd "Activity Categories"
+cd "Building Structures and HVAC"
+cd "Building"
+cd "Structural Design"
+cd Tasks
+
+cd "Site survey and geotechnical data review"
+cd Assignments
+cd "Sarah Thompson"
+ad "bookeddate:2026-03-24,hours:8"
+ad "bookeddate:2026-03-25,hours:8"
+ad "bookeddate:2026-03-26,hours:8"
+ad "bookeddate:2026-03-27,hours:8"
+ad "bookeddate:2026-03-28,hours:8"
+ad "bookeddate:2026-03-31,hours:8"
+ad "bookeddate:2026-04-01,hours:8"
+ad "bookeddate:2026-04-02,hours:8"
+ad "bookeddate:2026-04-03,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Structural concept design"
+cd Assignments
+cd "Sarah Thompson"
+ad "bookeddate:2026-04-06,hours:8"
+ad "bookeddate:2026-04-07,hours:8"
+ad "bookeddate:2026-04-08,hours:8"
+ad "bookeddate:2026-04-09,hours:8"
+ad "bookeddate:2026-04-10,hours:8"
+ad "bookeddate:2026-04-13,hours:8"
+ad "bookeddate:2026-04-14,hours:8"
+ad "bookeddate:2026-04-15,hours:8"
+ad "bookeddate:2026-04-16,hours:8"
+ad "bookeddate:2026-04-17,hours:8"
+ad "bookeddate:2026-04-20,hours:8"
+ad "bookeddate:2026-04-21,hours:8"
+ad "bookeddate:2026-04-22,hours:8"
+ad "bookeddate:2026-04-23,hours:8"
+ad "bookeddate:2026-04-24,hours:8"
+cd ..
+cd ..
+cd ..
+
+# Hours for Michael Chen on "Foundation design"
+cd "Detailed structural analysis"
+cd Tasks
+cd "Foundation design"
+cd Assignments
+cd "Michael Chen"
+ad "bookeddate:2026-04-27,hours:8"
+ad "bookeddate:2026-04-28,hours:8"
+ad "bookeddate:2026-04-29,hours:8"
+ad "bookeddate:2026-04-30,hours:8"
+ad "bookeddate:2026-05-01,hours:8"
+ad "bookeddate:2026-05-04,hours:8"
+ad "bookeddate:2026-05-05,hours:8"
+ad "bookeddate:2026-05-06,hours:8"
+ad "bookeddate:2026-05-07,hours:8"
+ad "bookeddate:2026-05-08,hours:8"
+ad "bookeddate:2026-05-11,hours:8"
+ad "bookeddate:2026-05-12,hours:8"
+ad "bookeddate:2026-05-13,hours:8"
+ad "bookeddate:2026-05-14,hours:8"
+ad "bookeddate:2026-05-15,hours:8"
+cd ..
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 21: Add tasks for Piping > Influent and Treated Water Piping > Piping layout
+# =============================================================================
+
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd "Activity Categories"
+cd "Piping"
+cd "Influent and Treated Water Piping"
+cd "Piping layout"
+cd Tasks
+ad "taskname:P&ID review"
+ad "taskname:Pipe routing study"
+ad "taskname:Detailed piping layout drawings"
+ad "taskname:Isometric drawings"
+ad "taskname:Layout drawing review and issue"
+cd ..
+
+cd Tasks
+cd "P&ID review"
+cd Assignments
+ad "username:Patricia Taylor,assigneddate:2026-04-28,closedate:2026-05-08"
+cd ..
+cd ..
+
+cd "Pipe routing study"
+cd Assignments
+ad "username:Patricia Taylor,assigneddate:2026-05-11,closedate:2026-05-22"
+cd ..
+cd ..
+
+cd "Detailed piping layout drawings"
+cd Assignments
+ad "username:Patricia Taylor,assigneddate:2026-05-25,closedate:2026-06-12"
+cd ..
+cd ..
+
+cd "Isometric drawings"
+cd Assignments
+ad "username:Patricia Taylor,assigneddate:2026-05-25,closedate:2026-06-12"
+cd ..
+cd ..
+
+cd "Layout drawing review and issue"
+cd Assignments
+ad "username:Patricia Taylor,assigneddate:2026-06-15,closedate:2026-06-19"
+cd ..
+cd ..
+
+# Hours for Patricia Taylor
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd "Activity Categories"
+cd "Piping"
+cd "Influent and Treated Water Piping"
+cd "Piping layout"
+cd Tasks
+
+cd "P&ID review"
+cd Assignments
+cd "Patricia Taylor"
+ad "bookeddate:2026-04-28,hours:8"
+ad "bookeddate:2026-04-29,hours:8"
+ad "bookeddate:2026-04-30,hours:8"
+ad "bookeddate:2026-05-01,hours:8"
+ad "bookeddate:2026-05-04,hours:8"
+ad "bookeddate:2026-05-05,hours:8"
+ad "bookeddate:2026-05-06,hours:8"
+ad "bookeddate:2026-05-07,hours:8"
+ad "bookeddate:2026-05-08,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Pipe routing study"
+cd Assignments
+cd "Patricia Taylor"
+ad "bookeddate:2026-05-11,hours:8"
+ad "bookeddate:2026-05-12,hours:8"
+ad "bookeddate:2026-05-13,hours:8"
+ad "bookeddate:2026-05-14,hours:8"
+ad "bookeddate:2026-05-15,hours:8"
+ad "bookeddate:2026-05-18,hours:8"
+ad "bookeddate:2026-05-19,hours:8"
+ad "bookeddate:2026-05-20,hours:8"
+ad "bookeddate:2026-05-21,hours:8"
+ad "bookeddate:2026-05-22,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "Detailed piping layout drawings"
+cd Assignments
+cd "Patricia Taylor"
+ad "bookeddate:2026-05-25,hours:8"
+ad "bookeddate:2026-05-26,hours:8"
+ad "bookeddate:2026-05-27,hours:8"
+ad "bookeddate:2026-05-28,hours:8"
+ad "bookeddate:2026-05-29,hours:8"
+ad "bookeddate:2026-06-01,hours:8"
+ad "bookeddate:2026-06-02,hours:8"
+ad "bookeddate:2026-06-03,hours:8"
+ad "bookeddate:2026-06-04,hours:8"
+ad "bookeddate:2026-06-05,hours:8"
+ad "bookeddate:2026-06-08,hours:8"
+ad "bookeddate:2026-06-09,hours:8"
+ad "bookeddate:2026-06-10,hours:8"
+ad "bookeddate:2026-06-11,hours:8"
+ad "bookeddate:2026-06-12,hours:8"
+cd ..
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 22: Add tasks for System Controls > PLC Unit > Instrumentation design
+# =============================================================================
+
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd "Activity Categories"
+cd "System Controls"
+cd "PLC Unit"
+cd "Instrumentation design"
+cd Tasks
+ad "taskname:System requirements review"
+ad "taskname:I-O list preparation"
+ad "taskname:PLC logic design"
+ad "taskname:HMI interface design"
+ad "taskname:FAT documentation preparation"
+ad "taskname:Document approval"
+cd ..
+
+cd Tasks
+cd "System requirements review"
+cd Assignments
+ad "username:Kevin Zhang,assigneddate:2026-05-25,closedate:2026-06-05"
+cd ..
+cd ..
+
+cd "I-O list preparation"
+cd Assignments
+ad "username:Kevin Zhang,assigneddate:2026-06-08,closedate:2026-06-26"
+cd ..
+cd ..
+
+cd "PLC logic design"
+cd Assignments
+ad "username:Kevin Zhang,assigneddate:2026-06-29,closedate:2026-07-17"
+cd ..
+cd ..
+
+cd "HMI interface design"
+cd Assignments
+ad "username:Kevin Zhang,assigneddate:2026-06-29,closedate:2026-07-17"
+cd ..
+cd ..
+
+cd "FAT documentation preparation"
+cd Assignments
+ad "username:Kevin Zhang,assigneddate:2026-07-20,closedate:2026-07-24"
+cd ..
+cd ..
+
+cd "Document approval"
+cd Assignments
+ad "username:John Davis,assigneddate:2026-07-27"
+cd ..
+cd ..
+
+# Hours for Kevin Zhang
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd "Activity Categories"
+cd "System Controls"
+cd "PLC Unit"
+cd "Instrumentation design"
+cd Tasks
+
+cd "System requirements review"
+cd Assignments
+cd "Kevin Zhang"
+ad "bookeddate:2026-05-25,hours:8"
+ad "bookeddate:2026-05-26,hours:8"
+ad "bookeddate:2026-05-27,hours:8"
+ad "bookeddate:2026-05-28,hours:8"
+ad "bookeddate:2026-05-29,hours:8"
+ad "bookeddate:2026-06-01,hours:8"
+ad "bookeddate:2026-06-02,hours:8"
+ad "bookeddate:2026-06-03,hours:8"
+ad "bookeddate:2026-06-04,hours:8"
+ad "bookeddate:2026-06-05,hours:8"
+cd ..
+cd ..
+cd ..
+
+cd "I-O list preparation"
+cd Assignments
+cd "Kevin Zhang"
+ad "bookeddate:2026-06-08,hours:8"
+ad "bookeddate:2026-06-09,hours:8"
+ad "bookeddate:2026-06-10,hours:8"
+ad "bookeddate:2026-06-11,hours:8"
+ad "bookeddate:2026-06-12,hours:8"
+ad "bookeddate:2026-06-15,hours:8"
+ad "bookeddate:2026-06-16,hours:8"
+ad "bookeddate:2026-06-17,hours:8"
+ad "bookeddate:2026-06-18,hours:8"
+ad "bookeddate:2026-06-19,hours:8"
+ad "bookeddate:2026-06-22,hours:8"
+ad "bookeddate:2026-06-23,hours:8"
+ad "bookeddate:2026-06-24,hours:8"
+ad "bookeddate:2026-06-25,hours:8"
+ad "bookeddate:2026-06-26,hours:8"
+cd ..
+cd ..
+cd ..
+
+
+# =============================================================================
+# STEP 23: Add activity notes
+# =============================================================================
+# Path: ... > <Activity> > Notes
+# Format: ad "username:<name>,note:<text>,notedate:<date>"
+
+# Notes for Bioreactors > Mechanical design
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd "Activity Categories"
+cd "Bioreactors"
+cd "Pressure Vessels"
+cd "Mechanical design"
+cd Notes
+ad "username:John Davis,note:Project kick-off meeting held with client. WTP capacity confirmed at 50 ML-day. Bioreactor sizing criteria agreed.,notedate:2026-03-24"
+ad "username:Marcus Brown,note:Vendor data received for bioreactor internals. Equipment specification review underway.,notedate:2026-03-31"
+ad "username:Marcus Brown,note:Preliminary mechanical design complete. Bioreactor vessel dimensions confirmed. Proceeding to detailed design.,notedate:2026-04-24"
+cd ..
+
+# Notes for Building > Structural Design
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd "Activity Categories"
+cd "Building Structures and HVAC"
+cd "Building"
+cd "Structural Design"
+cd Notes
+ad "username:John Davis,note:Geotechnical investigation complete. Soil bearing capacity report received and issued to structural team.,notedate:2026-03-27"
+ad "username:Sarah Thompson,note:Structural concept design approved by client. Strip footing system confirmed for WTP building. Proceeding to detailed design.,notedate:2026-04-24"
+ad "username:Michael Chen,note:Foundation design progressing. Pile design required for the pump room area due to poor soil conditions in that zone.,notedate:2026-05-08"
+cd ..
+
+# Notes for Piping > Influent and Treated Water Piping > Piping layout
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd "Activity Categories"
+cd "Piping"
+cd "Influent and Treated Water Piping"
+cd "Piping layout"
+cd Notes
+ad "username:Patricia Taylor,note:P&ID review complete. Confirmed 14 pipe runs for influent and treated water system. Routing study underway.,notedate:2026-05-08"
+ad "username:Patricia Taylor,note:Pipe routing study complete. Route corridors agreed with civil team. No major clashes with structural elements.,notedate:2026-05-22"
+cd ..
+
+# Notes for System Controls > PLC Unit > Instrumentation design
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd "Activity Categories"
+cd "System Controls"
+cd "PLC Unit"
+cd "Instrumentation design"
+cd Notes
+ad "username:Kevin Zhang,note:System requirements workshop completed with client. 450 I-O points confirmed for PLC system. Preparing I-O list.,notedate:2026-06-05"
+ad "username:Kevin Zhang,note:I-O list submitted to client for review. Preliminary PLC architecture defined - redundant CPU with distributed I-O.,notedate:2026-06-26"
+cd ..
+
+
+# =============================================================================
+# STEP 24: Mark milestone steps as completed on linked artefacts
+# =============================================================================
+# Path: ... > Artefacts > <Artefact> > Associations > <Link>
+# Format: ad "milestonestepname:<name>,completedbyname:<name>,completiondate:<date>"
+
+# Mark "Bioreactors - Calculation" discipline check as completed
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd "Artefact Types"
+cd "Calculation"
+cd Artefacts
+cd "Bioreactors - Calculation"
+cd Associations
+cd "Mechanical design"
+ad "milestonestepname:Review,completedbyname:Marcus Brown,completiondate:2026-06-05"
+cd ..
+cd ..
+
+# Mark "Bioreactors - Foundation Calculation" discipline check as completed
+cd ..
+cd "Bioreactors - Foundation Calculation"
+cd Associations
+cd "Foundation design"
+ad "milestonestepname:Review,completedbyname:Michael Chen,completiondate:2026-06-19"
+cd ..
+cd ..
+
+cd ..
+cd ..
+cd ..
+
+# Mark building structural drawing discipline checks as completed
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd "Artefact Types"
+cd "Drawing"
+cd Artefacts
+cd "Building - Foundation Drawing"
+cd Associations
+cd "Structural Design"
+ad "milestonestepname:Review,completedbyname:Sarah Thompson,completiondate:2026-05-29"
+ad "milestonestepname:Approved,completedbyname:Michael Chen,completiondate:2026-06-05"
+cd ..
+cd ..
+
+cd ..
+cd "Building - General Notes"
+cd Associations
+cd "Structural Design"
+ad "milestonestepname:Review,completedbyname:Sarah Thompson,completiondate:2026-06-12"
+cd ..
+cd ..
+
+cd ..
+cd "Building - Grade Slab and Beam Plan"
+cd Associations
+cd "Structural Design"
+ad "milestonestepname:Review,completedbyname:Sarah Thompson,completiondate:2026-06-19"
+cd ..
+cd ..
+
+cd ..
+cd ..
+cd ..
+
+# Mark process piping drawing discipline checks as completed
+cd ~
+cd Projects
+cd "Water Treatment Plant"
+cd "Artefact Types"
+cd "Drawing"
+cd Artefacts
+cd "Influent and Treated Water Piping - Layout Drawings"
+cd Associations
+cd "Piping layout"
+ad "milestonestepname:Review,completedbyname:Patricia Taylor,completiondate:2026-06-12"
+cd ..
+cd ..
+
+cd ..
+cd "Influent and Treated Water Piping - Isometric Drawings"
+cd Associations
+cd "Piping layout"
+ad "milestonestepname:Review,completedbyname:Patricia Taylor,completiondate:2026-06-12"
 cd ..
 cd ..

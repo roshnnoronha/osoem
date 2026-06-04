@@ -188,7 +188,7 @@ The expected fields depend on the current location in the hierarchy:
 | Departments | `departmentname` |
 | Employees | `firstname, lastname, email, password` |
 | Projects | `projectname, projectno` |
-| Team | `employeename, role` (role: 1=Member, 2=Manager, 3=Admin) |
+| Team | `employeename, role` (role: 0=Member, 1=Lead, 2=Manager) |
 | Activity Categories | `categoryname` |
 | Subcategories | `subcategoryname` |
 | Activities | `activityname, managerid, plannedstart, plannedfinish, plannedhours` |

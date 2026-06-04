@@ -6,7 +6,7 @@
 3.1 Electron Donor Storage Tanks
 3.2 Phosphoric Acid Storage Tanks
 3.3 Electron Donor Day Tanks
-3.4 Residuals Holding Tanks/Basins
+3.4 Residuals Holding Tanks-Basins
 3.5 Aeration Tanks
 3.6 Ferric Chloride Storage Tanks
 3.7 Polymer Storage Tanks
@@ -21,7 +21,7 @@
 4.7 Ferric Chloride Piping
 4.8 Polymer Addition Piping
 5 Valves and Fittings
-5.1 Motor/Air Operated (on/off)
+5.1 Motor-Air Operated (on-off)
 5.2 Manual
 5.3 Check Valves
 6 Pumps and Blowers
@@ -40,13 +40,13 @@
 9.1 Flow Meters - Influent and treated water
 9.2 Flow Meters - Backwash
 9.3 Flow Meters - Residuals
-9.4 High/Low Alarm (for holding tanks)
+9.4 High-Low Alarm (for holding tanks)
 9.5 Temperature meters
 9.6 Head loss sensors
 9.7 Sampling Ports
 9.8 ORP sensor
 9.9 Turbidity meters
-9.10 Perchlorate/Nitrate Analyzer
+9.10 Perchlorate-Nitrate Analyzer
 9.11 Dissolved Oxygen Analyzer
 10 System Controls 
 10.1 PLC Unit(s)

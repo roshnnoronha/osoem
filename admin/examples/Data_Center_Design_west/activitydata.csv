@@ -1,0 +1,26 @@
+CategoryName,SubCategoryName,ActivityName,ActivityDescription,PlannedStart,PlannedFinish,PlannedHours,ActivityManagerName
+Initiation and Planning,Project Charter,Project Charter,To develop the project charter,2026-01-06,2026-01-30,160, John Davis
+Initiation and Planning,Feasibility Study,Feasibility Study,To develop the project charter,2026-01-13,2026-02-27,480, John Davis
+Initiation and Planning,Project Planning,Project Planning,Project Planning,2026-01-27,2026-03-13,640, John Davis
+Initiation and Planning,Resource Allocation,Resource Allocation,Resource Allocation,2026-02-10,2026-03-27,320, John Davis
+Design and Engineering,Architectural Design,Architectural Design,Architectural Design,2026-02-03,2026-05-22,1200, John Davis
+Design and Engineering,Structural Design,Structural Design,Structural Design,2026-02-17,2026-05-22,960, John Davis
+Design and Engineering,Electrical System Design,Electrical System Design,Electrical System Design,2026-02-17,2026-06-12,1600, John Davis
+Design and Engineering,Cooling System Design,Cooling System Design,Cooling System Design,2026-02-24,2026-06-19,1400, John Davis
+Design and Engineering,Fire Suppression Design,Fire Suppression Design,Fire Suppression Design,2026-03-10,2026-05-29,640, John Davis
+Facility Construction and Fit-Out,Site Preparation,Site Preparation,Site Preparation,2026-05-05,2026-06-12,480, John Davis
+Facility Construction and Fit-Out,Structural Work,Structural Work,Structural Work,2026-05-26,2026-07-31,1600, John Davis
+Facility Construction and Fit-Out,Raised Floor Installation,Raised Floor Installation,Raised Floor Installation,2026-07-07,2026-08-07,560, John Davis
+Facility Construction and Fit-Out,Building Finishing,Building Finishing,Building Finishing,2026-07-28,2026-08-28,640, John Davis
+Facility Construction and Fit-Out,Power Supply Installation,Power Supply Installation,Power Supply Installation,2026-06-23,2026-08-21,1200, John Davis
+Facility Construction and Fit-Out,Cooling System Installation,Cooling System Installation,Cooling System Installation,2026-06-23,2026-08-28,1400, John Davis
+Facility Construction and Fit-Out,Fire System Installation,Fire System Installation,Fire System Installation,2026-07-14,2026-08-28,640, John Davis
+IT Infrastructure Installation,Cable Tray and Network Cabling,Cable Tray and Network Cabling,Cable Tray and Network Cabling,2026-08-04,2026-09-11,800, John Davis
+IT Infrastructure Installation,Rack and Cabinet Installation,Rack and Cabinet Installation,Rack and Cabinet Installation,2026-08-18,2026-09-18,560, John Davis
+IT Infrastructure Installation,Server and Storage Hardware Installation,Server and Storage Hardware Installation,Server and Storage Hardware Installation,2026-09-01,2026-10-09,960, John Davis
+IT Infrastructure Installation,Network Switch and Router Configuration,Network Switch and Router Configuration,Network Switch and Router Configuration,2026-09-15,2026-10-30,800, John Davis
+Testing and Commissioning,Electrical Load Testing,Electrical Load Testing,Electrical Load Testing,2026-09-22,2026-10-23,480, John Davis
+Testing and Commissioning,Cooling Performance Verification,Cooling Performance Verification,Cooling Performance Verification,2026-10-06,2026-11-06,400, John Davis
+Testing and Commissioning,Network and Security Testing,Network and Security Testing,Network and Security Testing,2026-10-20,2026-11-27,560, John Davis
+Closure and Handover,Final Inspection and Sign-off,Final Inspection and Sign-off,Final Inspection and Sign-off,2026-11-17,2026-12-04,320, John Davis
+Closure and Handover,Documentation and As-Built Drawings,Documentation and As-Built Drawings,Documentation and As-Built Drawings,2026-11-17,2026-12-18,640, John Davis

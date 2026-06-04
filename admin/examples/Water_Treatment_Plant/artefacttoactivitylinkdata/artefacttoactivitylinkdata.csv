@@ -9,8 +9,8 @@ Phosphoric Acid Storage Tanks - General Arrangement Drawing,Tanks,Phosphoric Aci
 Phosphoric Acid Storage Tanks - Section and Elevation Drawing,Tanks,Phosphoric Acid Storage Tanks,Mechanical design, 1.0
 Electron Donor Day Tanks - General Arrangement Drawing,Tanks,Electron Donor Day Tanks,Mechanical design, 1.0
 Electron Donor Day Tanks - Section and Elevation Drawing,Tanks,Electron Donor Day Tanks,Mechanical design, 1.0
-Residuals Holding Tanks/Basins - General Arrangement Drawing,Tanks,Residuals Holding Tanks/Basins,Mechanical design, 1.0
-Residuals Holding Tanks/Basins - Section and Elevation Drawing,Tanks,Residuals Holding Tanks/Basins,Mechanical design, 1.0
+Residuals Holding Tanks-Basins - General Arrangement Drawing,Tanks,Residuals Holding Tanks-Basins,Mechanical design, 1.0
+Residuals Holding Tanks-Basins - Section and Elevation Drawing,Tanks,Residuals Holding Tanks-Basins,Mechanical design, 1.0
 Aeration Tanks - General Arrangement Drawing,Tanks,Aeration Tanks,Mechanical design, 1.0
 Aeration Tanks - Section and Elevation Drawing,Tanks,Aeration Tanks,Mechanical design, 1.0
 Ferric Chloride Storage Tanks - General Arrangement Drawing,Tanks,Ferric Chloride Storage Tanks,Mechanical design, 1.0
@@ -48,7 +48,7 @@ Post Treatment Filters - Calculation,Post-Treatment Filters,Pressure Vessels,Mec
 Electron Donor Storage Tanks - Calculation,Tanks,Electron Donor Storage Tanks,Mechanical design, 1.0
 Phosphoric Acid Storage Tanks - Calculation,Tanks,Phosphoric Acid Storage Tanks,Mechanical design, 1.0
 Electron Donor Day Tanks - Calculation,Tanks,Electron Donor Day Tanks,Mechanical design, 1.0
-Residuals Holding Tanks/Basins - Calculation,Tanks,Residuals Holding Tanks/Basins,Mechanical design, 1.0
+Residuals Holding Tanks-Basins - Calculation,Tanks,Residuals Holding Tanks-Basins,Mechanical design, 1.0
 Aeration Tanks - Calculation,Tanks,Aeration Tanks,Mechanical design, 1.0
 Ferric Chloride Storage Tanks - Calculation,Tanks,Ferric Chloride Storage Tanks,Mechanical design, 1.0
 Polymer Storage Tanks - Calculation,Tanks,Polymer Storage Tanks,Mechanical design, 1.0
@@ -67,7 +67,7 @@ Post Treatment Filters - Foundation Drawing,Post-Treatment Filters,Pressure Vess
 Electron Donor Storage Tanks - Foundation Drawing,Tanks,Electron Donor Storage Tanks,Foundation design, 1.0
 Phosphoric Acid Storage Tanks - Foundation Drawing,Tanks,Phosphoric Acid Storage Tanks,Foundation design, 1.0
 Electron Donor Day Tanks - Foundation Drawing,Tanks,Electron Donor Day Tanks,Foundation design, 1.0
-Residuals Holding Tanks/Basins - Foundation Drawing,Tanks,Residuals Holding Tanks/Basins,Foundation design, 1.0
+Residuals Holding Tanks-Basins - Foundation Drawing,Tanks,Residuals Holding Tanks-Basins,Foundation design, 1.0
 Aeration Tanks - Foundation Drawing,Tanks,Aeration Tanks,Foundation design, 1.0
 Ferric Chloride Storage Tanks - Foundation Drawing,Tanks,Ferric Chloride Storage Tanks,Foundation design, 1.0
 Polymer Storage Tanks - Foundation Drawing,Tanks,Polymer Storage Tanks,Foundation design, 1.0
@@ -85,7 +85,7 @@ Post Treatment Filters - Foundation Calculation,Post-Treatment Filters,Pressure 
 Electron Donor Storage Tanks - Foundation Calculation,Tanks,Electron Donor Storage Tanks,Foundation design, 1.0
 Phosphoric Acid Storage Tanks - Foundation Calculation,Tanks,Phosphoric Acid Storage Tanks,Foundation design, 1.0
 Electron Donor Day Tanks - Foundation Calculation,Tanks,Electron Donor Day Tanks,Foundation design, 1.0
-Residuals Holding Tanks/Basins - Foundation Calculation,Tanks,Residuals Holding Tanks/Basins,Foundation design, 1.0
+Residuals Holding Tanks-Basins - Foundation Calculation,Tanks,Residuals Holding Tanks-Basins,Foundation design, 1.0
 Aeration Tanks - Foundation Calculation,Tanks,Aeration Tanks,Foundation design, 1.0
 Ferric Chloride Storage Tanks - Foundation Calculation,Tanks,Ferric Chloride Storage Tanks,Foundation design, 1.0
 Polymer Storage Tanks - Foundation Calculation,Tanks,Polymer Storage Tanks,Foundation design, 1.0
@@ -135,8 +135,8 @@ Flow Meters Backwash - Datasheet,Instrumentation,Flow Meters - Backwash,Instrume
 Flow Meters Backwash - Instrument Location Plan,Instrumentation,Flow Meters - Backwash,Instrumentation design, 1.0
 Flow Meters Residuals - Datasheet,Instrumentation,Flow Meters - Residuals,Instrumentation design, 1.0
 Flow Meters Residuals - Instrument Location Plan,Instrumentation,Flow Meters - Residuals,Instrumentation design, 1.0
-High/Low Alarm - Datasheet,Instrumentation,High/Low Alarm (for holding tanks),Instrumentation design, 1.0
-High/Low Alarm - Instrument Location Plan,Instrumentation,High/Low Alarm (for holding tanks),Instrumentation design, 1.0
+High-Low Alarm - Datasheet,Instrumentation,High-Low Alarm (for holding tanks),Instrumentation design, 1.0
+High-Low Alarm - Instrument Location Plan,Instrumentation,High-Low Alarm (for holding tanks),Instrumentation design, 1.0
 Temperature meters - Datasheet,Instrumentation,Temperature meters,Instrumentation design, 1.0
 Temperature meters - Instrument Location Plan,Instrumentation,Temperature meters,Instrumentation design, 1.0
 Head loss sensors - Datasheet,Instrumentation,Head loss sensors,Instrumentation design, 1.0
@@ -147,8 +147,8 @@ ORP sensor - Datasheet,Instrumentation,ORP sensor,Instrumentation design, 1.0
 ORP sensor - Instrument Location Plan,Instrumentation,ORP sensor,Instrumentation design, 1.0
 Turbidity meters - Datasheet,Instrumentation,Turbidity meters,Instrumentation design, 1.0
 Turbidity meters - Instrument Location Plan,Instrumentation,Turbidity meters,Instrumentation design, 1.0
-Perchlorate/Nitrate Analyzer - Datasheet,Instrumentation,Perchlorate/Nitrate Analyzer,Instrumentation design, 1.0
-Perchlorate/Nitrate Analyzer - Instrument Location Plan,Instrumentation,Perchlorate/Nitrate Analyzer,Instrumentation design, 1.0
+Perchlorate-Nitrate Analyzer - Datasheet,Instrumentation,Perchlorate-Nitrate Analyzer,Instrumentation design, 1.0
+Perchlorate-Nitrate Analyzer - Instrument Location Plan,Instrumentation,Perchlorate-Nitrate Analyzer,Instrumentation design, 1.0
 Dissolved Oxygen Analyzer - Datasheet,Instrumentation,Dissolved Oxygen Analyzer,Instrumentation design, 1.0
 Dissolved Oxygen Analyzer - Instrument Location Plan,Instrumentation,Dissolved Oxygen Analyzer,Instrumentation design, 1.0
 PLC Unit - Datasheet,System Controls,PLC Unit,Instrumentation design, 1.0

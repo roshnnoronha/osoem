@@ -1,0 +1,14 @@
+#ifndef DB_CONFIG_H
+#define DB_CONFIG_H
+
+#include <string>
+
+namespace config {
+    const std::string DB_HOST = "localhost";
+    const std::string DB_USER = "<username>";
+    const std::string DB_PASS = "<password>";
+    const std::string DB_NAME = "osoem_database";
+    const int DB_PORT = 3306;
+}
+
+#endif // DB_CONFIG_H

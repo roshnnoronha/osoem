@@ -194,10 +194,7 @@ void ActivityData::validateRecord(Record& record) {
         throw ValidationError("Activity name must not exceed 255 characters");
     }
 
-    // Validatet activity desctiption
-    if (record.description.empty()) {
-        throw ValidationError("Activity description cannot be empty");
-    }
+    // Validate activity desctiption
     if (utils::containsReservedChars(record.description)) {
         throw ValidationError("Activity description cannot contain reserved characters (,  :)");
     }
