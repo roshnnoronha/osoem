@@ -106,7 +106,7 @@ CREATE TABLE Hours(
     bookingid INT NOT NULL AUTO_INCREMENT,
     assignmentid INT NOT NULL,
     bookeddate DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    hours INT NOT NULL,
+    hours DECIMAL(5,2) NOT NULL,
     PRIMARY KEY (bookingid),
     FOREIGN KEY (assignmentid) REFERENCES ActivityTaskAssignments(assignmentid)
 );
@@ -125,6 +125,7 @@ CREATE TABLE Artefacts(
     artefacttypeid INT NOT NULL,
     artefactownerid INT,
     artefacttitle VARCHAR(255) NOT NULL,
+    artefactdescription VARCHAR(1000),
     PRIMARY KEY (artefactid),
     FOREIGN KEY (artefacttypeid) REFERENCES ArtefactTypes (artefacttypeid),
     FOREIGN KEY (artefactownerid) REFERENCES Employees (employeeid) 
@@ -148,6 +149,7 @@ CREATE TABLE ArtefactDataFields(
     maximumlength INT,
     maximumvalue INT,
     minimumvalue INT,
+    editable BOOLEAN NOT NULL DEFAULT 1,
     PRIMARY KEY (artefactdatafieldid),
     FOREIGN KEY (artefacttypeid) REFERENCES ArtefactTypes (artefacttypeid)
 );
@@ -183,6 +185,8 @@ CREATE TABLE MilestoneToArtefactLink(
     milestonelinkid INT AUTO_INCREMENT NOT NULL,
     milestonestepid INT NOT NULL,
     artefactlinkid INT NOT NULL,
+    planneddate DATE,
+    forecastdate DATE,
     completedbyid INT,
     completiondate DATE,
     PRIMARY KEY (milestonelinkid),

@@ -2,9 +2,57 @@
 #include "../exceptions/exceptions.h"
 #include "../utils/auth.h"
 #include "../utils/csv_parser.h"
+#include <stdexcept>
 #include <vector>
 
 namespace commands {
+
+// Context-specific format help for CSV add, based on current path type
+static std::string addFormatHelp(Path::ItemType type) {
+    switch (type) {
+        case Path::DEPARTMENTS_FOLDER:
+            return "ad \"departmentname:<name>\"";
+        case Path::DEPARTMENT:
+            return "ad \"firstname:<first>, lastname:<last>, email:<email>, password:<password>, admin:<0|1>\"";
+        case Path::PROJECTS_FOLDER:
+            return "ad \"projectname:<name>, projectno:<number>\"";
+        case Path::ACTIVITIES_FOLDER:
+            return "ad \"categoryname:<name>\"";
+        case Path::CATEGORY:
+            return "ad \"subcategoryname:<name>\"";
+        case Path::SUBCATEGORY:
+            return "ad \"activityname:<name>, activitymanagerid|activitymanagername:<manager>, activitydescription:<text>,"
+                   " plannedstart:<date>, plannedfinish:<date>, plannedhours:<hours>\"";
+        case Path::TASKS_FOLDER:
+            return "ad \"taskname:<name>, taskdescription:<text>, departmentid|departmentname:<department>\"";
+        case Path::NOTES_FOLDER:
+            return "ad \"userid|username:<user>, note:<text>, notedate:<date>\"";
+        case Path::ARTEFACT_TYPES_FOLDER:
+            return "ad \"artefactname:<name>, artefactdescription:<text>\"";
+        case Path::ARTEFACTS_FOLDER:
+            return "ad \"artefacttitle:<title>, artefactownerid|artefactownername:<owner>\"";
+        case Path::FIELDS_FOLDER:
+            return "ad \"fieldtitle:<title>, valuetype:<0|1>, maximumlength:<n>, maximumvalue:<n>, minimumvalue:<n>\"";
+        case Path::MILESTONES_FOLDER:
+            return "ad \"milestonename:<name>\"";
+        case Path::MILESTONE:
+            return "ad \"milestonestepname:<name>, progressratio:<ratio>\"";
+        case Path::TEAM_FOLDER:
+            return "ad \"employeeid|employeename:<employee>, role:<role>\"";
+        case Path::ASSIGNMENTS_FOLDER:
+            return "ad \"userid|username:<user>, assigneddate:<date>, closedate:<date>\"";
+        case Path::ASSIGNMENT:
+            return "ad \"bookeddate:<date>, hours:<hours>\"";
+        case Path::DATA_FOLDER:
+            return "ad \"artefactdatafieldid|fieldname:<field>, value:<value>\"";
+        case Path::ASSOCIATIONS_FOLDER:
+            return "ad \"activityid|activityname:<activity>, ratio:<ratio>\"";
+        case Path::ARTEFACT_TO_ACTIVITY_LINK:
+            return "ad \"milestonestepid|milestonestepname:<step>, completedbyid|completedbyname:<employee>, completiondate:<date>\"";
+        default:
+            return "ad \"<field>:<value>, <field>:<value>, ...\"";
+    }
+}
 
 void add(Database& db, Path& pth) {
 
@@ -277,72 +325,10 @@ void add(Database& db, Path& pth, const std::string& csvValues) {
             addMilestoneToArtefactLink(db, link, projectId);
         }
     }
+  } catch (const std::invalid_argument& e) {
+        throw ValidationError(std::string("Invalid format: ") + e.what() + ". Use: " + addFormatHelp(pth.current_type()));
   } catch (const CsvParseError& e) {
-        // Provide context-specific format help based on current path type
-        std::string formatHelp;
-        switch (pth.current_type()) {
-            case Path::DEPARTMENT:
-                formatHelp = "ad <firstname>,<lastname>,<email>,<password>";
-                break;
-            case Path::PROJECTS_FOLDER:
-                formatHelp = "ad <projectname>,<projectno>";
-                break;
-            case Path::ACTIVITIES_FOLDER:
-                formatHelp = "ad <categoryname>";
-                break;
-            case Path::CATEGORY:
-                formatHelp = "ad <subcategoryname>";
-                break;
-            case Path::SUBCATEGORY:
-                formatHelp = "ad <activityname>,<managerid>,<plannedstart>,<plannedfinish>,<plannedhours>";
-                break;
-            case Path::TASKS_FOLDER:
-                formatHelp = "ad <taskname>";
-                break;
-            case Path::NOTES_FOLDER:
-                formatHelp = "ad <userid>,<note>,<notedate>";
-                break;
-            case Path::ARTEFACT_TYPES_FOLDER:
-                formatHelp = "ad <artefactname>,<artefactdescription>";
-                break;
-            case Path::ARTEFACTS_FOLDER:
-                formatHelp = "ad <artefacttitle>,<artefactownerid>";
-                break;
-            case Path::FIELDS_FOLDER:
-                formatHelp = "ad <fieldtitle>,<valuetype>,<maximumlength>,<maximumvalue>,<minimumvalue>";
-                break;
-            case Path::MILESTONES_FOLDER:
-                formatHelp = "ad <milestonename>";
-                break;
-            case Path::MILESTONE:
-                formatHelp = "ad <milestonestepname>,<progressratio>";
-                break;
-            case Path::DEPARTMENTS_FOLDER:
-                formatHelp = "ad <departmentname>";
-                break;
-            case Path::TEAM_FOLDER:
-                formatHelp = "ad <employeeid>,<role>";
-                break;
-            case Path::ASSIGNMENTS_FOLDER:
-                formatHelp = "ad <userid>,<assigneddate>,<closedate>";
-                break;
-            case Path::ASSIGNMENT:
-                formatHelp = "ad <bookeddate>,<hours>";
-                break;
-            case Path::DATA_FOLDER:
-                formatHelp = "ad <artefactdatafieldid>,<value>";
-                break;
-            case Path::ASSOCIATIONS_FOLDER:
-                formatHelp = "ad <activityid>,<ratio>";
-                break;
-            case Path::ARTEFACT_TO_ACTIVITY_LINK:
-                formatHelp = "ad <milestonestepid>,<completedbyid>,<completiondate>";
-                break;
-            default:
-                formatHelp = "ad <field1>,<field2>,...";
-                break;
-        }
-        throw ValidationError("Invalid format. Use: " + formatHelp);
+        throw ValidationError(std::string(e.what()) + " Use: " + addFormatHelp(pth.current_type()));
   } catch (const DataError& e) {
         throw;
   }
@@ -1082,7 +1068,7 @@ int addHours(Database& db, HoursData& hours) {
             );
             insertStmt->setInt(1, hours.getAssignmentId());
             insertStmt->setString(2, hours.getBookedDate());
-            insertStmt->setInt(3, hours.getHours());
+            insertStmt->setDouble(3, hours.getHours());
             insertStmt->executeUpdate();
             lastId = db.getLastInsertId();
             count++;

@@ -74,17 +74,20 @@ void help(const std::string& topic) {
             "  Add a new item at the current location.\n"
             "\n"
             "  Syntax:  add\n"
-            "           add <field1>,<field2>,...\n"
-            "           ad  <field1>,<field2>,...\n"
+            "           add \"<field>:<value>, <field>:<value>, ...\"\n"
+            "           ad  \"<field>:<value>, <field>:<value>, ...\"\n"
             "\n"
             "  Usage:\n"
             "    - With no arguments, the program prompts for each field interactively.\n"
-            "    - With CSV arguments, all fields are supplied in a single line (used in\n"
-            "      source files — interactive mode is not available from source files).\n"
+            "    - With an argument, all fields are supplied in a single line as\n"
+            "      comma-separated field:value pairs (used in source files, where\n"
+            "      interactive mode is not available).\n"
+            "    - Field names are case-insensitive. Quote the argument if it contains spaces.\n"
+            "    - On a format error, the expected fields for the current location are shown.\n"
             "\n"
             "  Examples:\n"
-            "    add                           Interactive add\n"
-            "    ad \"Project Alpha\",2026-01-01  Add with CSV values\n";
+            "    add                                            Interactive add\n"
+            "    ad \"projectname:Project Alpha, projectno:P-001\"  Add a project\n";
 
     } else if (topic == "remove" || topic == "rm") {
         std::cout <<
@@ -108,19 +111,21 @@ void help(const std::string& topic) {
         std::cout <<
             "set (st)\n"
             "\n"
-            "  Edit the value of a field on an item at the current location.\n"
+            "  Edit the values of one or more fields on an item at the current location.\n"
             "\n"
-            "  Syntax:  set <id|name> <fieldname>,<newvalue>\n"
-            "           st  <id|name> <fieldname>,<newvalue>\n"
+            "  Syntax:  set <id|name> \"<field>:<value>, <field>:<value>, ...\"\n"
+            "           st  <id|name> \"<field>:<value>, <field>:<value>, ...\"\n"
             "\n"
             "  Notes:\n"
             "    - The first argument identifies the item (by ID or name).\n"
-            "    - The second argument is a comma-separated pair: field name and new value.\n"
+            "    - The second argument is a comma-separated list of field:value pairs.\n"
+            "    - Field names are case-insensitive.\n"
+            "    - Quote the second argument if it contains spaces.\n"
             "    - Some fields (e.g. parent IDs) cannot be edited via set.\n"
             "\n"
             "  Examples:\n"
-            "    set 5 activityname,\"New Name\"   Rename activity with ID 5\n"
-            "    st \"Task 1\" startdate,2026-06-01 Set start date on a task\n";
+            "    set 5 \"activityname:New Name\"                     Rename item with ID 5\n"
+            "    st \"Task 1\" \"startdate:2026-06-01, enddate:2026-07-01\"  Set dates on a task\n";
 
     } else if (topic == "import" || topic == "im") {
         std::cout <<
@@ -159,7 +164,11 @@ void help(const std::string& topic) {
             "\n"
             "  Notes:\n"
             "    - Exports the items listed at the current hierarchy level.\n"
-            "    - File paths may be absolute or relative to the current working directory.\n"
+            "    - File paths may be absolute or relative. Relative paths resolve against\n"
+            "      the source file's directory in batch mode, otherwise the current\n"
+            "      working directory.\n"
+            "    - An existing file is overwritten. If the export fails, the file is\n"
+            "      left untouched.\n"
             "\n"
             "  Examples:\n"
             "    ex output.csv          Export to output.csv\n"

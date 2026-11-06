@@ -46,7 +46,7 @@ TEST_F(BatchTest, B02_CommentLinesAreIgnored) {
         "cd ~\n"
         "# End\n");
 
-    EXPECT_NO_THROW(commands::batchExecute(*db, pth, path));
+    EXPECT_NO_THROW(commands::batchExecute(*db, pth, path, true));
     std::remove(path.c_str());
 }
 
@@ -59,7 +59,7 @@ TEST_F(BatchTest, B03_EmptyLinesAreSkipped) {
         "ls\n"
         "\n");
 
-    EXPECT_NO_THROW(commands::batchExecute(*db, pth, path));
+    EXPECT_NO_THROW(commands::batchExecute(*db, pth, path, true));
     std::remove(path.c_str());
 }
 
@@ -77,7 +77,7 @@ TEST_F(BatchTest, B04_ScriptStopsAtFirstError) {
     // After the error the function returns early.
     testing::internal::CaptureStdout();
     testing::internal::CaptureStderr();
-    EXPECT_NO_THROW(commands::batchExecute(*db, pth, path));
+    EXPECT_NO_THROW(commands::batchExecute(*db, pth, path, true));
     testing::internal::GetCapturedStdout();
     std::string err = testing::internal::GetCapturedStderr();
 
@@ -91,7 +91,7 @@ TEST_F(BatchTest, B04_ScriptStopsAtFirstError) {
 
 // B-05 — Batch mode always runs as admin (no PermissionError from write commands)
 TEST_F(BatchTest, B05_BatchModeIsAdmin) {
-    // batchExecute internally calls execute(..., isAdmin=1)
+    // batchExecute passes isAdmin through to execute()
     std::string path = writeSrcFile("b05_admin.src",
         "cd ~\n"
         "cd Projects\n"
@@ -99,7 +99,7 @@ TEST_F(BatchTest, B05_BatchModeIsAdmin) {
         "rm \"B05 Batch Project\"\n");
 
     // Should not throw PermissionError
-    EXPECT_NO_THROW(commands::batchExecute(*db, pth, path));
+    EXPECT_NO_THROW(commands::batchExecute(*db, pth, path, true));
     std::remove(path.c_str());
 }
 
@@ -113,7 +113,7 @@ TEST_F(BatchTest, B06_NavigationStatePersistsAcrossLines) {
         "cd Milestones\n"
         "ad \"milestonename:B06 Batch Milestone\"\n");
 
-    EXPECT_NO_THROW(commands::batchExecute(*db, pth, path));
+    EXPECT_NO_THROW(commands::batchExecute(*db, pth, path, true));
 
     int count = queryCount(
         "SELECT COUNT(*) FROM Milestones WHERE milestonename='B06 Batch Milestone'");
@@ -124,6 +124,18 @@ TEST_F(BatchTest, B06_NavigationStatePersistsAcrossLines) {
 
 // B-07 — Non-existent script file raises FileIOError
 TEST_F(BatchTest, B07_NonExistentScriptFile) {
-    EXPECT_THROW(commands::batchExecute(*db, pth, "no_such_file_osoem.src"),
+    EXPECT_THROW(commands::batchExecute(*db, pth, "no_such_file_osoem.src", true),
                  FileIOError);
+}
+
+// B-08 — Non-admin users cannot run batch mode
+TEST_F(BatchTest, B08_NonAdminRejected) {
+    EXPECT_THROW(commands::batchExecute(*db, pth, "no_such_file_osoem.src", false),
+                 PermissionError);
+}
+
+// B-08 — Non-admin users cannot run batch mode
+TEST_F(BatchTest, B08_NonAdminRejected) {
+    EXPECT_THROW(commands::batchExecute(*db, pth, "no_such_file_osoem.src", false),
+                 PermissionError);
 }

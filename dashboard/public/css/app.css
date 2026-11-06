@@ -1,0 +1,526 @@
+/* Osoem dashboard theme (layered on Bootstrap 5.3) */
+
+:root {
+    --app-brand: #2563eb;
+    --app-brand-rgb: 37, 99, 235;
+    --app-brand-dark: #1d4ed8;
+    --app-nav-bg: #0f172a;
+    --app-bg: #f5f7fa;
+    --app-border: #e3e8ef;
+    --app-muted: #64748b;
+    --app-text: #0f172a;
+
+    --app-planned: #94a3b8;
+    --app-forecast: #f59e0b;
+    --app-actual: var(--app-brand);
+    --app-over: #dc2626;
+
+    --bs-primary: var(--app-brand);
+    --bs-primary-rgb: var(--app-brand-rgb);
+    --bs-link-color: var(--app-brand);
+    --bs-link-color-rgb: var(--app-brand-rgb);
+    --bs-link-hover-color: var(--app-brand-dark);
+    --bs-body-font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --bs-body-font-size: 0.9375rem;
+    --bs-body-color: var(--app-text);
+    --bs-border-color: var(--app-border);
+}
+
+body {
+    background-color: var(--app-bg);
+    min-height: 100vh;
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--app-brand);
+    --bs-btn-border-color: var(--app-brand);
+    --bs-btn-hover-bg: var(--app-brand-dark);
+    --bs-btn-hover-border-color: var(--app-brand-dark);
+    --bs-btn-active-bg: var(--app-brand-dark);
+    --bs-btn-active-border-color: var(--app-brand-dark);
+}
+
+.btn-outline-primary {
+    --bs-btn-color: var(--app-brand);
+    --bs-btn-border-color: var(--app-brand);
+    --bs-btn-hover-bg: var(--app-brand);
+    --bs-btn-hover-border-color: var(--app-brand);
+    --bs-btn-active-bg: var(--app-brand-dark);
+}
+
+.btn .bi,
+.dropdown-item .bi {
+    margin-right: 0.25rem;
+}
+
+.btn-icon .bi {
+    margin-right: 0;
+}
+
+/* ---------- Navbar ---------- */
+
+.app-navbar {
+    background-color: var(--app-nav-bg);
+}
+
+.app-navbar .navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.app-navbar .navbar-brand .brand-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-right: 0.5rem;
+    border-radius: 0.4rem;
+    background-color: var(--app-brand);
+    font-size: 0.9rem;
+}
+
+.app-navbar .nav-link {
+    font-weight: 500;
+}
+
+.avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: rgba(var(--app-brand-rgb), 0.25);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* ---------- Page structure ---------- */
+
+.app-main {
+    padding-top: 1.5rem;
+    padding-bottom: 3rem;
+}
+
+.page-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.page-header .breadcrumb {
+    margin-bottom: 0.25rem;
+    font-size: 0.85rem;
+}
+
+.page-header h1 {
+    margin-bottom: 0.15rem;
+    font-weight: 600;
+}
+
+.page-subtitle {
+    color: var(--app-muted);
+    margin-bottom: 0;
+}
+
+.page-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.card {
+    border-color: var(--app-border);
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.card-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    background-color: #fff;
+    border-bottom-color: var(--app-border);
+    padding-top: 0.85rem;
+    padding-bottom: 0.85rem;
+}
+
+.card-title {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+}
+
+.card > .table {
+    margin-bottom: 0;
+}
+
+.table > :not(caption) > * > * {
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+}
+
+.table thead th {
+    color: var(--app-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.table td:first-child,
+.table th:first-child {
+    padding-left: 1rem;
+}
+
+.table td:last-child,
+.table th:last-child {
+    padding-right: 1rem;
+}
+
+.section-label {
+    color: var(--app-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.dashboard-section + .dashboard-section {
+    margin-top: 2rem;
+}
+
+.dashboard-section-title {
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.detail-list {
+    margin-bottom: 0;
+}
+
+.detail-list dt {
+    color: var(--app-muted);
+    font-weight: 500;
+}
+
+.detail-list dd {
+    margin-bottom: 0.5rem;
+}
+
+.empty-state {
+    padding: 2rem 1rem;
+    text-align: center;
+    color: var(--app-muted);
+}
+
+.empty-state .bi {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.75rem;
+    opacity: 0.6;
+}
+
+.clickable-row {
+    cursor: pointer;
+}
+
+/* ---------- Stat tiles ---------- */
+
+.stat-tile {
+    height: 100%;
+}
+
+.stat-tile .card-body {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.stat-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    font-size: 1.15rem;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.1;
+}
+
+.stat-label {
+    color: var(--app-muted);
+    font-size: 0.8rem;
+}
+
+/* ---------- Status pills ---------- */
+
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.status-pill::before {
+    content: "";
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background-color: currentColor;
+}
+
+.status-success { background-color: #dcfce7; color: #15803d; }
+.status-primary { background-color: #dbeafe; color: #1d4ed8; }
+.status-danger { background-color: #fee2e2; color: #b91c1c; }
+.status-warning { background-color: #fef3c7; color: #b45309; }
+.status-secondary { background-color: #f1f5f9; color: #475569; }
+
+/* ---------- Charts (Gantt, hours, artefact progress) ---------- */
+
+.chart {
+    --label-w: 90px;
+    --value-w: 120px;
+    position: relative;
+}
+
+.chart-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.6rem;
+}
+
+.chart-label {
+    flex: 0 0 var(--label-w);
+    padding-right: 0.5rem;
+    color: var(--app-muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.chart-track {
+    flex: 1 1 auto;
+    position: relative;
+    height: 1.4rem;
+    border-radius: 0.35rem;
+    background-color: #eef2f7;
+}
+
+.chart-value {
+    flex: 0 0 var(--value-w);
+    padding-left: 0.6rem;
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.chart-bar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    min-width: 3px;
+    border-radius: 0.35rem;
+}
+
+.chart-bar-planned { background-color: var(--app-planned); }
+.chart-bar-forecast { background-color: var(--app-forecast); }
+.chart-bar-actual,
+.chart-bar-consumed-normal { background-color: var(--app-actual); }
+.chart-bar-consumed-over { background-color: var(--app-over); }
+
+.chart-bar-ongoing {
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255, 255, 255, 0.25) 5px, rgba(255, 255, 255, 0.25) 10px);
+}
+
+.chart-axis {
+    margin-bottom: 0.4rem;
+}
+
+.chart-axis .chart-track {
+    height: 1rem;
+    background: none;
+}
+
+.chart-tick {
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    color: var(--app-muted);
+    font-size: 0.7rem;
+    white-space: nowrap;
+}
+
+.chart-tick:first-child {
+    transform: none;
+}
+
+.chart-today {
+    position: absolute;
+    top: 1.1rem;
+    bottom: 0;
+    left: calc(var(--label-w) + (100% - var(--label-w) - var(--value-w)) * var(--pos));
+    width: 2px;
+    background-color: var(--app-over);
+    pointer-events: none;
+}
+
+.chart-today-label {
+    position: absolute;
+    top: -1.15rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0 0.3rem;
+    border-radius: 0.2rem;
+    background-color: var(--app-over);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 600;
+}
+
+.chart-total {
+    margin-top: 0.85rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--app-border);
+}
+
+.chart-total .chart-label {
+    color: var(--app-text);
+    font-weight: 600;
+}
+
+/* ---------- Task tree ---------- */
+
+.task-tree,
+.task-tree ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.task-tree ul {
+    margin-left: 0.55rem;
+    padding-left: 0.9rem;
+    border-left: 1px solid var(--app-border);
+}
+
+.task-tree-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0;
+}
+
+.task-tree-item .task-name {
+    flex: 1 1 auto;
+    color: inherit;
+    text-decoration: none;
+}
+
+.task-tree-item a.task-name:hover {
+    color: var(--bs-link-color);
+    text-decoration: underline;
+}
+
+.task-tree-item .task-hours {
+    color: var(--app-muted);
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.task-tree-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    color: var(--app-muted);
+    font-size: 0.75rem;
+}
+
+/* ---------- Artefacts and notes ---------- */
+
+.artefact-table th:nth-child(1) { width: 26%; }
+.artefact-table th:nth-child(2) { width: 14%; }
+.artefact-table th:nth-child(3) { width: 16%; }
+.artefact-table th:nth-child(4) { width: 22%; }
+.artefact-table th:nth-child(5) { width: 18%; }
+.artefact-table th:nth-child(6) { width: 4%; }
+
+.artefact-table .progress {
+    height: 0.5rem;
+}
+
+.artefact-table .progress-bar {
+    background-color: var(--app-actual);
+}
+
+.artefact-table .progress-bar.is-complete {
+    background-color: #16a34a;
+}
+
+.note-item {
+    padding: 0.9rem 1rem;
+}
+
+.note-text {
+    white-space: pre-line;
+}
+
+.note-meta {
+    color: var(--app-muted);
+    font-size: 0.8rem;
+}
+
+/* ---------- Login ---------- */
+
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 1rem;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(var(--app-brand-rgb), 0.18), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(var(--app-brand-rgb), 0.12), transparent 40%),
+        var(--app-nav-bg);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    border: none;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+}
+
+.login-card .brand-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.6rem;
+    background-color: var(--app-brand);
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 700;
+}

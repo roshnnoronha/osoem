@@ -4,6 +4,10 @@ project(osoem_planner)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Code shared across agents (data/, client/, exceptions/, utils/) and the
+# generated config headers live one level up, alongside this agent's folder.
+set(AGENTS_ROOT ${CMAKE_SOURCE_DIR}/..)
+
 # MySQL Connector/C++
 find_package(mysqlcppconn QUIET)
 if(NOT mysqlcppconn_FOUND)
@@ -36,26 +40,33 @@ if(NOT READLINE_INCLUDE_DIR OR NOT READLINE_LIBRARY)
 endif()
 
 include_directories(
-    ${CMAKE_SOURCE_DIR}/config
-    ${CMAKE_SOURCE_DIR}/src
+    ${AGENTS_ROOT}/config
+    ${AGENTS_ROOT}/include
+    ${AGENTS_ROOT}/include/data
+    ${AGENTS_ROOT}/include/client
+    ${AGENTS_ROOT}/include/exceptions
+    ${AGENTS_ROOT}/include/utils
     ${MYSQLCPPCONN_INCLUDE_DIR}
     ${CURL_INCLUDE_DIRS}
     ${READLINE_INCLUDE_DIR}
 )
 
-set(SOURCES
-    src/main.cpp
-    src/data/database.cpp
-    src/planner/openai_client.cpp
-    src/planner/planner.cpp
-    src/planner/agent_tools.cpp
-    src/utils/utils.cpp
+set(COMMON_SOURCES
+    ${AGENTS_ROOT}/include/data/database.cpp
+    ${AGENTS_ROOT}/include/client/openai_client.cpp
+    ${AGENTS_ROOT}/include/utils/utils.cpp
 )
 
-add_executable(osoem_planner ${SOURCES})
+add_executable(osoem_planner
+    main.cpp
+    ${COMMON_SOURCES}
+    planner/planner.cpp
+    planner/planner_tools.cpp
+)
 target_link_libraries(osoem_planner
     ${MYSQLCPPCONN_LIBRARY}
     CURL::libcurl
     nlohmann_json::nlohmann_json
     ${READLINE_LIBRARY}
 )
+

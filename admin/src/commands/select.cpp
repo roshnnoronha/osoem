@@ -1043,7 +1043,7 @@ void selectHours(Database& db, Path& pth, int id) {
             std::cout << "Hours Booking Details:" << std::endl;
             std::cout << "  ID: " << res->getInt("bookingid") << std::endl;
             std::cout << "  Date: " << res->getString("bookeddate") << std::endl;
-            std::cout << "  Hours: " << res->getInt("hours") << std::endl;
+            std::cout << "  Hours: " << res->getString("hours") << std::endl;
         } else {
             throw EntityNotFoundError("Hours booking", id);
         }

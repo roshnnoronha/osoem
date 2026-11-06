@@ -33,7 +33,7 @@ fi
 MISSING=()
 command -v cmake &>/dev/null || MISSING+=("cmake")
 command -v g++   &>/dev/null || MISSING+=("g++")
-IT [[ ${#MISSING[@]} -gt 0 ]]; then
+if [[ ${#MISSING[@]} -gt 0 ]]; then
     echo "ERROR: Missing required tools: ${MISSING[*]}"
     echo "Install with: sudo apt install cmake g++ libmysqlcppconn-dev libreadline-dev libssl-dev"
     exit 1

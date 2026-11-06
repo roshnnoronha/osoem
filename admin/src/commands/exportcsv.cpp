@@ -31,11 +31,8 @@ void exportcsv (Database& db, Path& pth, std::string filename) {
         throw FileIOError("No filename specified.");
     }
 
-    // Open file for writing
-    std::ofstream file(filename);
-    if (!file.is_open()) {
-        throw FileIOError("Could not open file '" + filename + "' for writing");
-    }
+    // Buffer output so the file is only touched once the export succeeds
+    std::ostringstream file;
 
     std::cout << "Exporting data to file: " << filename << std::endl;
 
@@ -574,11 +571,15 @@ void exportcsv (Database& db, Path& pth, std::string filename) {
         }
 
     } catch (sql::SQLException& e) {
-        file.close();
         throw DatabaseError("export", e.what());
     }
 
-    file.close();
+    std::ofstream out(filename);
+    if (!out.is_open()) {
+        throw FileIOError("Could not open file '" + filename + "' for writing");
+    }
+    out << file.str();
+    out.close();
     std::cout << "Export completed successfully." << std::endl;
 }
 

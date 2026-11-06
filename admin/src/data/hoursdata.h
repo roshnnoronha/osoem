@@ -27,7 +27,7 @@ public:
     // Getter functions
     int getAssignmentId() { return records[index].assignmentId; }
     std::string getBookedDate() { return records[index].bookedDate; }
-    int getHours() { return records[index].hours; }
+    double getHours() { return records[index].hours; }
 
 protected:
     std::size_t recordCount() const override { return records.size(); }
@@ -37,7 +37,7 @@ private:
         int id = 0;
         int assignmentId;
         std::string bookedDate;
-        int hours;
+        double hours;
     };
     std::vector<Record> records;
     Database& db;

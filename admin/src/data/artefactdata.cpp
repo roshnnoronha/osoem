@@ -61,31 +61,33 @@ ArtefactData::ArtefactData(int artefactId, Database* db_ptr) : db(*db_ptr) {
 
 void ArtefactData::setValue(std::string fieldName, std::string fieldValue) {
     std::transform(fieldName.begin(), fieldName.end(), fieldName.begin(), ::tolower);
+    Record oldVal;
     for (auto& rec : records) {
-        if (fieldName == "artefacttypeid") {
-            try {
-                rec.artefactTypeId = std::stoi(fieldValue);
-            } catch (const std::exception& e) {
-                throw InvalidFieldError("Invalid value for artefacttypeid. Must be an integer.");
+        try {
+            oldVal = rec;
+            if (fieldName == "artefacttitle") {
+                rec.title = fieldValue;
+            } else if (fieldName == "artefactownerid" || fieldName == "artefactownername") {
+                int newOwnerId = utils::resolveIdOrName(db, fieldValue, utils::lookupEmployee);
+                auto teamStmt = db.prepareStatement(
+                    "SELECT COUNT(*) AS cnt FROM ProjectTeamMembers ptm "
+                    "JOIN ArtefactTypes atype ON ptm.projectid = atype.projectid "
+                    "WHERE atype.artefacttypeid = ? AND ptm.employeeid = ?"
+                );
+                teamStmt->setInt(1, rec.artefactTypeId);
+                teamStmt->setInt(2, newOwnerId);
+                auto teamRes = teamStmt->executeQuery();
+                if (teamRes->next() && teamRes->getInt("cnt") == 0) {
+                    throw ValidationError("Artefact owner must be a member of the project team");
+                }
+                rec.artefactOwnerId = newOwnerId;
+            } else {
+                throw InvalidFieldError("Invalid field name:" + fieldName + ". Valid fields are: artefacttitle, artefactownerid, artefactownername.");
             }
-        } else if (fieldName == "artefacttitle") {
-            rec.title = fieldValue;
-        } else if (fieldName == "artefactownerid" || fieldName == "artefactownername") {
-            int newOwnerId = utils::resolveIdOrName(db, fieldValue, utils::lookupEmployee);
-            auto teamStmt = db.prepareStatement(
-                "SELECT COUNT(*) AS cnt FROM ProjectTeamMembers ptm "
-                "JOIN ArtefactTypes atype ON ptm.projectid = atype.projectid "
-                "WHERE atype.artefacttypeid = ? AND ptm.employeeid = ?"
-            );
-            teamStmt->setInt(1, rec.artefactTypeId);
-            teamStmt->setInt(2, newOwnerId);
-            auto teamRes = teamStmt->executeQuery();
-            if (teamRes->next() && teamRes->getInt("cnt") == 0) {
-                throw ValidationError("Artefact owner must be a member of the project team");
-            }
-            rec.artefactOwnerId = newOwnerId;
-        } else {
-            throw InvalidFieldError("Invalid field name:" + fieldName + ". Valid fields are: artefacttypeid, artefacttitle, artefactownerid, artefactownername.");
+            validateRecord(rec);
+        } catch (const ValidationError& e) {
+            rec = oldVal;
+            throw e;
         }
     }
 }

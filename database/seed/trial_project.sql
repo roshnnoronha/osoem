@@ -5,13 +5,16 @@ VALUES
 ('Plumbing'),
 ('Electrical');
 
+-- password/passwordsalt below are SHA-256(plaintext + salt) pairs (matches admin/src/utils/auth.cpp's
+-- hashing scheme). The plaintext login passwords are unchanged: ajds435kjad, ihfdgjh23h98, jhjhfgkjn35n,
+-- hjbvirj84n (filled in by the "Use the demo account" link in dashboard/public/index.php), igrkjnghoid94u5.
 INSERT INTO Employees (departmentid,firstname,lastname,email,password,passwordsalt,admin)
 VALUES
-(1,'Paul','Sharp','paul.sharp@organiz.com','ajds435kjad','aaaaaaaa',1),  
-(2,'Rebecca','Henderson','rebecca.henderson@organiz.com','ihfdgjh23h98','aaaaaaaa',0),  
-(2,'Anne','Mills','anne.mills@organiz.com','jhjhfgkjn35n','aaaaaaaa',0),  
-(3,'Edward','Poole','edward.poole@organiz.com','hjbvirj84n','aaaaaaaa',0),  
-(4,'Blake','Ball','blake.ball@organiz.com','igrkjnghoid94u5','aaaaaaaa',0);  
+(1,'Paul','Sharp','paul.sharp@organiz.com','5dc50f2f5412d0010291d58532095d93e45792ce9c94495b8d9c329670c05811','762aef1bb364287eeb362c502905920d799f580b182f300e7e6d698795ee16b3',1),
+(2,'Rebecca','Henderson','rebecca.henderson@organiz.com','92f2192f0bffff44a5dbd8b272d0fae459b01d6bc4ccf87e6f3a73fc4f1e2366','f85e5a77eb5ac3992ea365eed4b3695de7764d3d76f27af42432e6b42e5dcdc6',0),
+(2,'Anne','Mills','anne.mills@organiz.com','48e99c035bb7488daca8c4139c666444f2d6d90f9dba7552707183f9fd329643','af4c02c7a236880c5721b5541a2a879bcd99529891ee32cc2a0bd8d6df46ab3f',0),
+(3,'Edward','Poole','edward.poole@organiz.com','60b738afbe0ef3d45a9cb3854f22393ead8df0846fce76ba0eecb8cbedbf0198','cc6b2cfe102beda96378d1361119a634b479fe2d26c551d97a7a02d5eb3c5d79',0),
+(4,'Blake','Ball','blake.ball@organiz.com','74b1de81c29e2924d1aff96aa3fbf1b7475c52bc5ac14d344e9fa4f591c4720b','f6b045714773cb32543fbe96ac79f45a0280cd0863c94cfa28e482041e0f4573',0);
 
 INSERT INTO Projects ( projectno , projectname)
 VALUES

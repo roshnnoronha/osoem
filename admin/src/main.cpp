@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
 
         // Check if we have a source file to execute (batch mode)
         if (!sourceFile.empty()) {
-            commands::batchExecute(db, pth, sourceFile);
+            commands::batchExecute(db, pth, sourceFile, userContext.isAdmin);
             return 0;
         }
 

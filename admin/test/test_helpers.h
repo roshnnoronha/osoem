@@ -121,11 +121,11 @@ protected:
 
         // Seed departments and employees
         data::Path seedPath;
-        commands::batchExecute(*db, seedPath, "examples/Organization_Examples/departments.src");
+        commands::batchExecute(*db, seedPath, "examples/Organization_Examples/departments.src", true);
 
         // Seed the residential building project
         seedPath.reset();
-        commands::batchExecute(*db, seedPath, "examples/Residential_Building_Project/project.src");
+        commands::batchExecute(*db, seedPath, "examples/Residential_Building_Project/project.src", true);
     }
 };
 

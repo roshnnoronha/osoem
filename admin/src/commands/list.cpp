@@ -919,7 +919,7 @@ void listHours(Database& db, int assignmentId, bool showAll) {
         while (res->next()) {
             std::cout << std::left << std::setw(5) << res->getInt("bookingid")
                       << std::setw(20) << res->getString("bookeddate")
-                      << std::setw(10) << res->getInt("hours")
+                      << std::setw(10) << res->getString("hours")
                       << std::endl;
             count++;
         }
@@ -928,7 +928,7 @@ void listHours(Database& db, int assignmentId, bool showAll) {
         while (res->next()) {
             std::cout << "(" << res->getInt("bookingid") << ") "
                       << res->getString("bookeddate") << " - "
-                      << res->getInt("hours") << "h" << std::endl;
+                      << res->getString("hours") << "h" << std::endl;
             count++;
         }
     }

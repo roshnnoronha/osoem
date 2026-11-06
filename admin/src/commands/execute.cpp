@@ -42,7 +42,7 @@ int execute (Database& db, Path& pth, std::string input, bool isAdmin, bool from
         }
         if (param.empty()) {
             if (fromSourceFile) {
-                throw PermissionError("Manual add is not allowed when running from a source file. Use: ad <field1>,<field2>,...");
+                throw PermissionError("Manual add is not allowed when running from a source file. Use: ad \"<field>:<value>, <field>:<value>, ...\"");
             }
             add(db, pth);
         } else {
@@ -81,7 +81,12 @@ int execute (Database& db, Path& pth, std::string input, bool isAdmin, bool from
 }
 
 // Execute a batch of commands in a source file `filename`
-void batchExecute (Database& db, Path& pth, std::string filename) {
+void batchExecute (Database& db, Path& pth, std::string filename, bool isAdmin) {
+    // Batch mode is restricted to admin users
+    if (!isAdmin) {
+        throw PermissionError("Batch mode requires admin access.");
+    }
+
     // Open file
     std::ifstream file(filename);
     if (!file.is_open()) {
@@ -106,7 +111,7 @@ void batchExecute (Database& db, Path& pth, std::string filename) {
 
         std::cout << "[osoem: "<<filename<<", Line " << lineNumber << "] "<< pth.to_string() << ">" << line << std::endl;
         try {
-            execute (db, pth, line, 1, true, sourceDir);
+            execute (db, pth, line, isAdmin, true, sourceDir);
         } catch (const DataError& e) {
             std::cerr << "Error: " << e.what() << std::endl;
             return;

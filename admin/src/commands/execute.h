@@ -24,7 +24,7 @@ namespace commands {
 int execute (Database& db, Path& pth, std::string input, bool isAdmin = 0, bool fromSourceFile = false, std::string sourceDir = "");
 
 // Execute a batch of commands in a source file `filename`
-void batchExecute (Database& db, Path& pth, std::string filename);
+void batchExecute (Database& db, Path& pth, std::string filename, bool isAdmin);
 
 // Parse input string into tokens, handling quoted strings with spaces
 std::vector<std::string> parseInput(const std::string& input); 

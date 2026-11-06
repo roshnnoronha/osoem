@@ -320,8 +320,14 @@ void setActivityData(Database& db, ActivityData& act, int activityId) {
             updateStmt->setNull(9, sql::DataType::DATE);
         else
             updateStmt->setString(9, act.getActualEnd());
-        updateStmt->setDouble(10, act.getPlannedHours());
-        updateStmt->setDouble(11, act.getForecastHours());
+        if (act.getPlannedHours() < 0)
+            updateStmt->setNull(10, sql::DataType::DECIMAL);
+        else
+            updateStmt->setDouble(10, act.getPlannedHours());
+        if (act.getForecastHours() < 0)
+            updateStmt->setNull(11, sql::DataType::DECIMAL);
+        else
+            updateStmt->setDouble(11, act.getForecastHours());
         updateStmt->setInt(12, activityId);
 
         int rowsAffected = updateStmt->executeUpdate();
@@ -704,7 +710,7 @@ void setHoursData(Database& db, HoursData& hours, int bookingId) {
         std::string query = "UPDATE Hours SET bookeddate = ?, hours = ? WHERE bookingid = ?";
         auto updateStmt = db.prepareStatement(query);
         updateStmt->setString(1, hours.getBookedDate());
-        updateStmt->setInt(2, hours.getHours());
+        updateStmt->setDouble(2, hours.getHours());
         updateStmt->setInt(3, bookingId);
 
         int rowsAffected = updateStmt->executeUpdate();
@@ -785,7 +791,7 @@ void setMilestoneToArtefactLinkData(Database& db, MilestoneToArtefactLinkData& l
         }
 
         // Build and execute UPDATE query
-        std::string query = "UPDATE MilestoneToArtefactLink SET milestonestepid = ?, completedby = ?, completiondate = ? WHERE milestonelinkid = ?";
+        std::string query = "UPDATE MilestoneToArtefactLink SET milestonestepid = ?, completedbyid = ?, completiondate = ? WHERE milestonelinkid = ?";
         auto updateStmt = db.prepareStatement(query);
         updateStmt->setInt(1, link.getMilestoneStepId());
         if (link.getCompletedById() == 0) {

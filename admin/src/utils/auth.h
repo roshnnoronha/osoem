@@ -16,7 +16,7 @@ struct UserContext {
     bool isAdmin;
     bool isAuthenticated;
 
-    UserContext() : employeeId(0), isAdmin(true /*false*/), isAuthenticated(false) {}
+    UserContext() : employeeId(0), isAdmin(false), isAuthenticated(false) {}
 };
 
 // Generate a random 32-byte salt (returned as 64-character hex string)

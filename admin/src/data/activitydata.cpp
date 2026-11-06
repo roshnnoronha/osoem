@@ -106,66 +106,74 @@ ActivityData::ActivityData(int activityId, Database* db_ptr): db(*db_ptr) {
         temp.forecastStart = res->getString("forecaststart");
         temp.forecastEnd = res->getString("forecastfinish");
         temp.actualEnd = res->getString("actualfinish");
-        temp.plannedHours = res->getDouble("plannedhours");
-        temp.forecastHours = res->getDouble("forecasthours");
+        temp.plannedHours = res->isNull("plannedhours") ? -1 : res->getDouble("plannedhours");  // -1 indicates NULL
+        temp.forecastHours = res->isNull("forecasthours") ? -1 : res->getDouble("forecasthours");
         records.emplace_back(temp);
     }
 }
 
 void ActivityData::setValue(std::string fieldName, std::string fieldValue) {
     std::transform(fieldName.begin(), fieldName.end(), fieldName.begin(), ::tolower);
+    Record oldVal;
     for (auto& rec : records) {
-        if (fieldName == "activityname") {
-            rec.name = fieldValue;
-        } else if (fieldName == "activitydescription") {
-            rec.description = fieldValue;
-        } else if (fieldName == "activitymanagerid" || fieldName == "activitymanagername") {
-            int newManagerId = utils::resolveIdOrName(db, fieldValue, utils::lookupEmployee);
-            auto teamStmt = db.prepareStatement(
-                "SELECT COUNT(*) AS cnt FROM ProjectTeamMembers ptm "
-                "JOIN ActivityCategories c ON ptm.projectid = c.projectid "
-                "JOIN ActivitySubcategories s ON c.categoryid = s.categoryid "
-                "WHERE s.subcategoryid = ? AND ptm.employeeid = ?"
-            );
-            teamStmt->setInt(1, rec.subCategoryId);
-            teamStmt->setInt(2, newManagerId);
-            auto teamRes = teamStmt->executeQuery();
-            if (teamRes->next() && teamRes->getInt("cnt") == 0) {
-                throw ValidationError("Activity manager must be a member of the project team");
-            }
-            rec.managerId = newManagerId;
-        } else if (fieldName == "plannedstart") {
-            rec.plannedStart = fieldValue;
-        } else if (fieldName == "plannedfinish") {
-            rec.plannedEnd = fieldValue;
-        } else if (fieldName == "forecaststart") {
-            rec.forecastStart = fieldValue;
-        } else if (fieldName == "forecastfinish") {
-            rec.forecastEnd = fieldValue;
-        } else if (fieldName == "actualfinish") {
-            rec.actualEnd = fieldValue;
-        } else if (fieldName == "plannedhours") {
-            if (fieldValue.empty()) {
-                rec.plannedHours = -1;  // -1 indicates NULL
-            } else {
-                try {
-                    rec.plannedHours = std::stod(fieldValue);
-                } catch (const std::exception& e) {
-                    throw InvalidFieldError("Invalid value for plannedhours. Must be a number.");
+        try {
+            oldVal = rec;
+            if (fieldName == "activityname") {
+                rec.name = fieldValue;
+            } else if (fieldName == "activitydescription") {
+                rec.description = fieldValue;
+            } else if (fieldName == "activitymanagerid" || fieldName == "activitymanagername") {
+                int newManagerId = utils::resolveIdOrName(db, fieldValue, utils::lookupEmployee);
+                auto teamStmt = db.prepareStatement(
+                    "SELECT COUNT(*) AS cnt FROM ProjectTeamMembers ptm "
+                    "JOIN ActivityCategories c ON ptm.projectid = c.projectid "
+                    "JOIN ActivitySubcategories s ON c.categoryid = s.categoryid "
+                    "WHERE s.subcategoryid = ? AND ptm.employeeid = ?"
+                );
+                teamStmt->setInt(1, rec.subCategoryId);
+                teamStmt->setInt(2, newManagerId);
+                auto teamRes = teamStmt->executeQuery();
+                if (teamRes->next() && teamRes->getInt("cnt") == 0) {
+                    throw ValidationError("Activity manager must be a member of the project team");
                 }
-            }
-        } else if (fieldName == "forecasthours") {
-            if (fieldValue.empty()) {
-                rec.forecastHours = -1;  // -1 indicates NULL
-            } else {
-                try {
-                    rec.forecastHours = std::stod(fieldValue);
-                } catch (const std::exception& e) {
-                    throw InvalidFieldError("Invalid value for forecasthours. Must be a number.");
+                rec.managerId = newManagerId;
+            } else if (fieldName == "plannedstart") {
+                rec.plannedStart = fieldValue;
+            } else if (fieldName == "plannedfinish") {
+                rec.plannedEnd = fieldValue;
+            } else if (fieldName == "forecaststart") {
+                rec.forecastStart = fieldValue;
+            } else if (fieldName == "forecastfinish") {
+                rec.forecastEnd = fieldValue;
+            } else if (fieldName == "actualfinish") {
+                rec.actualEnd = fieldValue;
+            } else if (fieldName == "plannedhours") {
+                if (fieldValue.empty()) {
+                    rec.plannedHours = -1;  // -1 indicates NULL
+                } else {
+                    try {
+                        rec.plannedHours = std::stod(fieldValue);
+                    } catch (const std::exception& e) {
+                        throw InvalidFieldError("Invalid value for plannedhours. Must be a number.");
+                    }
                 }
+            } else if (fieldName == "forecasthours") {
+                if (fieldValue.empty()) {
+                    rec.forecastHours = -1;  // -1 indicates NULL
+                } else {
+                    try {
+                        rec.forecastHours = std::stod(fieldValue);
+                    } catch (const std::exception& e) {
+                        throw InvalidFieldError("Invalid value for forecasthours. Must be a number.");
+                    }
+                }
+            } else {
+                throw InvalidFieldError("Invalid field name. Valid fields are: activityname, activitydescription, activitymanagerid, activitymanagername, plannedstart, plannedfinish, forecaststart, forecastfinish, actualfinish, plannedhours, forecasthours.");
             }
-        } else {
-            throw InvalidFieldError("Invalid field name. Valid fields are: activityname, activitydescription, activitymanagerid, activitymanagername, plannedstart, plannedfinish, forecaststart, forecastfinish, actualfinish, plannedhours, forecasthours.");
+            validateRecord(rec);
+        } catch (const ValidationError& e) {
+            rec = oldVal;
+            throw e;
         }
     }
 }
@@ -312,7 +320,7 @@ void ActivityData::validateRecord(Record& record) {
     }
 
     // Validate planned hours is non-negative (or -1 for NULL)
-    if (record.plannedHours < -1) {
+    if (record.plannedHours < 0 && record.plannedHours != -1) {
         throw ValidationError("Planned hours must be non-negative");
     }
     if (record.plannedHours > 99999999.99) {
@@ -320,7 +328,7 @@ void ActivityData::validateRecord(Record& record) {
     }
 
     // Validate forecast hours is non-negative (or -1 for NULL)
-    if (record.forecastHours < -1) {
+    if (record.forecastHours < 0 && record.forecastHours != -1) {
         throw ValidationError("Forecast hours must be non-negative");
     }
     if (record.forecastHours > 99999999.99) {
